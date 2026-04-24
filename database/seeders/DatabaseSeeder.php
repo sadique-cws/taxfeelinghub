@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         // Admin Account
@@ -20,16 +17,18 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin Advisor',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
+                'status' => 'approved',
             ]
         );
 
-        // Client Account
+        // Client Account (approved)
         User::updateOrCreate(
             ['email' => 'client@taxfilinghub.com'],
             [
                 'name' => 'John Client',
                 'password' => Hash::make('password'),
                 'role' => 'user',
+                'status' => 'approved',
             ]
         );
     }

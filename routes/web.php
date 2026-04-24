@@ -23,8 +23,14 @@ Route::prefix('services')->group(function () {
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ClientController;
 
-Route::middleware(['auth', 'verified'])->group(function () {
+// Pending approval page (authenticated but not approved)
+Route::middleware(['auth'])->group(function () {
+    Route::inertia('pending', 'auth/pending')->name('pending');
+});
+
+Route::middleware(['auth', 'verified', 'approved'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     
     // User Document Routes
@@ -32,10 +38,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard/documents/download', [DocumentController::class, 'downloadZip'])->name('dashboard.documents.download');
     Route::delete('documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
 
-    // Admin Document Routes
+    // Admin Routes
     Route::middleware(['admin'])->prefix('admin')->group(function () {
         Route::get('documents', [DocumentController::class, 'adminIndex'])->name('admin.documents');
         Route::post('documents', [DocumentController::class, 'store'])->name('admin.documents.store');
+        Route::get('clients', [ClientController::class, 'index'])->name('admin.clients');
+        Route::patch('clients/{user}/approve', [ClientController::class, 'approve'])->name('admin.clients.approve');
+        Route::patch('clients/{user}/reject', [ClientController::class, 'reject'])->name('admin.clients.reject');
+        Route::delete('clients/{user}', [ClientController::class, 'destroy'])->name('admin.clients.destroy');
     });
 });
 

@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, FileText, ShieldCheck } from 'lucide-react';
+import { LayoutGrid, FileText, ShieldCheck, Users } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -32,6 +32,11 @@ export function AppSidebar() {
             title: 'Manage Documents',
             href: '/admin/documents',
             icon: ShieldCheck,
+        });
+        mainNavItems.push({
+            title: 'Manage Clients',
+            href: '/admin/clients',
+            icon: Users,
         });
     } else {
         mainNavItems.push({

@@ -14,7 +14,8 @@ class DashboardController extends Controller
         $user = $request->user();
 
         if ($user->role === 'admin') {
-            $totalClients = User::where('role', 'user')->count();
+            $totalClients = User::where('role', 'user')->where('status', 'approved')->count();
+            $pendingClients = User::where('role', 'user')->where('status', 'pending')->count();
             $totalDocuments = Document::count();
             $recentDocuments = Document::with('user:id,name,email')
                 ->latest()
@@ -32,6 +33,7 @@ class DashboardController extends Controller
         return Inertia::render('dashboard', [
             'stats' => [
                 'totalClients' => $totalClients,
+                'pendingClients' => $pendingClients ?? 0,
                 'totalDocuments' => $totalDocuments,
                 'storageUsed' => $user->role === 'admin'
                     ? Document::sum('size')

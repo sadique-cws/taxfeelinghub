@@ -23,6 +23,7 @@ interface RecentDocument {
 interface Props {
     stats: {
         totalClients: number;
+        pendingClients: number;
         totalDocuments: number;
         storageUsed: number;
     };
@@ -93,10 +94,11 @@ export default function Dashboard({ stats, recentDocuments }: Props) {
                         variant="success"
                     />
                     <StatCard 
-                        title="Recent Uploads" 
-                        value={String(recentDocuments.length).padStart(2, '0')} 
+                        title={isAdmin ? 'Pending Approval' : 'Recent Uploads'}
+                        value={String(isAdmin ? stats.pendingClients : recentDocuments.length).padStart(2, '0')} 
                         icon={Clock}
-                        trend="Last 5 files"
+                        trend={isAdmin ? 'Needs action' : 'Last 5 files'}
+                        variant={isAdmin && stats.pendingClients > 0 ? 'warning' : 'default'}
                     />
                 </div>
 
