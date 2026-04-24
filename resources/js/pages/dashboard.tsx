@@ -5,7 +5,6 @@ import {
     FileText, 
     Clock, 
     ShieldCheck, 
-    AlertCircle, 
     ArrowRight, 
     TrendingUp,
     Download
@@ -47,15 +46,21 @@ export default function Dashboard({ stats, recentDocuments }: Props) {
         <>
             <Head title="Dashboard" />
 
-            <div className="p-6 space-y-6 bg-white min-h-full">
-                {/* Welcome Section */}
-                <div className="border border-slate-200 p-8 bg-slate-50">
+            <div className="p-6 md:p-8 space-y-8 min-h-full">
+                {/* Welcome Hero */}
+                <div className="rounded-2xl bg-hero-gradient text-white p-8 md:p-10 shadow-card">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
-                            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+                            <div className="inline-flex items-center gap-2 mb-4">
+                                <div className="gold-rule" />
+                                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                                    {isAdmin ? 'Admin Console' : 'Client Portal'}
+                                </span>
+                            </div>
+                            <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight">
                                 Welcome back, {user.name}
                             </h1>
-                            <p className="text-slate-500 mt-1">
+                            <p className="text-white/70 mt-2 max-w-lg">
                                 {isAdmin 
                                     ? 'Administrative overview and document management system.' 
                                     : 'Manage your taxes, compliance, and corporate documents.'}
@@ -63,21 +68,22 @@ export default function Dashboard({ stats, recentDocuments }: Props) {
                         </div>
                         <Link 
                             href={isAdmin ? '/admin/documents' : '/dashboard/documents'}
-                            className="bg-slate-900 text-white font-bold px-6 py-3 rounded-none text-sm"
+                            className="inline-flex items-center gap-2 rounded-xl bg-gold px-7 py-3.5 font-semibold text-gold-foreground hover:opacity-90 transition-smooth shadow-soft"
                         >
                             {isAdmin ? 'Manage Files' : 'My Documents'}
+                            <ArrowRight className="h-4 w-4" />
                         </Link>
                     </div>
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                     {isAdmin && (
                         <StatCard 
-                            title="Total Clients" 
+                            title="Active Clients" 
                             value={String(stats.totalClients).padStart(2, '0')} 
                             icon={LayoutGrid}
-                            trend="Registered"
+                            trend="Approved"
                         />
                     )}
                     <StatCard 
@@ -104,52 +110,53 @@ export default function Dashboard({ stats, recentDocuments }: Props) {
 
                 <div className="grid gap-6 lg:grid-cols-3">
                     {/* Recent Documents */}
-                    <div className="lg:col-span-2 border border-slate-200 bg-white">
-                        <div className="p-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
-                            <h2 className="font-bold text-slate-900 uppercase tracking-widest text-xs">Recent Uploads</h2>
-                            <Clock className="h-4 w-4 text-slate-400" />
+                    <div className="lg:col-span-2 rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                        <div className="p-5 border-b border-border flex justify-between items-center">
+                            <h2 className="font-display font-bold text-primary">Recent Uploads</h2>
+                            <Clock className="h-4 w-4 text-muted-foreground" />
                         </div>
                         <div>
                             {recentDocuments.length > 0 ? recentDocuments.map((doc) => (
-                                <div key={doc.id} className="flex items-start gap-4 p-5 border-b border-slate-100 last:border-0">
-                                    <div className="h-10 w-10 bg-slate-100 flex items-center justify-center shrink-0">
-                                        <FileText className="h-5 w-5 text-slate-500" />
+                                <div key={doc.id} className="flex items-start gap-4 p-5 border-b border-border/50 last:border-0 hover-lift transition-smooth">
+                                    <div className="h-10 w-10 rounded-lg bg-primary text-white flex items-center justify-center shrink-0">
+                                        <FileText className="h-5 w-5" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="font-bold text-slate-900 truncate">{doc.name}</p>
-                                        <p className="text-sm text-slate-500 mt-1">
+                                        <p className="font-display font-semibold text-primary truncate">{doc.name}</p>
+                                        <p className="text-sm text-muted-foreground mt-1">
                                             {formatSize(doc.size)} • {doc.category || 'General'}
-                                            {isAdmin && doc.user && <> • for <span className="font-medium">{doc.user.name}</span></>}
+                                            {isAdmin && doc.user && <> • for <span className="font-semibold text-accent">{doc.user.name}</span></>}
                                             {' '}• {new Date(doc.created_at).toLocaleDateString()}
                                         </p>
                                     </div>
                                 </div>
                             )) : (
-                                <div className="p-12 text-center text-slate-400">
-                                    <FileText className="h-10 w-10 mx-auto mb-3 text-slate-200" />
-                                    <p className="font-bold text-slate-900">No documents yet</p>
-                                    <p className="text-sm mt-1">
+                                <div className="p-12 text-center">
+                                    <FileText className="h-10 w-10 mx-auto mb-3 text-muted-foreground/30" />
+                                    <p className="font-display font-semibold text-primary">No documents yet</p>
+                                    <p className="text-sm text-muted-foreground mt-1">
                                         {isAdmin ? 'Upload documents for clients to get started.' : 'Your documents will appear here once uploaded by the firm.'}
                                     </p>
                                 </div>
                             )}
                         </div>
                         {recentDocuments.length > 0 && (
-                            <div className="p-4 bg-slate-50 border-t border-slate-200 text-center">
+                            <div className="p-4 border-t border-border text-center">
                                 <Link 
                                     href={isAdmin ? '/admin/documents' : '/dashboard/documents'} 
-                                    className="text-xs font-bold text-slate-900 uppercase tracking-widest hover:underline"
+                                    className="text-xs font-bold text-accent uppercase tracking-widest hover:text-primary transition-smooth"
                                 >
-                                    View All Documents
+                                    View All Documents →
                                 </Link>
                             </div>
                         )}
                     </div>
 
                     {/* Side Panel */}
-                    <div className="space-y-6">
-                        <div className="border border-slate-200 bg-white p-6">
-                            <h2 className="font-bold text-slate-900 uppercase tracking-widest text-xs mb-4">Quick Actions</h2>
+                    <div className="space-y-5">
+                        <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                            <div className="gold-rule mb-4" />
+                            <h2 className="font-display font-bold text-primary mb-4">Quick Actions</h2>
                             <div className="grid gap-3">
                                 <QuickActionButton icon={TrendingUp} label="Request New Service" />
                                 <QuickActionButton icon={Download} label="Download All Docs" href="/dashboard/documents/download" />
@@ -157,13 +164,13 @@ export default function Dashboard({ stats, recentDocuments }: Props) {
                             </div>
                         </div>
 
-                        <div className="border border-slate-900 bg-slate-900 p-6 text-white">
-                            <h2 className="font-bold uppercase tracking-widest text-xs mb-2 text-gold">Expert Advice</h2>
-                            <p className="text-sm text-slate-300 leading-relaxed">
+                        <div className="rounded-2xl bg-hero-gradient text-white p-6 shadow-card">
+                            <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold mb-3">Expert Advice</p>
+                            <p className="text-sm text-white/80 leading-relaxed">
                                 Need help with your tax planning? Our senior partners are available for consultation every Tuesday.
                             </p>
-                            <button className="mt-4 text-xs font-bold uppercase tracking-widest text-white border-b border-gold pb-1">
-                                Book a slot
+                            <button className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold hover:text-white transition-smooth">
+                                Book a slot <ArrowRight className="h-3 w-3" />
                             </button>
                         </div>
                     </div>
@@ -181,22 +188,22 @@ Dashboard.layout = {
 
 function StatCard({ title, value, icon: Icon, trend, variant = 'default' }: any) {
     return (
-        <div className="border border-slate-200 p-6 bg-white">
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-card hover-lift transition-smooth group">
             <div className="flex justify-between items-start">
                 <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500">{title}</p>
-                    <p className="text-3xl font-bold text-slate-900 mt-1">{value}</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{title}</p>
+                    <p className="font-display text-3xl font-bold text-primary mt-1">{value}</p>
                 </div>
-                <div className="h-10 w-10 bg-slate-100 flex items-center justify-center text-slate-900">
+                <div className="h-10 w-10 rounded-lg bg-primary text-white flex items-center justify-center group-hover:bg-gold group-hover:text-black transition-smooth">
                     <Icon className="h-5 w-5" />
                 </div>
             </div>
             <div className="mt-4 flex items-center gap-1.5">
                 <div className={cn(
                     "h-2 w-2 rounded-full",
-                    variant === 'success' ? 'bg-green-500' : variant === 'warning' ? 'bg-orange-500' : 'bg-slate-300'
+                    variant === 'success' ? 'bg-green-500' : variant === 'warning' ? 'bg-gold' : 'bg-muted-foreground/30'
                 )} />
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{trend}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{trend}</p>
             </div>
         </div>
     );
@@ -205,13 +212,15 @@ function StatCard({ title, value, icon: Icon, trend, variant = 'default' }: any)
 function QuickActionButton({ icon: Icon, label, href }: any) {
     const content = (
         <>
-            <Icon className="h-4 w-4" />
-            <span>{label}</span>
+            <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-gold group-hover:text-black transition-smooth">
+                <Icon className="h-4 w-4" />
+            </div>
+            <span className="font-display font-semibold text-primary">{label}</span>
         </>
     );
     
-    const btnClass = "flex items-center gap-3 w-full border border-slate-200 p-4 text-sm font-bold text-slate-900 hover:bg-slate-50 rounded-none text-left";
+    const cls = "flex items-center gap-3 w-full rounded-xl border border-border p-3 text-sm hover-lift transition-smooth group";
 
-    if (href) return <a href={href} className={btnClass}>{content}</a>;
-    return <button className={btnClass}>{content}</button>;
+    if (href) return <a href={href} className={cls}>{content}</a>;
+    return <button className={cls}>{content}</button>;
 }

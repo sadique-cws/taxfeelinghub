@@ -1,30 +1,15 @@
-import { Head, Link, useForm } from '@inertiajs/react';
-import { BreadcrumbItem } from '@/types';
-import { FileText, Download, Trash2, Archive, Clock } from 'lucide-react';
+import { Head } from '@inertiajs/react';
+import { FileText, Download, Archive, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-interface Document {
-    id: number;
-    name: string;
-    category: string;
-    size: number;
-    created_at: string;
-}
-
-interface Props {
-    documents: Document[];
-}
-
-const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Dashboard', href: '/dashboard' },
-    { title: 'My Documents', href: '/dashboard/documents' },
-];
+interface Document { id: number; name: string; category: string; size: number; created_at: string; file_path?: string; }
+interface Props { documents: Document[]; }
 
 export default function UserDocuments({ documents }: Props) {
     const formatSize = (bytes: number) => {
-        if (bytes === 0) return '0 Bytes';
+        if (bytes === 0) return '0 B';
         const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const sizes = ['B', 'KB', 'MB', 'GB'];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     };
@@ -32,100 +17,98 @@ export default function UserDocuments({ documents }: Props) {
     return (
         <>
             <Head title="My Documents" />
-
-            <div className="p-6 space-y-6 bg-white min-h-full">
-                {/* Header - Flat */}
-                <div className="border border-slate-200 p-8 bg-slate-900 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                    <div>
-                        <h1 className="text-3xl font-bold tracking-tight">My Documents</h1>
-                        <p className="text-slate-400 mt-2 text-sm max-w-md">Access your tax returns, registration certificates, and compliance reports here.</p>
+            <div className="p-6 md:p-8 space-y-8 min-h-full">
+                {/* Header */}
+                <div className="rounded-2xl bg-hero-gradient text-white p-8 md:p-10 shadow-card">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                        <div>
+                            <div className="inline-flex items-center gap-2 mb-4">
+                                <div className="gold-rule" />
+                                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Client Portal</span>
+                            </div>
+                            <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight">My Documents</h1>
+                            <p className="text-white/70 mt-2 max-w-md">Access your tax returns, registration certificates, and compliance reports.</p>
+                        </div>
+                        <a 
+                            href="/dashboard/documents/download"
+                            className="inline-flex items-center gap-2 rounded-xl bg-gold px-7 py-3.5 font-semibold text-gold-foreground hover:opacity-90 transition-smooth shadow-soft"
+                        >
+                            <Archive className="h-5 w-5" />
+                            Download All (ZIP)
+                        </a>
                     </div>
-                    <a 
-                        href="/dashboard/documents/download"
-                        className="inline-flex items-center gap-2 bg-white text-slate-900 font-bold px-6 py-4 hover:bg-slate-100 transition-colors rounded-none"
-                    >
-                        <Archive className="h-5 w-5" />
-                        Download All (ZIP)
-                    </a>
                 </div>
 
-                {/* Summary Row - Flat */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <div className="border border-slate-200 p-5 bg-white">
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Total Files</p>
-                        <p className="text-2xl font-bold text-slate-900 mt-1">{documents.length}</p>
+                {/* Stats */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Total Files</p>
+                        <p className="font-display text-3xl font-bold text-primary mt-1">{documents.length}</p>
                     </div>
-                    <div className="border border-slate-200 p-5 bg-white">
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Storage Used</p>
-                        <p className="text-2xl font-bold text-slate-900 mt-1">
-                            {formatSize(documents.reduce((acc, doc) => acc + doc.size, 0))}
+                    <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Storage Used</p>
+                        <p className="font-display text-3xl font-bold text-primary mt-1">
+                            {formatSize(documents.reduce((acc, d) => acc + d.size, 0))}
                         </p>
                     </div>
-                    <div className="border border-slate-200 p-5 bg-white">
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Latest Upload</p>
-                        <div className="flex items-center gap-2 text-slate-900 font-bold mt-1">
+                    <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Latest Upload</p>
+                        <div className="flex items-center gap-2 mt-1">
                             <Clock className="h-4 w-4 text-gold" />
-                            {documents.length > 0 ? new Date(documents[0].created_at).toLocaleDateString() : 'N/A'}
+                            <span className="font-display text-lg font-bold text-primary">
+                                {documents.length > 0 ? new Date(documents[0].created_at).toLocaleDateString() : 'N/A'}
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                {/* Document Grid - Flat */}
-                <div className="border border-slate-200 bg-white">
-                    <div className="p-4 border-b border-slate-200 bg-slate-50">
-                        <h2 className="font-bold text-slate-900 uppercase tracking-widest text-xs">Files Available for Download</h2>
+                {/* Table */}
+                <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                    <div className="p-5 border-b border-border">
+                        <h2 className="font-display font-bold text-primary">Files Available for Download</h2>
                     </div>
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left border-collapse">
-                            <thead className="bg-slate-50 border-b border-slate-200">
+                        <table className="w-full text-left">
+                            <thead className="border-b border-border bg-muted/50">
                                 <tr>
-                                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Filename</th>
-                                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Category</th>
-                                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+                                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Filename</th>
+                                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Category</th>
+                                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-200">
+                            <tbody className="divide-y divide-border/50">
                                 {documents.length > 0 ? documents.map(doc => (
-                                    <tr key={doc.id} className="text-sm">
+                                    <tr key={doc.id} className="text-sm hover:bg-muted/30 transition-smooth">
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-4">
-                                                <div className="h-10 w-10 bg-slate-900 text-white flex items-center justify-center shrink-0">
+                                                <div className="h-10 w-10 rounded-lg bg-primary text-white flex items-center justify-center shrink-0">
                                                     <FileText className="h-5 w-5" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-bold text-slate-900">{doc.name}</p>
-                                                    <p className="text-xs text-slate-500 mt-0.5">{formatSize(doc.size)} • Uploaded {new Date(doc.created_at).toLocaleDateString()}</p>
+                                                    <p className="font-display font-semibold text-primary">{doc.name}</p>
+                                                    <p className="text-xs text-muted-foreground mt-0.5">{formatSize(doc.size)} • {new Date(doc.created_at).toLocaleDateString()}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
-                                            <span className="font-bold text-slate-900 text-xs px-3 py-1 border border-slate-200 bg-slate-50 inline-block">
+                                            <span className="font-bold text-xs px-3 py-1 rounded-full bg-gold/10 text-accent border border-gold/20">
                                                 {doc.category || 'General'}
                                             </span>
                                         </td>
                                         <td className="px-6 py-5 text-right">
-                                            <div className="flex justify-end gap-2">
-                                                <Button 
-                                                    variant="outline" 
-                                                    className="rounded-none border-slate-900 text-slate-900 font-bold hover:bg-slate-900 hover:text-white transition-colors h-10 shadow-none"
-                                                    asChild
-                                                >
-                                                    <a href={`/storage/${doc.file_path}`} download={doc.name}>
-                                                        <Download className="h-4 w-4 mr-2" />
-                                                        Download
-                                                    </a>
-                                                </Button>
-                                            </div>
+                                            <Button variant="outline" className="rounded-xl border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-smooth" asChild>
+                                                <a href={`/storage/${doc.file_path}`} download={doc.name}>
+                                                    <Download className="h-4 w-4 mr-2" /> Download
+                                                </a>
+                                            </Button>
                                         </td>
                                     </tr>
                                 )) : (
                                     <tr>
                                         <td colSpan={3} className="px-6 py-20 text-center">
-                                            <div className="max-w-xs mx-auto">
-                                                <Archive className="h-12 w-12 text-slate-200 mx-auto mb-4" />
-                                                <p className="font-bold text-slate-900 text-lg">No documents yet.</p>
-                                                <p className="text-slate-500 text-sm mt-1">When the firm uploads your documents, they will appear here for you to download.</p>
-                                            </div>
+                                            <Archive className="h-12 w-12 text-muted-foreground/20 mx-auto mb-4" />
+                                            <p className="font-display font-semibold text-primary text-lg">No documents yet.</p>
+                                            <p className="text-sm text-muted-foreground mt-1">Documents will appear here once uploaded by your advisor.</p>
                                         </td>
                                     </tr>
                                 )}
