@@ -21,6 +21,13 @@ createInertiaApp({
             case name === 'contact':
             case name === 'error':
                 return null;
+            case name === 'auth/login':
+            case name === 'auth/register':
+            case name === 'auth/pending':
+            case name === 'auth/forgot-password':
+            case name === 'auth/reset-password':
+            case name === 'auth/verify-email':
+                return null;
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):

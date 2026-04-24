@@ -9,16 +9,14 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { register } from '@/routes';
 import { request } from '@/routes/password';
-import AppLogoIcon from '@/components/app-logo-icon';
-import { ShieldCheck, User as UserIcon, LogIn, ArrowRight } from 'lucide-react';
+import { AppLogo } from '@/components/app-logo';
+import { ShieldCheck, User as UserIcon, LogIn, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 type Props = { status?: string; canResetPassword: boolean; canRegister: boolean; };
 
 export default function Login({ status, canResetPassword, canRegister }: Props) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: false,
+        email: '', password: '', remember: false,
     });
 
     const submit = (e: React.FormEvent) => {
@@ -26,110 +24,152 @@ export default function Login({ status, canResetPassword, canRegister }: Props) 
         post('/login', { onFinish: () => reset('password') });
     };
 
-    const autofill = (email: string) => {
-        setData({ email, password: 'password', remember: true });
-    };
+    const autofill = (email: string) => setData({ email, password: 'password', remember: true });
 
     return (
-        <div className="min-h-screen flex flex-col lg:flex-row">
-            <Head title="Log in" />
+        <div className="min-h-screen bg-background flex flex-col lg:flex-row">
+            <Head title="Log in — Tax Filing Hub" />
 
-            {/* Left Panel — Brand */}
-            <div className="hidden lg:flex lg:w-1/2 bg-hero-gradient text-white flex-col justify-center items-center p-16 relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-                <div className="text-center z-10 max-w-md">
-                    <div className="gold-rule mx-auto mb-6" />
-                    <h1 className="font-display text-5xl font-bold tracking-tight mb-6">Tax Filing Hub</h1>
-                    <p className="text-white/70 text-lg leading-relaxed">
-                        Your trusted partner in financial compliance, tax advisory, and business growth.
-                    </p>
-                    <div className="mt-10 grid grid-cols-3 gap-6">
-                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                            <p className="font-display text-2xl font-bold text-gold">500+</p>
-                            <p className="text-xs text-white/50 mt-1">Happy Clients</p>
+            {/* Left Panel - Branding & Visuals */}
+            <div className="hidden lg:flex lg:w-[45%] xl:w-[40%] bg-primary relative overflow-hidden flex-col p-12">
+                {/* Background Image with Overlay */}
+                <div 
+                    className="absolute inset-0 z-0 opacity-40 mix-blend-overlay scale-110"
+                    style={{ 
+                        backgroundImage: `url('/Users/comestro/.gemini/antigravity/brain/7be21d6f-0602-4210-90b8-88fb5d3d44f0/tax_portal_hero_split_1777036199310.png')`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                    }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-transparent z-10" />
+
+                <div className="relative z-20 flex flex-col h-full">
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl self-start">
+                        <AppLogo className="text-white" />
+                    </div>
+
+                    <div className="mt-auto space-y-8 animate-fade-up">
+                        <h2 className="font-display text-4xl xl:text-5xl font-bold text-white leading-tight">
+                            Streamlining your <span className="text-gold">financial future.</span>
+                        </h2>
+                        
+                        <div className="space-y-4">
+                            {[
+                                "Secure document management",
+                                "Real-time compliance tracking",
+                                "Direct advisor communication",
+                                "Automated statutory reminders"
+                            ].map((text) => (
+                                <div key={text} className="flex items-center gap-3 text-white/80">
+                                    <CheckCircle2 className="h-5 w-5 text-gold shrink-0" />
+                                    <span className="text-sm font-medium">{text}</span>
+                                </div>
+                            ))}
                         </div>
-                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                            <p className="font-display text-2xl font-bold text-gold">15+</p>
-                            <p className="text-xs text-white/50 mt-1">Years Experience</p>
-                        </div>
-                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                            <p className="font-display text-2xl font-bold text-gold">99%</p>
-                            <p className="text-xs text-white/50 mt-1">Compliance Rate</p>
+
+                        <div className="pt-8 border-t border-white/10">
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-3">Trusted by professionals at</p>
+                            <div className="flex gap-6 opacity-30">
+                                <ShieldCheck className="h-6 w-6 text-white" />
+                                <LogIn className="h-6 w-6 text-white" />
+                                <UserIcon className="h-6 w-6 text-white" />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
             </div>
 
-            {/* Right Panel — Form */}
-            <div className="flex-1 flex flex-col items-center justify-center p-8 md:p-16 bg-background">
-                <div className="w-full max-w-[400px] space-y-8">
+            {/* Right Panel - Login Form */}
+            <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 lg:p-24 bg-white">
+                <div className="w-full max-w-md space-y-10">
                     {/* Mobile Logo */}
-                    <div className="flex flex-col items-center lg:hidden mb-4">
-                        <AppLogoIcon className="size-10 fill-current text-primary" />
-                        <h1 className="font-display text-xl font-bold text-primary mt-3">Tax Filing Hub</h1>
+                    <div className="lg:hidden flex justify-center mb-8">
+                        <AppLogo className="text-primary" />
                     </div>
 
-                    <div>
-                        <h2 className="font-display text-2xl font-bold text-primary">Welcome back</h2>
-                        <p className="text-muted-foreground mt-1">Sign in to access your portal.</p>
+                    <div className="space-y-2">
+                        <h1 className="font-display text-3xl font-bold text-primary tracking-tight">Sign In</h1>
+                        <p className="text-muted-foreground">Access your advisor portal and documents</p>
                     </div>
 
-                    <form onSubmit={submit} className="space-y-5">
-                        <div className="space-y-2">
-                            <Label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Email</Label>
-                            <Input id="email" type="email" name="email" required autoFocus value={data.email} onChange={e => setData('email', e.target.value)} className="rounded-xl h-12 border-border" placeholder="you@example.com" />
-                            <InputError message={errors.email} />
-                        </div>
-
-                        <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                                <Label htmlFor="password" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Password</Label>
-                                {canResetPassword && <TextLink href={request()} className="text-xs text-accent hover:text-primary">Forgot?</TextLink>}
+                    <form onSubmit={submit} className="space-y-6">
+                        <div className="space-y-4">
+                            <div className="space-y-1.5">
+                                <Label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Email Address</Label>
+                                <Input 
+                                    id="email" 
+                                    type="email" 
+                                    name="email" 
+                                    required 
+                                    autoFocus 
+                                    value={data.email} 
+                                    onChange={e => setData('email', e.target.value)}
+                                    className="rounded-xl h-12 border-border bg-surface/50 focus-visible:ring-primary focus-visible:border-primary transition-all"
+                                    placeholder="you@example.com" 
+                                />
+                                <InputError message={errors.email} />
                             </div>
-                            <PasswordInput id="password" name="password" required value={data.password} onChange={e => setData('password', e.target.value)} className="rounded-xl h-12 border-border" placeholder="••••••••" />
-                            <InputError message={errors.password} />
+
+                            <div className="space-y-1.5">
+                                <div className="flex items-center justify-between">
+                                    <Label htmlFor="password" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Password</Label>
+                                    {canResetPassword && <TextLink href={request()} className="text-xs font-semibold text-accent hover:text-primary transition-colors">Forgot password?</TextLink>}
+                                </div>
+                                <PasswordInput 
+                                    id="password" 
+                                    name="password" 
+                                    required 
+                                    value={data.password} 
+                                    onChange={e => setData('password', e.target.value)}
+                                    className="rounded-xl h-12 border-border bg-surface/50 focus-visible:ring-primary focus-visible:border-primary transition-all"
+                                    placeholder="••••••••" 
+                                />
+                                <InputError message={errors.password} />
+                            </div>
                         </div>
 
-                        <div className="flex items-center gap-3 py-1">
-                            <Checkbox id="remember" name="remember" checked={data.remember} onCheckedChange={c => setData('remember', c as boolean)} className="rounded border-border" />
-                            <Label htmlFor="remember" className="text-sm text-muted-foreground">Keep me signed in</Label>
+                        <div className="flex items-center gap-3">
+                            <Checkbox 
+                                id="remember" 
+                                name="remember" 
+                                checked={data.remember} 
+                                onCheckedChange={c => setData('remember', c as boolean)}
+                                className="rounded border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary" 
+                            />
+                            <Label htmlFor="remember" className="text-sm text-muted-foreground cursor-pointer">Keep me signed in for 30 days</Label>
                         </div>
 
-                        <Button type="submit" disabled={processing} className="w-full rounded-xl bg-primary hover:bg-secondary text-white font-bold h-12 shadow-elegant">
-                            {processing ? <Spinner /> : <LogIn className="h-4 w-4 mr-2" />}
-                            Sign In
+                        <Button type="submit" disabled={processing}
+                            className="w-full rounded-xl bg-primary hover:bg-secondary text-primary-foreground font-bold h-14 transition-all text-lg group">
+                            {processing ? <Spinner /> : <LogIn className="h-5 w-5 mr-2 group-hover:translate-x-1 transition-transform" />}
+                            Log In to Portal
                         </Button>
                     </form>
 
-                    {/* Demo Quick Access */}
-                    <div className="rounded-2xl border border-border bg-card p-5 shadow-card">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground mb-4 text-center">Quick Access (Demo)</p>
+                    {/* Quick Access Grid (Professional Style) */}
+                    <div className="pt-8 border-t border-border">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4 text-center">Development Quick Access</p>
                         <div className="grid grid-cols-2 gap-3">
-                            <button type="button" onClick={() => autofill('admin@taxfilinghub.com')} className="flex flex-col items-center justify-center p-4 rounded-xl border border-border hover-lift transition-smooth group">
-                                <ShieldCheck className="h-5 w-5 text-primary mb-2 group-hover:text-gold transition-smooth" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Admin</span>
+                            <button type="button" onClick={() => autofill('admin@taxfilinghub.com')}
+                                className="flex flex-col gap-1 p-4 rounded-xl border border-border bg-surface hover:bg-muted transition-all text-left group">
+                                <span className="text-xs font-bold text-primary group-hover:text-accent">Admin Role</span>
+                                <span className="text-[10px] text-muted-foreground">admin@taxfilinghub.com</span>
                             </button>
-                            <button type="button" onClick={() => autofill('client@taxfilinghub.com')} className="flex flex-col items-center justify-center p-4 rounded-xl border border-border hover-lift transition-smooth group">
-                                <UserIcon className="h-5 w-5 text-primary mb-2 group-hover:text-gold transition-smooth" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Client</span>
+                            <button type="button" onClick={() => autofill('client@taxfilinghub.com')}
+                                className="flex flex-col gap-1 p-4 rounded-xl border border-border bg-surface hover:bg-muted transition-all text-left group">
+                                <span className="text-xs font-bold text-primary group-hover:text-accent">Client Role</span>
+                                <span className="text-[10px] text-muted-foreground">client@taxfilinghub.com</span>
                             </button>
                         </div>
                     </div>
 
                     {canRegister && (
                         <p className="text-center text-sm text-muted-foreground">
-                            New client? <TextLink href={register()} className="font-semibold text-accent hover:text-primary">Create an account</TextLink>
+                            New to the platform? <TextLink href={register()} className="font-bold text-accent hover:text-primary transition-colors">Create an account</TextLink>
                         </p>
                     )}
                 </div>
             </div>
-
-            {status && (
-                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg font-bold text-sm">
-                    {status}
-                </div>
-            )}
         </div>
     );
 }

@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
-import { AppLogo as AppLogoFlat } from '@/components/app-logo-flat';
+import AppLogoIcon from '@/components/app-logo-icon';
 
 export function AppSidebar() {
     const { auth } = usePage().props as any;
@@ -47,13 +47,21 @@ export function AppSidebar() {
     }
 
     return (
-        <Sidebar collapsible="icon" variant="inset" className="border-r border-slate-200 shadow-none">
-            <SidebarHeader className="border-b border-slate-200 py-4">
+        <Sidebar collapsible="icon" variant="inset">
+            <SidebarHeader className="py-5 px-4">
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={dashboard()} prefetch>
-                                <AppLogoFlat />
+                            <Link href={dashboard()} prefetch className="flex items-center gap-3">
+                                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white">
+                                    <AppLogoIcon className="size-5 fill-current" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="font-display text-sm font-bold text-primary">Tax Filing Hub</span>
+                                    <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                                        {user.role === 'admin' ? 'Admin Console' : 'Client Portal'}
+                                    </span>
+                                </div>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -64,7 +72,7 @@ export function AppSidebar() {
                 <NavMain items={mainNavItems} />
             </SidebarContent>
 
-            <SidebarFooter className="border-t border-slate-200">
+            <SidebarFooter>
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

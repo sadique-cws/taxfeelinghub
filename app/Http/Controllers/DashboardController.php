@@ -30,6 +30,10 @@ class DashboardController extends Controller
                 ->get();
         }
 
+        $recentClients = $user->role === 'admin'
+            ? User::where('role', 'user')->latest()->take(5)->get(['id', 'name', 'email', 'status', 'created_at'])
+            : collect([]);
+
         return Inertia::render('dashboard', [
             'stats' => [
                 'totalClients' => $totalClients,
@@ -40,6 +44,7 @@ class DashboardController extends Controller
                     : $user->documents()->sum('size'),
             ],
             'recentDocuments' => $recentDocuments,
+            'recentClients' => $recentClients,
         ]);
     }
 }

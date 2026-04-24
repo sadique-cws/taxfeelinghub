@@ -2,7 +2,7 @@ import { Phone, MessageSquare } from 'lucide-react';
 
 export function FloatingContact() {
     return (
-        <div className="fixed bottom-6 right-6 z-[60] flex flex-col gap-4 sm:hidden">
+        <div className="fixed bottom-6 right-6 z-[60] flex flex-col gap-4 sm:hidden hide-on-drawer transition-smooth">
             <a
                 href="https://wa.me/917488447789"
                 target="_blank"

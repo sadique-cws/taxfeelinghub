@@ -5,9 +5,7 @@ import {
     FileText, 
     Clock, 
     ShieldCheck, 
-    ArrowRight, 
-    TrendingUp,
-    Download
+    ArrowRight
 } from 'lucide-react';
 
 interface RecentDocument {
@@ -19,6 +17,14 @@ interface RecentDocument {
     user?: { id: number; name: string; email: string };
 }
 
+interface RecentClient {
+    id: number;
+    name: string;
+    email: string;
+    status: string;
+    created_at: string;
+}
+
 interface Props {
     stats: {
         totalClients: number;
@@ -27,9 +33,10 @@ interface Props {
         storageUsed: number;
     };
     recentDocuments: RecentDocument[];
+    recentClients: RecentClient[];
 }
 
-export default function Dashboard({ stats, recentDocuments }: Props) {
+export default function Dashboard({ stats, recentDocuments, recentClients }: Props) {
     const { auth } = usePage().props as any;
     const user = auth.user;
     const isAdmin = user.role === 'admin';
@@ -154,13 +161,34 @@ export default function Dashboard({ stats, recentDocuments }: Props) {
 
                     {/* Side Panel */}
                     <div className="space-y-5">
-                        <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
-                            <div className="gold-rule mb-4" />
-                            <h2 className="font-display font-bold text-primary mb-4">Quick Actions</h2>
-                            <div className="grid gap-3">
-                                <QuickActionButton icon={TrendingUp} label="Request New Service" />
-                                <QuickActionButton icon={Download} label="Download All Docs" href="/dashboard/documents/download" />
-                                <QuickActionButton icon={ShieldCheck} label="Check Compliance" />
+                        <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                            <div className="p-5 border-b border-border flex items-center justify-between">
+                                <h2 className="font-display font-bold text-primary">Recent Clients</h2>
+                                {isAdmin && (
+                                    <Link href="/admin/clients" className="text-[10px] font-bold text-accent uppercase tracking-widest hover:text-primary transition-smooth">
+                                        View All
+                                    </Link>
+                                )}
+                            </div>
+                            <div className="divide-y divide-border/50">
+                                {recentClients.length > 0 ? recentClients.map(client => (
+                                    <div key={client.id} className="flex items-center gap-3 p-4 hover:bg-muted/30 transition-smooth">
+                                        <div className="h-9 w-9 rounded-xl bg-primary text-white flex items-center justify-center text-xs font-bold shrink-0 uppercase">
+                                            {client.name.charAt(0)}{client.name.split(' ')[1]?.charAt(0) || ''}
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-display text-sm font-semibold text-primary truncate">{client.name}</p>
+                                            <p className="text-[11px] text-muted-foreground truncate">{client.email}</p>
+                                        </div>
+                                        <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${
+                                            client.status === 'approved' ? 'bg-green-50 text-green-700 border-green-200' :
+                                            client.status === 'pending' ? 'bg-gold/10 text-accent border-gold/20' :
+                                            'bg-red-50 text-red-700 border-red-200'
+                                        }`}>{client.status}</span>
+                                    </div>
+                                )) : (
+                                    <div className="p-8 text-center text-muted-foreground text-sm">No clients onboarded yet.</div>
+                                )}
                             </div>
                         </div>
 
@@ -209,18 +237,3 @@ function StatCard({ title, value, icon: Icon, trend, variant = 'default' }: any)
     );
 }
 
-function QuickActionButton({ icon: Icon, label, href }: any) {
-    const content = (
-        <>
-            <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-gold group-hover:text-black transition-smooth">
-                <Icon className="h-4 w-4" />
-            </div>
-            <span className="font-display font-semibold text-primary">{label}</span>
-        </>
-    );
-    
-    const cls = "flex items-center gap-3 w-full rounded-xl border border-border p-3 text-sm hover-lift transition-smooth group";
-
-    if (href) return <a href={href} className={cls}>{content}</a>;
-    return <button className={cls}>{content}</button>;
-}

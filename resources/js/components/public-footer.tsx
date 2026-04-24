@@ -104,7 +104,7 @@ export function PublicFooter() {
       <div className="border-t border-primary-foreground/10">
         <div className="container-page py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p>Crafted for growing businesses across India.</p>
+          <p>Powered by <a href="https://comestro.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline font-semibold">Comestro.com</a> — Comestro Techlabs Pvt Ltd</p>
         </div>
       </div>
     </footer>

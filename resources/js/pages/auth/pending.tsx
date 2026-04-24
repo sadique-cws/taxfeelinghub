@@ -1,55 +1,79 @@
 import { Head, Link } from '@inertiajs/react';
-import { AppLogo as AppLogoFlat } from '@/components/app-logo-flat';
-import { Clock, LogOut } from 'lucide-react';
+import { Clock, LogOut, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { AppLogo } from '@/components/app-logo';
 
 export default function Pending() {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-6">
-            <Head title="Account Pending Approval" />
+        <div className="min-h-screen bg-surface flex items-center justify-center p-6">
+            <Head title="Access Pending — Tax Filing Hub" />
             
-            <div className="w-full max-w-[420px] space-y-8">
-                <div className="flex flex-col items-center">
-                    <AppLogoFlat className="mb-4" />
+            <div className="w-full max-w-[520px] space-y-8">
+                {/* Branding */}
+                <div className="flex justify-center">
+                    <AppLogo className="text-primary scale-110" />
                 </div>
 
-                <div className="bg-white border border-slate-200 p-10 text-center">
-                    <div className="h-16 w-16 bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto mb-6">
-                        <Clock className="h-8 w-8 text-amber-600" />
+                {/* Main Card */}
+                <div className="bg-white border border-border rounded-2xl overflow-hidden flex flex-col">
+                    <div className="bg-primary p-10 text-white text-center">
+                        <div className="h-16 w-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 text-gold mx-auto">
+                            <Clock className="h-8 w-8" />
+                        </div>
+                        <h1 className="font-display text-3xl font-bold tracking-tight">Account Under Review</h1>
+                        <p className="text-white/60 text-sm mt-2">We're verifying your details for secure access</p>
                     </div>
-                    <h1 className="text-2xl font-bold text-slate-900">Account Pending Approval</h1>
-                    <p className="text-slate-500 mt-3 text-sm leading-relaxed">
-                        Your account has been created successfully. An administrator will review and approve your access shortly. You'll be able to log in once approved.
-                    </p>
+
+                    <div className="p-10">
+                        <div className="space-y-6">
+                            <p className="text-muted-foreground leading-relaxed text-center">
+                                Your registration has been received. Our team is currently reviewing your profile to ensure compliance and security. You'll be notified via email once your account is active.
+                            </p>
+
+                            <div className="bg-surface border border-border rounded-2xl p-6 space-y-5">
+                                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent text-center mb-4 border-b border-border pb-4">Onboarding Process</p>
+                                
+                                <div className="flex items-start gap-4">
+                                    <div className="h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-bold shrink-0">1</div>
+                                    <div>
+                                        <p className="text-sm font-bold text-primary">Identity Verification</p>
+                                        <p className="text-xs text-muted-foreground mt-0.5">Admin cross-checks provided information</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4">
+                                    <div className="h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-bold shrink-0">2</div>
+                                    <div>
+                                        <p className="text-sm font-bold text-primary">Portal Activation</p>
+                                        <p className="text-xs text-muted-foreground mt-0.5">Secure environment is provisioned for you</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4">
+                                    <div className="h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-bold shrink-0">3</div>
+                                    <div>
+                                        <p className="text-sm font-bold text-primary">Success Notification</p>
+                                        <p className="text-xs text-muted-foreground mt-0.5">You'll receive a welcome email with instructions</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="pt-4 flex flex-col items-center">
+                                <Link
+                                    href="/logout"
+                                    method="post"
+                                    as="button"
+                                    className="flex items-center justify-center gap-2 text-muted-foreground hover:text-primary text-xs font-bold uppercase tracking-widest transition-colors"
+                                >
+                                    <LogOut className="h-4 w-4" /> Sign Out
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="border border-slate-200 bg-white p-6">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-4 text-center">What Happens Next?</p>
-                    <ul className="space-y-3 text-sm text-slate-600">
-                        <li className="flex gap-3">
-                            <span className="h-5 w-5 bg-slate-900 text-white text-xs flex items-center justify-center shrink-0 font-bold">1</span>
-                            Admin reviews your registration
-                        </li>
-                        <li className="flex gap-3">
-                            <span className="h-5 w-5 bg-slate-900 text-white text-xs flex items-center justify-center shrink-0 font-bold">2</span>
-                            Your account gets approved
-                        </li>
-                        <li className="flex gap-3">
-                            <span className="h-5 w-5 bg-slate-900 text-white text-xs flex items-center justify-center shrink-0 font-bold">3</span>
-                            You can access your document portal
-                        </li>
-                    </ul>
-                </div>
-
-                <div className="text-center">
-                    <Link 
-                        href="/logout" 
-                        method="post" 
-                        as="button"
-                        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900"
-                    >
-                        <LogOut className="h-3 w-3" />
-                        Sign Out
-                    </Link>
+                <div className="flex items-center justify-center gap-2 text-muted-foreground/40 text-[10px] font-bold uppercase tracking-[0.2em]">
+                    <ShieldCheck className="h-4 w-4" />
+                    Government Standard Data Protection
                 </div>
             </div>
         </div>

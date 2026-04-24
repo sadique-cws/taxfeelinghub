@@ -99,9 +99,9 @@ export default function Welcome() {
       </Head>
 
       {/* HERO */}
-      <section className="relative min-h-[70vh] flex items-center pt-16 lg:pt-24 pb-20 lg:pb-32 overflow-hidden bg-hero-gradient text-primary-foreground">
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden bg-hero-gradient text-primary-foreground">
         <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:32px_32px]" />
-        <div className="container-page relative grid gap-12 lg:grid-cols-[1.15fr_1fr] items-center py-12 md:py-20">
+        <div className="container-page relative grid gap-12 lg:grid-cols-[1.15fr_1fr] items-center py-10">
           <div className="animate-fade-up">
             <div className="inline-flex items-center gap-2 mb-6">
               <div className="gold-rule" />
