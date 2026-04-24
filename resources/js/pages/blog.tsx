@@ -30,11 +30,11 @@ export default function Blog() {
       <section className="container-page py-20">
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Featured */}
-          <article className="lg:row-span-2 group rounded-3xl border border-border bg-card overflow-hidden hover-lift flex flex-col shadow-card animate-fade-up">
-            <div className="aspect-[4/3] bg-hero-gradient relative overflow-hidden">
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at:30%_20%,white_1px,transparent_1px)] [background-size:24px_24px]" />
+          <article className="lg:row-span-2 group rounded-xl border border-border bg-card overflow-hidden flex flex-col transition-all hover:border-gold/50 animate-fade-up">
+            <div className="aspect-[4/3] bg-primary relative overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:24px_24px]" />
               <div className="absolute bottom-8 left-8">
-                <span className="inline-block rounded-full bg-gold text-black px-4 py-1.5 text-xs font-bold uppercase tracking-widest shadow-soft">
+                <span className="inline-block rounded bg-gold text-black px-4 py-1.5 text-xs font-bold uppercase tracking-widest">
                   Featured
                 </span>
               </div>
@@ -78,7 +78,7 @@ export default function Blog() {
         <div className="mt-20 text-center animate-fade-up">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 rounded-xl border border-border bg-card px-8 py-4 font-bold text-primary hover:bg-surface transition-smooth shadow-soft"
+            className="inline-flex items-center gap-3 rounded-lg border border-border bg-card px-8 py-4 font-bold text-primary hover:bg-surface transition-smooth"
           >
             Subscribe for monthly updates <ArrowRight className="h-5 w-5" />
           </Link>
@@ -95,7 +95,7 @@ export default function Blog() {
                     Speak to one of our advisors about taxes, compliance or company setup. We respond within one business day.
                 </p>
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-                    <Button size="lg" variant="secondary" className="rounded-xl px-10 h-16 text-lg font-bold w-full sm:w-auto shadow-elegant" asChild>
+                    <Button size="lg" variant="secondary" className="rounded-lg px-10 h-16 text-lg font-bold w-full sm:w-auto border border-white/20" asChild>
                         <Link href="/contact">Request a Call Back</Link>
                     </Button>
                     <a href="tel:+917488447789" className="flex items-center gap-4 text-2xl font-bold text-gold hover:text-white transition-smooth group">
@@ -115,7 +115,7 @@ export default function Blog() {
 function BlogCard({ post, compact = false, index = 0 }: { post: typeof POSTS[number]; compact?: boolean; index?: number }) {
   return (
     <article 
-        className="group rounded-3xl border border-border bg-card p-8 md:p-10 hover-lift shadow-card flex flex-col animate-fade-up"
+        className="group rounded-xl border border-border bg-card p-8 md:p-10 transition-all hover:border-gold/50 flex flex-col animate-fade-up"
         style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-accent mb-6">

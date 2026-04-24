@@ -55,8 +55,8 @@ export default function About() {
           </div>
         </div>
         <div className="relative animate-fade-up" style={{ animationDelay: '0.2s' }}>
-          <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-3xl" />
-          <div className="relative aspect-[4/3] rounded-3xl bg-surface border border-border shadow-elegant overflow-hidden flex items-center justify-center text-muted-foreground font-display text-xl">
+          <div className="absolute -inset-4 bg-accent/5 rounded-xl blur-xl" />
+          <div className="relative aspect-[4/3] rounded-xl bg-surface border border-border overflow-hidden flex items-center justify-center text-muted-foreground font-display text-xl">
             [Team Image Placeholder]
           </div>
         </div>
@@ -76,8 +76,8 @@ export default function About() {
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {VALUES.map((v, i) => (
-              <div key={v.title} className="rounded-2xl border border-border bg-background p-8 shadow-card hover-lift animate-fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-white mb-6">
+              <div key={v.title} className="rounded-xl border border-border bg-background p-8 animate-fade-up transition-all hover:border-gold/50" style={{ animationDelay: `${i * 0.1}s` }}>
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white mb-6">
                   <v.icon className="h-6 w-6" />
                 </div>
                 <h3 className="font-display text-xl font-bold text-primary mb-3">{v.title}</h3>
@@ -99,7 +99,7 @@ export default function About() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {TIMELINE.map((t, i) => (
             <div key={t.year} className="relative pl-8 border-l-2 border-gold animate-fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-              <div className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-gold shadow-soft" />
+              <div className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-gold" />
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">Milestone {i + 1}</p>
               <p className="font-display text-3xl font-bold text-primary mb-2">{t.year}</p>
               <p className="font-bold text-lg text-foreground mb-2">{t.title}</p>
@@ -108,7 +108,7 @@ export default function About() {
           ))}
         </div>
         <div className="mt-16 animate-fade-up">
-          <Button size="lg" className="rounded-xl px-10 h-14 font-bold" asChild>
+          <Button size="lg" className="rounded-lg px-10 h-14 font-bold" asChild>
             <Link href="/services">
                 See what we do <ArrowRight className="h-5 w-5 ml-2" />
             </Link>
@@ -126,7 +126,7 @@ export default function About() {
                     Speak to one of our advisors about taxes, compliance or company setup. We respond within one business day.
                 </p>
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-                    <Button size="lg" variant="secondary" className="rounded-xl px-10 h-16 text-lg font-bold w-full sm:w-auto shadow-elegant" asChild>
+                    <Button size="lg" variant="secondary" className="rounded-lg px-10 h-16 text-lg font-bold w-full sm:w-auto border border-white/20" asChild>
                         <Link href="/contact">Request a Call Back</Link>
                     </Button>
                     <a href="tel:+917488447789" className="flex items-center gap-4 text-2xl font-bold text-gold hover:text-white transition-smooth group">
@@ -145,7 +145,7 @@ export default function About() {
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 text-center shadow-soft group hover:border-gold/30 transition-smooth">
+    <div className="rounded-xl border border-border bg-card p-6 text-center group hover:border-gold/30 transition-smooth">
       <p className="font-display text-3xl font-bold text-primary group-hover:text-accent transition-colors">{value}</p>
       <p className="text-xs font-bold text-muted-foreground mt-2 uppercase tracking-widest leading-none">{label}</p>
     </div>

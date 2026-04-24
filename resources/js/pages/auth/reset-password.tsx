@@ -39,7 +39,7 @@ export default function ResetPassword({ token, email }: Props) {
                 </div>
 
                 {/* Main Card */}
-                <div className="bg-white border border-border rounded-2xl overflow-hidden flex flex-col">
+                <div className="bg-white border border-border rounded-xl overflow-hidden flex flex-col">
                     <div className="bg-primary p-8 text-white">
                         <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-4 text-gold">
                             <RefreshCw className="h-6 w-6" />

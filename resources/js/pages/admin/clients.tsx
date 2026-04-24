@@ -22,7 +22,7 @@ export default function AdminClients({ clients }: Props) {
             <Head title="Manage Clients" />
             <div className="p-6 md:p-8 space-y-8 min-h-full">
                 {/* Header */}
-                <div className="rounded-2xl bg-hero-gradient text-white p-8 shadow-card">
+                <div className="bg-primary text-white p-8 border border-border">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
                             <div className="inline-flex items-center gap-2 mb-4">
@@ -33,14 +33,14 @@ export default function AdminClients({ clients }: Props) {
                             <p className="text-white/70 mt-2">Approve, reject, and manage client accounts.</p>
                         </div>
                         <div className="flex gap-3 text-sm">
-                            <span className="rounded-full bg-gold/20 text-gold font-bold px-4 py-1.5 border border-gold/30">{clients.filter(c => c.status === 'pending').length} Pending</span>
-                            <span className="rounded-full bg-white/10 text-white font-bold px-4 py-1.5 border border-white/20">{clients.filter(c => c.status === 'approved').length} Active</span>
+                            <span className="rounded bg-gold/20 text-gold font-bold px-4 py-1.5 border border-gold/30">{clients.filter(c => c.status === 'pending').length} Pending</span>
+                            <span className="rounded bg-white/10 text-white font-bold px-4 py-1.5 border border-white/20">{clients.filter(c => c.status === 'approved').length} Active</span>
                         </div>
                     </div>
                 </div>
 
                 {/* Search */}
-                <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 shadow-card">
+                <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-4">
                     <Search className="h-5 w-5 text-muted-foreground" />
                     <Input 
                         className="border-0 focus-visible:ring-0 shadow-none p-0 h-auto text-base"
@@ -91,7 +91,7 @@ function Section({ icon: Icon, title, count, accent, children }: any) {
         red: 'text-red-500',
     };
     return (
-        <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+        <div className="rounded-xl border border-border bg-card overflow-hidden">
             <div className="p-5 border-b border-border flex items-center gap-3">
                 <Icon className={`h-5 w-5 ${colors[accent] || 'text-primary'}`} />
                 <h2 className="font-display font-bold text-primary">{title}</h2>
@@ -149,7 +149,7 @@ function StatusBadge({ status }: { status: string }) {
         rejected: 'bg-red-50 text-red-700 border-red-200',
     };
     return (
-        <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border ${styles[status] || styles.pending}`}>
+        <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded border ${styles[status] || styles.pending}`}>
             {status}
         </span>
     );

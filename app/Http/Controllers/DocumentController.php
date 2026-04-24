@@ -95,7 +95,7 @@ class DocumentController extends Controller
         if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
             foreach ($documents as $doc) {
                 if (Storage::exists($doc->file_path)) {
-                    $zip->addFile(storage_path('app/' . $doc->file_path), $doc->name);
+                    $zip->addFile(Storage::path($doc->file_path), $doc->name);
                 }
             }
             $zip->close();

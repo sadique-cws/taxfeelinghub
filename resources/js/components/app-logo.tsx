@@ -2,9 +2,10 @@ import { cn } from '@/lib/utils';
 
 interface AppLogoProps {
     className?: string;
+    subtext?: string;
 }
 
-export function AppLogo({ className }: AppLogoProps) {
+export function AppLogo({ className, subtext }: AppLogoProps) {
     return (
         <div className={cn("flex items-center gap-2.5 group", className)}>
             <div className="relative flex h-10 w-10 items-center justify-center shrink-0">
@@ -39,7 +40,7 @@ export function AppLogo({ className }: AppLogoProps) {
                     Tax Filing<span className="text-gold"> Hub</span>
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-0.5">
-                    Advisors & Consultants
+                    {subtext || "Advisors & Consultants"}
                 </span>
             </div>
         </div>

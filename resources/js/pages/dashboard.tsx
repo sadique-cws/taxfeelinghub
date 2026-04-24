@@ -55,7 +55,7 @@ export default function Dashboard({ stats, recentDocuments, recentClients }: Pro
 
             <div className="p-6 md:p-8 space-y-8 min-h-full">
                 {/* Welcome Hero */}
-                <div className="rounded-2xl bg-hero-gradient text-white p-8 md:p-10 shadow-card">
+                <div className="bg-primary text-white p-8 md:p-10 border border-border">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
                             <div className="inline-flex items-center gap-2 mb-4">
@@ -75,7 +75,7 @@ export default function Dashboard({ stats, recentDocuments, recentClients }: Pro
                         </div>
                         <Link 
                             href={isAdmin ? '/admin/documents' : '/dashboard/documents'}
-                            className="inline-flex items-center gap-2 rounded-xl bg-gold px-7 py-3.5 font-semibold text-gold-foreground hover:opacity-90 transition-smooth shadow-soft"
+                            className="inline-flex items-center gap-2 rounded-lg bg-gold px-7 py-3.5 font-semibold text-gold-foreground hover:bg-gold/90 transition-smooth"
                         >
                             {isAdmin ? 'Manage Files' : 'My Documents'}
                             <ArrowRight className="h-4 w-4" />
@@ -117,14 +117,14 @@ export default function Dashboard({ stats, recentDocuments, recentClients }: Pro
 
                 <div className="grid gap-6 lg:grid-cols-3">
                     {/* Recent Documents */}
-                    <div className="lg:col-span-2 rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                    <div className="lg:col-span-2 rounded-xl border border-border bg-card overflow-hidden">
                         <div className="p-5 border-b border-border flex justify-between items-center">
                             <h2 className="font-display font-bold text-primary">Recent Uploads</h2>
                             <Clock className="h-4 w-4 text-muted-foreground" />
                         </div>
                         <div>
                             {recentDocuments.length > 0 ? recentDocuments.map((doc) => (
-                                <div key={doc.id} className="flex items-start gap-4 p-5 border-b border-border/50 last:border-0 hover-lift transition-smooth">
+                                <div key={doc.id} className="flex items-start gap-4 p-5 border-b border-border/50 last:border-0 transition-smooth">
                                     <div className="h-10 w-10 rounded-lg bg-primary text-white flex items-center justify-center shrink-0">
                                         <FileText className="h-5 w-5" />
                                     </div>
@@ -161,7 +161,7 @@ export default function Dashboard({ stats, recentDocuments, recentClients }: Pro
 
                     {/* Side Panel */}
                     <div className="space-y-5">
-                        <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                        <div className="rounded-xl border border-border bg-card overflow-hidden">
                             <div className="p-5 border-b border-border flex items-center justify-between">
                                 <h2 className="font-display font-bold text-primary">Recent Clients</h2>
                                 {isAdmin && (
@@ -192,7 +192,7 @@ export default function Dashboard({ stats, recentDocuments, recentClients }: Pro
                             </div>
                         </div>
 
-                        <div className="rounded-2xl bg-hero-gradient text-white p-6 shadow-card">
+                        <div className="rounded-xl bg-primary text-white p-6 border border-white/10">
                             <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold mb-3">Expert Advice</p>
                             <p className="text-sm text-white/80 leading-relaxed">
                                 Need help with your tax planning? Our senior partners are available for consultation every Tuesday.
@@ -216,7 +216,7 @@ Dashboard.layout = {
 
 function StatCard({ title, value, icon: Icon, trend, variant = 'default' }: any) {
     return (
-        <div className="rounded-2xl border border-border bg-card p-6 shadow-card hover-lift transition-smooth group">
+        <div className="rounded-xl border border-border bg-card p-6 transition-smooth group">
             <div className="flex justify-between items-start">
                 <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{title}</p>

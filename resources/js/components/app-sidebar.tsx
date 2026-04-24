@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
-import AppLogoIcon from '@/components/app-logo-icon';
+import { AppLogo } from '@/components/app-logo';
 
 export function AppSidebar() {
     const { auth } = usePage().props as any;
@@ -51,17 +51,12 @@ export function AppSidebar() {
             <SidebarHeader className="py-5 px-4">
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
+                        <SidebarMenuButton size="lg" asChild className="h-auto p-0 hover:bg-transparent">
                             <Link href={dashboard()} prefetch className="flex items-center gap-3">
-                                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white">
-                                    <AppLogoIcon className="size-5 fill-current" />
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="font-display text-sm font-bold text-primary">Tax Filing Hub</span>
-                                    <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                                        {user.role === 'admin' ? 'Admin Console' : 'Client Portal'}
-                                    </span>
-                                </div>
+                                <AppLogo 
+                                    className="text-primary" 
+                                    subtext={user.role === 'admin' ? 'Admin Console' : 'Client Portal'} 
+                                />
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

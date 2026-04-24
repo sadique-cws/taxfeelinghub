@@ -39,10 +39,10 @@ export default function Register() {
                         backgroundPosition: 'center'
                     }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-transparent z-10" />
+                <div className="absolute inset-0 bg-primary/95 z-10" />
 
                 <div className="relative z-20 flex flex-col h-full">
-                    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl self-start">
+                    <div className="bg-white/10 border border-white/20 p-6 rounded-xl self-start">
                         <AppLogo className="text-white" />
                     </div>
 

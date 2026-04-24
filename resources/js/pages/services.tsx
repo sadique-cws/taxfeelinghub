@@ -92,9 +92,9 @@ export default function Services() {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className="group relative flex flex-col rounded-2xl border border-border bg-card p-7 hover-lift shadow-card transition-smooth"
+                className="group relative flex flex-col rounded-xl border border-border bg-card p-7 transition-all hover:border-gold/50"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-white mb-6 transition-smooth group-hover:bg-gold group-hover:text-black shadow-soft">
+                <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary text-white mb-6 transition-smooth group-hover:bg-gold group-hover:text-black">
                   <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="font-display text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">{s.title}</h3>
@@ -126,7 +126,7 @@ export default function Services() {
                     Speak to one of our advisors about taxes, compliance or company setup. We respond within one business day.
                 </p>
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-                    <Button size="lg" variant="secondary" className="rounded-xl px-10 h-16 text-lg font-bold w-full sm:w-auto shadow-elegant" asChild>
+                    <Button size="lg" variant="secondary" className="rounded-lg px-10 h-16 text-lg font-bold w-full sm:w-auto border border-white/20" asChild>
                         <Link href="/contact">Request a Call Back</Link>
                     </Button>
                     <a href="tel:+917488447789" className="flex items-center gap-4 text-2xl font-bold text-gold hover:text-white transition-smooth group">

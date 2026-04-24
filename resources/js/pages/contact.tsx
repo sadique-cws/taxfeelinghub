@@ -58,7 +58,7 @@ export default function Contact() {
             lines={[SITE.email, "We reply within one business day"]}
             actionHref={`mailto:${SITE.email}`}
           />
-          <div className="rounded-xl bg-hero-gradient text-white p-6 h-full shadow-card animate-fade-up">
+          <div className="rounded-xl bg-primary text-white p-6 h-full border border-white/10 animate-fade-up">
             <Clock className="h-5 w-5 text-gold mb-3" />
             <p className="font-display font-semibold text-lg">Office Hours</p>
             <ul className="mt-3 space-y-1.5 text-sm text-white/80">
@@ -71,7 +71,7 @@ export default function Contact() {
 
         {/* Form */}
         <div className="grid gap-10 lg:grid-cols-5">
-          <div className="lg:col-span-3 rounded-2xl border border-border bg-card p-8 md:p-10 shadow-card animate-fade-up">
+          <div className="lg:col-span-3 rounded-xl border border-border bg-card p-8 md:p-10 animate-fade-up">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-primary">Request a call back</h2>
             <p className="mt-2 text-muted-foreground">
               Submit your details and one of our financial advisors will be in touch shortly.
@@ -114,7 +114,7 @@ export default function Contact() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 py-4 font-bold text-white hover:bg-secondary transition-smooth shadow-elegant group"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 py-4 font-bold text-white hover:bg-secondary transition-smooth group"
                 >
                   Send Message <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
@@ -124,7 +124,7 @@ export default function Contact() {
 
           {/* Side panel */}
           <aside className="lg:col-span-2 space-y-5 animate-fade-up">
-            <div className="rounded-2xl overflow-hidden border border-border shadow-card h-64 lg:h-72">
+            <div className="rounded-xl overflow-hidden border border-border h-64 lg:h-72">
               <iframe
                 title="Tax Filing Hub office location"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(`${SITE.address.line1}, ${SITE.address.line2}, ${SITE.address.city}, ${SITE.address.state} ${SITE.address.pin}`)}&output=embed`}
@@ -133,7 +133,7 @@ export default function Contact() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-            <div className="rounded-2xl bg-primary text-white p-8 shadow-card">
+            <div className="rounded-xl bg-primary text-white p-8 border border-white/10">
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold mb-6">Why Tax Filing Hub</p>
               <ul className="space-y-4 text-base text-white/80">
                 <li className="flex gap-3"><CheckCircle2 className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" /> Direct access to senior advisors</li>
@@ -155,7 +155,7 @@ function InfoCard({
   icon: React.ElementType; title: string; lines: string[]; actionHref?: string;
 }) {
   const Content = (
-    <div className="rounded-xl border border-border bg-card p-6 hover-lift h-full shadow-card group">
+    <div className="rounded-xl border border-border bg-card p-6 h-full transition-all hover:border-gold/50 group">
       <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white mb-6 group-hover:bg-gold group-hover:text-black transition-smooth">
         <Icon className="h-5 w-5" />
       </div>

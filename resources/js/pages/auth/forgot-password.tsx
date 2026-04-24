@@ -30,7 +30,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 </div>
 
                 {/* Main Card */}
-                <div className="bg-white border border-border rounded-2xl overflow-hidden flex flex-col">
+                <div className="bg-white border border-border rounded-xl overflow-hidden flex flex-col">
                     <div className="bg-primary p-8 text-white">
                         <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-4 text-gold">
                             <KeyRound className="h-6 w-6" />
@@ -42,7 +42,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     <div className="p-8">
                         {status ? (
                             <div className="text-center space-y-6 py-4">
-                                <div className="h-16 w-16 rounded-full bg-green-50 border border-green-100 flex items-center justify-center mx-auto">
+                                <div className="h-16 w-16 rounded bg-green-50 border border-green-100 flex items-center justify-center mx-auto">
                                     <CheckCircle2 className="h-8 w-8 text-green-500" />
                                 </div>
                                 <div className="space-y-2">

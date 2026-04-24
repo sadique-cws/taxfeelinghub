@@ -44,8 +44,8 @@ export default function Career() {
         </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {PERKS.map((p, i) => (
-            <div key={p.title} className="rounded-2xl border border-border bg-card p-8 shadow-card hover-lift animate-fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-white mb-6">
+            <div key={p.title} className="rounded-xl border border-border bg-card p-8 animate-fade-up transition-all hover:border-gold/50" style={{ animationDelay: `${i * 0.1}s` }}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white mb-6">
                 <p.icon className="h-6 w-6" />
               </div>
               <h3 className="font-display text-xl font-bold text-primary mb-3">{p.title}</h3>
@@ -72,13 +72,13 @@ export default function Career() {
             {OPENINGS.map((job, i) => (
               <div
                 key={job.title}
-                className="group flex flex-col md:flex-row md:items-center gap-8 rounded-2xl border border-border bg-background p-8 md:p-10 hover-lift shadow-card animate-fade-up"
+                className="group flex flex-col md:flex-row md:items-center gap-8 rounded-xl border border-border bg-background p-8 md:p-10 transition-all hover:border-gold/50 animate-fade-up"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-4 mb-4">
                     <h3 className="font-display text-2xl font-bold text-primary">{job.title}</h3>
-                    <span className="inline-block rounded-full bg-gold/10 text-gold-foreground border border-gold/20 px-4 py-1 text-xs font-bold uppercase tracking-widest">
+                    <span className="inline-block rounded bg-gold/10 text-gold-foreground border border-gold/20 px-4 py-1 text-xs font-bold uppercase tracking-widest">
                       {job.type}
                     </span>
                   </div>
@@ -89,7 +89,7 @@ export default function Career() {
                 </div>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 font-bold text-white hover:bg-secondary transition-smooth shadow-elegant"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 font-bold text-white hover:bg-secondary transition-smooth"
                 >
                   Apply Now <ArrowRight className="h-5 w-5" />
                 </Link>
@@ -101,8 +101,8 @@ export default function Career() {
 
       {/* APPLY CTA */}
       <section className="container-page py-24 md:py-32">
-        <div className="rounded-3xl bg-hero-gradient text-white p-12 md:p-20 text-center shadow-elegant relative overflow-hidden animate-fade-up">
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,#D4AF37_1px,transparent_1px)] [background-size:32px_32px]" />
+        <div className="rounded-xl bg-primary text-white p-12 md:p-20 text-center border border-white/10 relative overflow-hidden animate-fade-up">
+          <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_center,#D4AF37_1px,transparent_1px)] [background-size:32px_32px]" />
           <div className="relative z-10">
             <Send className="h-14 w-14 text-gold mx-auto mb-8" />
             <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight">
@@ -114,7 +114,7 @@ export default function Career() {
             <div className="mt-12">
               <a
                 href="mailto:taxfilinghub@gmail.com?subject=Career Application"
-                className="inline-flex items-center gap-3 rounded-xl bg-gold px-10 py-5 text-lg font-bold text-black hover:opacity-90 transition-smooth shadow-elegant group"
+                className="inline-flex items-center gap-3 rounded-lg bg-gold px-10 py-5 text-lg font-bold text-black hover:bg-gold/90 transition-smooth group"
               >
                 taxfilinghub@gmail.com <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>

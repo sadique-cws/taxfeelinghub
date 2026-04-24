@@ -34,7 +34,7 @@ export default function AdminDocuments({ documents, clients }: Props) {
 
             <div className="p-6 md:p-8 space-y-8 min-h-full">
                 {/* Header */}
-                <div className="rounded-2xl bg-hero-gradient text-white p-8 shadow-card">
+                <div className="bg-primary text-white p-8 border border-border">
                     <div className="inline-flex items-center gap-2 mb-4">
                         <div className="gold-rule" />
                         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Admin</span>
@@ -45,7 +45,7 @@ export default function AdminDocuments({ documents, clients }: Props) {
 
                 <div className="grid gap-6 lg:grid-cols-3">
                     {/* Upload Form */}
-                    <div className="lg:col-span-1 rounded-2xl border border-border bg-card p-6 shadow-card">
+                    <div className="lg:col-span-1 rounded-xl border border-border bg-card p-6">
                         <h2 className="font-display text-lg font-bold text-primary mb-4 flex items-center gap-2">
                             <FileUp className="h-5 w-5 text-gold" />
                             Upload New Document
@@ -83,7 +83,7 @@ export default function AdminDocuments({ documents, clients }: Props) {
                     </div>
 
                     {/* Table */}
-                    <div className="lg:col-span-2 rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                    <div className="lg:col-span-2 rounded-xl border border-border bg-card overflow-hidden">
                         <div className="p-5 border-b border-border flex justify-between items-center">
                             <h2 className="font-display font-bold text-primary">Recent Uploads</h2>
                             <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary">{documents.length} Files</span>
@@ -120,7 +120,7 @@ export default function AdminDocuments({ documents, clients }: Props) {
                                                 </div>
                                             </td>
                                             <td className="px-5 py-4">
-                                                <span className="inline-block px-2.5 py-1 rounded-full bg-gold/10 text-accent text-[10px] font-bold uppercase tracking-wider border border-gold/20">
+                                                <span className="inline-block px-2.5 py-1 rounded bg-gold/10 text-accent text-[10px] font-bold uppercase tracking-wider border border-gold/20">
                                                     {doc.category || 'Uncategorized'}
                                                 </span>
                                             </td>
