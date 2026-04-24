@@ -21,8 +21,22 @@ Route::prefix('services')->group(function () {
     Route::inertia('/indirect-taxes', 'services/indirect-taxes');
 });
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentController;
+
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
+    
+    // User Document Routes
+    Route::get('dashboard/documents', [DocumentController::class, 'userIndex'])->name('dashboard.documents');
+    Route::get('dashboard/documents/download', [DocumentController::class, 'downloadZip'])->name('dashboard.documents.download');
+    Route::delete('documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+
+    // Admin Document Routes
+    Route::middleware(['admin'])->prefix('admin')->group(function () {
+        Route::get('documents', [DocumentController::class, 'adminIndex'])->name('admin.documents');
+        Route::post('documents', [DocumentController::class, 'store'])->name('admin.documents.store');
+    });
 });
 
 require __DIR__.'/settings.php';
