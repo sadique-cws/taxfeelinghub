@@ -21,7 +21,7 @@ interface ServiceDetailProps {
 export default function ServiceDetail({ title, description, overview, features, faqs }: ServiceDetailProps) {
     return (
         <PublicLayout>
-            <Head title={`${title} — TaxFilingHub`} />
+            <Head title={`${title} — Tax Filing Hub`} />
             
             <PageHeader
                 eyebrow="Service Details"

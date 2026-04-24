@@ -73,8 +73,8 @@ const SERVICES = [
 export default function Services() {
   return (
     <PublicLayout>
-      <Head title="Services — Accounting, Tax, GST & Compliance | TaxFilingHub">
-        <meta name="description" content="Explore TaxFilingHub's complete suite of services: accounting, GST, income tax, company registration, trademark, payroll and business advisory." />
+      <Head title="Services — Accounting, Tax, GST & Compliance | Tax Filing Hub">
+        <meta name="description" content="Explore Tax Filing Hub's complete suite of services: accounting, GST, income tax, company registration, trademark, payroll and business advisory." />
       </Head>
 
       <PageHeader

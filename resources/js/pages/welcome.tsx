@@ -94,8 +94,8 @@ const SERVICES = [
 export default function Welcome() {
   return (
     <PublicLayout>
-      <Head title="TaxFilingHub — Tax, GST & Company Compliance Made Simple">
-        <meta name="description" content="From accounting and GST to company registration and compliance, TaxFilingHub gives growing businesses one trusted partner for every financial and legal need." />
+      <Head title="Tax Filing Hub — Tax, GST & Company Compliance Made Simple">
+        <meta name="description" content="From accounting and GST to company registration and compliance, Tax Filing Hub gives growing businesses one trusted partner for every financial and legal need." />
       </Head>
 
       {/* HERO */}
@@ -113,7 +113,7 @@ export default function Welcome() {
               A trusted partner at every <span className="text-gradient-gold">stage of your growth.</span>
             </h1>
             <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl leading-relaxed">
-              TaxFilingHub combines technical mastery with a personal touch — helping startups, SMEs and enterprises stay compliant, efficient and ready for what's next.
+              Tax Filing Hub combines technical mastery with a personal touch — helping startups, SMEs and enterprises stay compliant, efficient and ready for what's next.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -225,7 +225,7 @@ export default function Welcome() {
           </div>
           <div>
             <div className="gold-rule mb-5" />
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Why TaxFilingHub</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Why Tax Filing Hub</p>
             <h2 className="mt-3 font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
               Expertise that feels personal.
             </h2>

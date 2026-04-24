@@ -20,14 +20,14 @@ const OPENINGS = [
 export default function Career() {
   return (
     <PublicLayout>
-      <Head title="Careers at TaxFilingHub — Join a Young Team of Professionals">
-        <meta name="description" content="Build your career at TaxFilingHub. Constant learning, healthy collaboration and meaningful work for accountants, lawyers and consultants." />
+      <Head title="Careers at Tax Filing Hub — Join a Young Team of Professionals">
+        <meta name="description" content="Build your career at Tax Filing Hub. Constant learning, healthy collaboration and meaningful work for accountants, lawyers and consultants." />
       </Head>
 
       <PageHeader
         eyebrow="Careers"
         title="Build your career with a team that learns together."
-        description="At TaxFilingHub you'll constantly be learning, your ideas will be welcomed, and you'll work in a healthy, competitive atmosphere of collaboration and teamwork."
+        description="At Tax Filing Hub you'll constantly be learning, your ideas will be welcomed, and you'll work in a healthy, competitive atmosphere of collaboration and teamwork."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Career" }]}
       />
 

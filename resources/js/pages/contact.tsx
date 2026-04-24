@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, Send, CheckCircle2, Clock } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 
 const SITE = {
-    name: 'TaxFilingHub',
+    name: 'Tax Filing Hub',
     email: 'taxfilinghub@gmail.com',
     phone: '+91 7488447789',
     phoneHref: 'tel:+917488447789',
@@ -23,8 +23,8 @@ export default function Contact() {
 
   return (
     <PublicLayout>
-      <Head title="Contact TaxFilingHub — Get Expert Tax & Financial Advice">
-        <meta name="description" content="Talk to TaxFilingHub. Reach our office in Purnia, Bihar or send us a message — we respond within one business day." />
+      <Head title="Contact Tax Filing Hub — Get Expert Tax & Financial Advice">
+        <meta name="description" content="Talk to Tax Filing Hub. Reach our office in Purnia, Bihar or send us a message — we respond within one business day." />
       </Head>
 
       <PageHeader
@@ -126,7 +126,7 @@ export default function Contact() {
           <aside className="lg:col-span-2 space-y-5 animate-fade-up">
             <div className="rounded-2xl overflow-hidden border border-border shadow-card h-64 lg:h-72">
               <iframe
-                title="TaxFilingHub office location"
+                title="Tax Filing Hub office location"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(`${SITE.address.line1}, ${SITE.address.line2}, ${SITE.address.city}, ${SITE.address.state} ${SITE.address.pin}`)}&output=embed`}
                 className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
                 loading="lazy"
@@ -134,7 +134,7 @@ export default function Contact() {
               />
             </div>
             <div className="rounded-2xl bg-primary text-white p-8 shadow-card">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold mb-6">Why TaxFilingHub</p>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold mb-6">Why Tax Filing Hub</p>
               <ul className="space-y-4 text-base text-white/80">
                 <li className="flex gap-3"><CheckCircle2 className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" /> Direct access to senior advisors</li>
                 <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" /> Transparent pricing, no hidden fees</li>

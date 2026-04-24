@@ -16,8 +16,8 @@ const POSTS = [
 export default function Blog() {
   return (
     <PublicLayout>
-      <Head title="Blog — Tax, GST & Compliance Insights | TaxFilingHub">
-        <meta name="description" content="Practical articles on income tax, GST, ROC compliance, business setup and finance — written by TaxFilingHub's advisory team." />
+      <Head title="Blog — Tax, GST & Compliance Insights | Tax Filing Hub">
+        <meta name="description" content="Practical articles on income tax, GST, ROC compliance, business setup and finance — written by Tax Filing Hub's advisory team." />
       </Head>
 
       <PageHeader

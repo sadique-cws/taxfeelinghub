@@ -36,7 +36,7 @@ export function AppLogo({ className }: AppLogoProps) {
 
             <div className="flex flex-col leading-none">
                 <span className="font-display font-bold text-xl tracking-tight">
-                    TaxFiling<span className="text-gold">Hub</span>
+                    Tax Filing<span className="text-gold"> Hub</span>
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-0.5">
                     Advisors & Consultants

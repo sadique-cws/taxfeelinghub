@@ -20,7 +20,7 @@ const SERVICES = [
 ];
 
 const SITE = {
-    name: 'TaxFilingHub',
+    name: 'Tax Filing Hub',
     email: 'taxfilinghub@gmail.com',
     phone: '+91 7488447789',
     phoneHref: 'tel:+917488447789',

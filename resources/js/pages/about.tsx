@@ -21,8 +21,8 @@ const TIMELINE = [
 export default function About() {
   return (
     <PublicLayout>
-      <Head title="About TaxFilingHub — Our Story, Mission & Team">
-        <meta name="description" content="Meet TaxFilingHub: a young team of finance, tax and legal professionals supporting businesses across India with personal commitment and deep expertise." />
+      <Head title="About Tax Filing Hub — Our Story, Mission & Team">
+        <meta name="description" content="Meet Tax Filing Hub: a young team of finance, tax and legal professionals supporting businesses across India with personal commitment and deep expertise." />
       </Head>
 
       <PageHeader
@@ -42,7 +42,7 @@ export default function About() {
           </h2>
           <div className="mt-8 space-y-6 text-muted-foreground text-lg leading-relaxed">
             <p>
-              TaxFilingHub continues to offer a wholesome service experience to boost highly valued client relationships — combining technical and industry expertise at par with well-placed firms together with a personal commitment to optimise client service.
+              Tax Filing Hub continues to offer a wholesome service experience to boost highly valued client relationships — combining technical and industry expertise at par with well-placed firms together with a personal commitment to optimise client service.
             </p>
             <p>
               Whether you're a first-time founder filing your first return or a 100-person enterprise managing complex compliance, our team becomes a quiet, dependable extension of yours.
