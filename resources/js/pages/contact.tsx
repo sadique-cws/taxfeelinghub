@@ -1,6 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
-import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle2, Clock } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 
@@ -19,7 +18,20 @@ const SITE = {
 };
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const { data, setData, post, processing, wasSuccessful, errors } = useForm({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+  });
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    post('/contact', {
+      preserveScroll: true,
+    });
+  };
 
   return (
     <PublicLayout>
@@ -77,7 +89,7 @@ export default function Contact() {
               Submit your details and one of our financial advisors will be in touch shortly.
             </p>
 
-            {submitted ? (
+            {wasSuccessful ? (
               <div className="mt-8 rounded-xl border border-gold/40 bg-gold/10 p-8 text-center animate-fade-up">
                 <CheckCircle2 className="h-12 w-12 text-gold mx-auto" />
                 <h3 className="mt-4 font-display text-xl font-semibold text-primary">Message sent!</h3>
@@ -86,37 +98,38 @@ export default function Contact() {
             ) : (
               <form
                 className="mt-8 grid gap-5"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSubmitted(true);
-                }}
+                onSubmit={submit}
               >
                 <div className="grid sm:grid-cols-2 gap-5">
-                  <Field label="Full name" name="name" required />
-                  <Field label="Email" name="email" type="email" required />
+                  <Field label="Full name" name="name" required value={data.name} onChange={e => setData('name', e.target.value)} error={errors.name} />
+                  <Field label="Email" name="email" type="email" required value={data.email} onChange={e => setData('email', e.target.value)} error={errors.email} />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-5">
-                  <Field label="Phone" name="phone" type="tel" required />
-                  <Field label="Subject" name="subject" />
+                  <Field label="Phone" name="phone" type="tel" required value={data.phone} onChange={e => setData('phone', e.target.value)} error={errors.phone} />
+                  <Field label="Subject" name="subject" value={data.subject} onChange={e => setData('subject', e.target.value)} error={errors.subject} />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 font-display">
-                    How can we help?
+                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 font-display uppercase tracking-widest text-[10px]">
+                    How can we help?<span className="text-gold ml-1">*</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={5}
                     required
+                    value={data.message}
+                    onChange={e => setData('message', e.target.value)}
                     className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-smooth"
                     placeholder="Tell us briefly about your business and what you need help with…"
                   />
+                  {errors.message && <p className="text-red-500 text-[10px] font-bold uppercase mt-1">{errors.message}</p>}
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 py-4 font-bold text-white hover:bg-secondary transition-smooth group"
+                  disabled={processing}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 py-4 font-bold text-white hover:bg-secondary transition-smooth group disabled:opacity-50"
                 >
-                  Send Message <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  {processing ? "Sending..." : "Send Message"} <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </form>
             )}
@@ -168,7 +181,11 @@ function InfoCard({
   return actionHref ? <a href={actionHref} className="block">{Content}</a> : Content;
 }
 
-function Field({ label, name, type = "text", required }: { label: string; name: string; type?: string; required?: boolean }) {
+function Field({ 
+    label, name, type = "text", required, value, onChange, error 
+}: { 
+    label: string; name: string; type?: string; required?: boolean; value?: string; onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; error?: string;
+}) {
   return (
     <div>
       <label htmlFor={name} className="block text-sm font-bold text-primary mb-2 font-display uppercase tracking-widest text-[10px]">
@@ -179,8 +196,11 @@ function Field({ label, name, type = "text", required }: { label: string; name: 
         name={name}
         type={type}
         required={required}
+        value={value}
+        onChange={onChange}
         className="w-full rounded-xl border border-input bg-background px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-smooth"
       />
+      {error && <p className="text-red-500 text-[10px] font-bold uppercase mt-1">{error}</p>}
     </div>
   );
 }

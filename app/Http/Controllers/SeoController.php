@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Str;
+
+class SeoController extends Controller
+{
+    /**
+     * Handle programmatic SEO landing pages for locations.
+     */
+    public function locationPage($city, $area = null)
+    {
+        $seoConfig = config('seo.cities');
+        $cityKey = strtolower($city);
+        
+        if (!isset($seoConfig[$cityKey])) {
+            abort(404);
+        }
+
+        $cityData = $seoConfig[$cityKey];
+        $locationName = $area ? Str::title(str_replace('-', ' ', $area)) . ', ' . $cityData['name'] : $cityData['name'];
+        
+        return Inertia::render('location-landing', [
+            'location' => [
+                'name' => $locationName,
+                'city' => $cityData['name'],
+                'area' => $area ? Str::title(str_replace('-', ' ', $area)) : null,
+                'description' => $cityData['description'],
+            ],
+            'services' => config('seo.services'),
+        ]);
+    }
+
+    /**
+     * Generate sitemap.xml.
+     */
+    public function sitemap()
+    {
+        $urls = [
+            route('home'),
+            route('about'),
+            route('services'),
+            route('career'),
+            route('contact'),
+        ];
+
+        // Add service detail pages (if any)
+        // ...
+
+        // Add programmatic SEO pages
+        foreach (config('seo.cities') as $cityKey => $cityData) {
+            $urls[] = url("/best-tax-consultant-in-{$cityKey}");
+            if (isset($cityData['areas'])) {
+                foreach ($cityData['areas'] as $area) {
+                    $areaSlug = Str::slug($area);
+                    $urls[] = url("/best-tax-consultant-in-{$cityKey}/{$areaSlug}");
+                }
+            }
+        }
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($urls as $url) {
+            $xml .= '<url>';
+            $xml .= '<loc>' . htmlspecialchars($url) . '</loc>';
+            $xml .= '<lastmod>' . date('Y-m-d') . '</lastmod>';
+            $xml .= '<changefreq>monthly</changefreq>';
+            $xml .= '<priority>0.8</priority>';
+            $xml .= '</url>';
+        }
+        $xml .= '</urlset>';
+
+        return response($xml)->header('Content-Type', 'application/xml');
+    }
+}

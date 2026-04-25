@@ -101,6 +101,36 @@ export function PublicFooter() {
           </ul>
         </div>
       </div>
+
+      {/* Service Areas Section (SEO) */}
+      <div className="border-t border-primary-foreground/10 bg-primary/50">
+        <div className="container-page py-10">
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold/60 mb-6 text-center">Service Areas in Bihar</h4>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+            {['Purnia', 'Katihar', 'Kishanganj', 'Araria', 'Forbesganj', 'Saharsa', 'Madhepura', 'Bhagalpur', 'Patna'].map((city) => (
+              <Link 
+                key={city} 
+                href={`/best-tax-consultant-in-${city.toLowerCase()}`}
+                className="text-xs text-primary-foreground/50 hover:text-gold transition-smooth"
+              >
+                Tax Consultant in {city}
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-primary-foreground/5 pt-6">
+            {['Bhatta Bazar', 'Line Bazar', 'Gulabbagh', 'Madhubani', 'Khuskibagh'].map((area) => (
+              <Link 
+                key={area} 
+                href={`/best-tax-consultant-in-purnia/${area.toLowerCase().replace(' ', '-')}`}
+                className="text-[10px] text-primary-foreground/30 hover:text-gold transition-smooth"
+              >
+                {area} Purnia
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="border-t border-primary-foreground/10">
         <div className="container-page py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>

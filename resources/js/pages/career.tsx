@@ -10,14 +10,16 @@ const PERKS = [
   { icon: Coffee, title: "Work-Life Balance", desc: "Reasonable hours, flexible Saturdays and respect for your personal time." },
 ];
 
-const OPENINGS = [
-  { title: "Senior Tax Associate", type: "Full-time", location: "Purnia, Bihar", desc: "Lead direct & indirect tax engagements for SME and corporate clients. 3+ years of experience required." },
-  { title: "Audit & Assurance Executive", type: "Full-time", location: "Purnia, Bihar", desc: "Plan and execute statutory and internal audits. CA Inter / Final candidates welcome." },
-  { title: "Company Secretary (CS)", type: "Full-time", location: "Purnia, Bihar / Remote", desc: "Handle ROC compliance, board meetings and corporate secretarial work for our growing client base." },
-  { title: "Articled Trainee (CA)", type: "Internship", location: "Purnia, Bihar", desc: "3-year articleship across audit, tax and advisory verticals. Mentorship guaranteed." },
-];
+interface CareerJob {
+  id: number;
+  title: string;
+  type: string;
+  location: string;
+  description: string;
+  is_active: boolean;
+}
 
-export default function Career() {
+export default function Career({ openings }: { openings: CareerJob[] }) {
   return (
     <PublicLayout>
       <Head title="Careers at Tax Filing Hub — Join a Young Team of Professionals">
@@ -69,9 +71,9 @@ export default function Career() {
           </div>
 
           <div className="space-y-6">
-            {OPENINGS.map((job, i) => (
+            {openings.length > 0 ? openings.map((job, i) => (
               <div
-                key={job.title}
+                key={job.id}
                 className="group flex flex-col md:flex-row md:items-center gap-8 rounded-xl border border-border bg-background p-8 md:p-10 transition-all hover:border-gold/50 animate-fade-up"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
@@ -82,7 +84,7 @@ export default function Career() {
                       {job.type}
                     </span>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed max-w-2xl">{job.desc}</p>
+                  <p className="text-muted-foreground leading-relaxed max-w-2xl">{job.description}</p>
                   <p className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary/60 uppercase tracking-widest">
                     <MapPin className="h-4 w-4 text-gold" /> {job.location}
                   </p>
@@ -94,7 +96,13 @@ export default function Career() {
                   Apply Now <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
-            ))}
+            )) : (
+              <div className="text-center py-20 bg-background rounded-xl border border-dashed border-border animate-fade-up">
+                <Briefcase className="h-12 w-12 text-muted-foreground/30 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-primary">No open positions right now</h3>
+                <p className="text-muted-foreground mt-2">But we're always looking for talent. Send us your CV anyway!</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
