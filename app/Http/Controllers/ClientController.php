@@ -11,15 +11,37 @@ class ClientController extends Controller
     /**
      * List all clients for admin management.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = User::where('role', 'user')
-            ->withCount('documents')
-            ->latest()
-            ->get();
+        $query = User::where('role', 'user')->withCount('documents')->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('phone', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('status') && in_array($request->status, ['pending', 'approved', 'rejected'])) {
+            $query->where('status', $request->status);
+        }
 
         return Inertia::render('admin/clients', [
-            'clients' => $clients,
+            'clients' => $query->get(),
+            'filters' => $request->only(['search', 'status'])
+        ]);
+    }
+
+    /**
+     * View client details.
+     */
+    public function show(User $user)
+    {
+        return Inertia::render('admin/clients/show', [
+            'client' => $user->loadCount('documents')->load('documents'),
+            'tickets' => $user->tickets()->latest()->get(),
         ]);
     }
 

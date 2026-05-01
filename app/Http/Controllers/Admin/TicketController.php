@@ -11,10 +11,28 @@ use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = Ticket::with('user:id,name,email')->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('subject', 'like', "%{$search}%")
+                  ->orWhereHas('user', function ($uq) use ($search) {
+                      $uq->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        if ($request->filled('status') && in_array($request->status, ['open', 'pending', 'closed'])) {
+            $query->where('status', $request->status);
+        }
+
         return Inertia::render('admin/tickets/index', [
-            'tickets' => Ticket::with('user:id,name,email')->latest()->get()
+            'tickets' => $query->get(),
+            'filters' => $request->only(['search', 'status'])
         ]);
     }
 

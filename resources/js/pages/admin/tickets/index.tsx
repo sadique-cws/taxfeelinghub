@@ -1,7 +1,17 @@
-import { Head, Link } from '@inertiajs/react';
-import { MessageCircle, Clock, CheckCircle2, User, ArrowRight, LifeBuoy } from 'lucide-react';
+import { MessageCircle, Clock, User, ArrowRight, LifeBuoy, Search, Filter, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { 
+    Select, 
+    SelectContent, 
+    SelectItem, 
+    SelectTrigger, 
+    SelectValue 
+} from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
+import { Head, Link, router } from '@inertiajs/react';
+import { useState, useEffect, useCallback } from 'react';
+import { useDebounce } from '@/hooks/use-debounce';
 
 interface Ticket {
     id: number;
@@ -18,9 +28,45 @@ interface Ticket {
 
 interface Props {
     tickets: Ticket[];
+    filters: {
+        search?: string;
+        status?: string;
+    };
 }
 
-export default function AdminTicketsIndex({ tickets }: Props) {
+export default function AdminTicketsIndex({ tickets, filters }: Props) {
+    const [search, setSearch] = useState(filters.search || '');
+    const [status, setStatus] = useState(filters.status || 'all');
+    const debouncedSearch = useDebounce(search, 500);
+
+    const handleFilter = useCallback((newSearch: string, newStatus: string) => {
+        router.get('/admin/tickets', {
+            search: newSearch || undefined,
+            status: newStatus === 'all' ? undefined : newStatus
+        }, {
+            preserveState: true,
+            preserveScroll: true,
+            replace: true
+        });
+    }, []);
+
+    useEffect(() => {
+        if (debouncedSearch !== (filters.search || '')) {
+            handleFilter(debouncedSearch, status);
+        }
+    }, [debouncedSearch, status, filters.search, handleFilter]);
+
+    const handleStatusChange = (value: string) => {
+        setStatus(value);
+        handleFilter(search, value);
+    };
+
+    const clearFilters = () => {
+        setSearch('');
+        setStatus('all');
+        router.get('/admin/tickets');
+    };
+
     const getStatusStyle = (status: string) => {
         switch (status) {
             case 'open': return 'bg-blue-50 text-blue-700 border-blue-200';
@@ -57,6 +103,46 @@ export default function AdminTicketsIndex({ tickets }: Props) {
                         <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight">Support Tickets</h1>
                         <p className="text-white/70 mt-2 max-w-xl">Manage and respond to client queries and support requests.</p>
                     </div>
+                </div>
+
+                {/* Filters */}
+                <div className="flex flex-col md:flex-row gap-4 items-end md:items-center bg-card p-4 rounded-xl border border-border shadow-sm">
+                    <div className="flex-1 w-full relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input
+                            placeholder="Search by subject, name or email..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="pl-10 h-11 border-border/60 focus:border-gold focus:ring-gold/20"
+                        />
+                    </div>
+                    
+                    <div className="w-full md:w-48">
+                        <Select value={status} onValueChange={handleStatusChange}>
+                            <SelectTrigger className="h-11 border-border/60">
+                                <div className="flex items-center gap-2">
+                                    <Filter className="h-3.5 w-3.5 text-gold" />
+                                    <SelectValue placeholder="All Status" />
+                                </div>
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">All Status</SelectItem>
+                                <SelectItem value="open">Open</SelectItem>
+                                <SelectItem value="pending">Pending</SelectItem>
+                                <SelectItem value="closed">Closed</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    {(filters.search || filters.status) && (
+                        <Button 
+                            variant="ghost" 
+                            onClick={clearFilters}
+                            className="h-11 px-4 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-red-600"
+                        >
+                            <X className="h-4 w-4 mr-2" /> Clear
+                        </Button>
+                    )}
                 </div>
 
                 {/* Tickets Table */}

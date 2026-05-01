@@ -24,7 +24,7 @@ export default function Login({ status, canResetPassword, canRegister }: Props) 
         post('/login', { onFinish: () => reset('password') });
     };
 
-    const autofill = (email: string) => setData({ email, password: 'password', remember: true });
+
 
     return (
         <div className="min-h-screen bg-background flex flex-col lg:flex-row">
@@ -145,23 +145,6 @@ export default function Login({ status, canResetPassword, canRegister }: Props) 
                             Log In to Portal
                         </Button>
                     </form>
-
-                    {/* Quick Access Grid (Professional Style) */}
-                    <div className="pt-8 border-t border-border">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4 text-center">Development Quick Access</p>
-                        <div className="grid grid-cols-2 gap-3">
-                            <button type="button" onClick={() => autofill('admin@taxfilinghub.com')}
-                                className="flex flex-col gap-1 p-4 rounded-xl border border-border bg-surface hover:bg-muted transition-all text-left group">
-                                <span className="text-xs font-bold text-primary group-hover:text-accent">Admin Role</span>
-                                <span className="text-[10px] text-muted-foreground">admin@taxfilinghub.com</span>
-                            </button>
-                            <button type="button" onClick={() => autofill('client@taxfilinghub.com')}
-                                className="flex flex-col gap-1 p-4 rounded-xl border border-border bg-surface hover:bg-muted transition-all text-left group">
-                                <span className="text-xs font-bold text-primary group-hover:text-accent">Client Role</span>
-                                <span className="text-[10px] text-muted-foreground">client@taxfilinghub.com</span>
-                            </button>
-                        </div>
-                    </div>
 
                     {canRegister && (
                         <p className="text-center text-sm text-muted-foreground">

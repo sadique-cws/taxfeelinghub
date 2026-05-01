@@ -8,10 +8,12 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { login } from '@/routes';
 import { AppLogo } from '@/components/app-logo';
-import { UserPlus, User, Mail, Lock, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { UserPlus, User, Mail, Lock, ShieldCheck, CheckCircle2, Phone } from 'lucide-react';
+
+import { useEffect } from 'react';
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm({
         name: '',
         email: '',
         phone: '',
@@ -19,15 +21,69 @@ export default function Register() {
         password_confirmation: '',
     });
 
+    // Real-time validation
+    useEffect(() => {
+        // Name validation
+        if (data.name.length > 0 && data.name.length < 3) {
+            setError('name', 'Name must be at least 3 characters');
+        } else {
+            clearErrors('name');
+        }
+    }, [data.name]);
+
+    useEffect(() => {
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (data.email.length > 0 && !emailRegex.test(data.email)) {
+            setError('email', 'Please enter a valid email address');
+        } else {
+            clearErrors('email');
+        }
+    }, [data.email]);
+
+    useEffect(() => {
+        // Phone validation
+        const phoneRegex = /^[0-9+()-\s]*$/;
+        if (data.phone.length > 0 && !phoneRegex.test(data.phone)) {
+            setError('phone', 'Please enter a valid phone number');
+        } else if (data.phone.length > 0 && data.phone.length < 10) {
+            setError('phone', 'Phone number is too short');
+        } else {
+            clearErrors('phone');
+        }
+    }, [data.phone]);
+
+    useEffect(() => {
+        // Password validation
+        if (data.password.length > 0 && data.password.length < 8) {
+            setError('password', 'Password must be at least 8 characters');
+        } else {
+            clearErrors('password');
+        }
+    }, [data.password]);
+
+    useEffect(() => {
+        // Password confirmation
+        if (data.password_confirmation.length > 0 && data.password_confirmation !== data.password) {
+            setError('password_confirmation', 'Passwords do not match');
+        } else {
+            clearErrors('password_confirmation');
+        }
+    }, [data.password_confirmation, data.password]);
+
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Final check before submission
+        if (Object.keys(errors).length > 0) return;
+
         post('/register', {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
 
     return (
-        <div className="min-h-screen bg-background flex flex-col lg:flex-row">
+        <div className="min-h-screen bg-red-5 bg-background flex flex-col lg:flex-row">
             <Head title="Create Account — Tax Filing Hub" />
 
             {/* Left Panel - Visuals */}

@@ -74,6 +74,7 @@ Route::middleware(['auth', 'verified', 'approved'])->group(function () {
         Route::get('documents', [DocumentController::class, 'adminIndex'])->name('admin.documents');
         Route::post('documents', [DocumentController::class, 'store'])->name('admin.documents.store');
         Route::get('clients', [ClientController::class, 'index'])->name('admin.clients');
+        Route::get('clients/{user}', [ClientController::class, 'show'])->name('admin.clients.show');
         
         // Admin Blog Management
         Route::get('blogs', [PostController::class, 'adminIndex'])->name('admin.blogs');
