@@ -23,6 +23,16 @@ class User extends Authenticatable
         return $this->hasMany(Document::class);
     }
 
+    public function tickets(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function ticketReplies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TicketReply::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

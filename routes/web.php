@@ -55,8 +55,22 @@ Route::middleware(['auth', 'verified', 'approved'])->group(function () {
     Route::get('dashboard/feedback', [\App\Http\Controllers\Client\FeedbackController::class, 'create'])->name('dashboard.feedback.create');
     Route::post('dashboard/feedback', [\App\Http\Controllers\Client\FeedbackController::class, 'store'])->name('dashboard.feedback.store');
 
+    // User Support Ticket Routes
+    Route::get('dashboard/tickets', [\App\Http\Controllers\Client\TicketController::class, 'index'])->name('dashboard.tickets.index');
+    Route::get('dashboard/tickets/create', [\App\Http\Controllers\Client\TicketController::class, 'create'])->name('dashboard.tickets.create');
+    Route::post('dashboard/tickets', [\App\Http\Controllers\Client\TicketController::class, 'store'])->name('dashboard.tickets.store');
+    Route::get('dashboard/tickets/{ticket}', [\App\Http\Controllers\Client\TicketController::class, 'show'])->name('dashboard.tickets.show');
+    Route::post('dashboard/tickets/{ticket}/reply', [\App\Http\Controllers\Client\TicketController::class, 'reply'])->name('dashboard.tickets.reply');
+    Route::post('dashboard/tickets/{ticket}/close', [\App\Http\Controllers\Client\TicketController::class, 'close'])->name('dashboard.tickets.close');
+
     // Admin Routes
     Route::middleware(['admin'])->prefix('admin')->group(function () {
+        // Admin Support Ticket Routes
+        Route::get('tickets', [\App\Http\Controllers\Admin\TicketController::class, 'index'])->name('admin.tickets.index');
+        Route::get('tickets/{ticket}', [\App\Http\Controllers\Admin\TicketController::class, 'show'])->name('admin.tickets.show');
+        Route::post('tickets/{ticket}/reply', [\App\Http\Controllers\Admin\TicketController::class, 'reply'])->name('admin.tickets.reply');
+        Route::patch('tickets/{ticket}/status', [\App\Http\Controllers\Admin\TicketController::class, 'updateStatus'])->name('admin.tickets.update-status');
+
         Route::get('documents', [DocumentController::class, 'adminIndex'])->name('admin.documents');
         Route::post('documents', [DocumentController::class, 'store'])->name('admin.documents.store');
         Route::get('clients', [ClientController::class, 'index'])->name('admin.clients');

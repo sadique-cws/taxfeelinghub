@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, FileText, ShieldCheck, Users, Briefcase, MessageSquare, Newspaper, Quote } from 'lucide-react';
+import { LayoutGrid, FileText, ShieldCheck, Users, Briefcase, MessageSquare, Newspaper, Quote, LifeBuoy } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -54,6 +54,11 @@ export function AppSidebar() {
             icon: Quote,
         });
         mainNavItems.push({
+            title: 'Support Tickets',
+            href: '/admin/tickets',
+            icon: LifeBuoy,
+        });
+        mainNavItems.push({
             title: 'Manage Inquiries',
             href: '/admin/leads',
             icon: MessageSquare,
@@ -68,6 +73,11 @@ export function AppSidebar() {
             title: 'Share Story',
             href: '/dashboard/feedback',
             icon: Quote,
+        });
+        mainNavItems.push({
+            title: 'Support Tickets',
+            href: '/dashboard/tickets',
+            icon: LifeBuoy,
         });
     }
 

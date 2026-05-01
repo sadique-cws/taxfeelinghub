@@ -46,13 +46,16 @@ class DocumentController extends Controller
         $file = $request->file('file');
         $path = $file->store('client-documents');
 
-        Document::create([
+        $document = Document::create([
             'user_id' => $request->user_id,
             'name' => $file->getClientOriginalName(),
             'file_path' => $path,
             'category' => $request->category,
             'size' => $file->getSize(),
         ]);
+
+        // Notify Client
+        \Illuminate\Support\Facades\Mail::to($document->user->email)->send(new \App\Mail\DocumentUploadedNotification($document));
 
         return back()->with('success', 'Document uploaded successfully.');
     }

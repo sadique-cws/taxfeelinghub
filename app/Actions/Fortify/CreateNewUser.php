@@ -24,11 +24,17 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'phone' => $input['phone'],
             'password' => $input['password'],
         ]);
+
+        // Notify Admin
+        $adminEmail = User::where('role', 'admin')->first()?->email ?? config('mail.from.address');
+        \Illuminate\Support\Facades\Mail::to($adminEmail)->send(new \App\Mail\NewUserSignupNotification($user));
+
+        return $user;
     }
 }
