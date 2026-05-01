@@ -6,11 +6,13 @@ use Laravel\Fortify\Features;
 use App\Http\Controllers\SeoController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\CareerJobController;
+use App\Http\Controllers\PostController;
 
 Route::inertia('/', 'welcome')->name('home');
 Route::inertia('/about', 'about')->name('about');
 Route::inertia('/services', 'services')->name('services');
-Route::inertia('/blog', 'blog')->name('blog');
+Route::get('/blog', [PostController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [PostController::class, 'show'])->name('blog.show');
 Route::get('/career', [CareerJobController::class, 'index'])->name('career');
 Route::inertia('/contact', 'contact')->name('contact');
 Route::post('/contact', [LeadController::class, 'store'])->name('contact.store');
@@ -53,6 +55,14 @@ Route::middleware(['auth', 'verified', 'approved'])->group(function () {
         Route::get('documents', [DocumentController::class, 'adminIndex'])->name('admin.documents');
         Route::post('documents', [DocumentController::class, 'store'])->name('admin.documents.store');
         Route::get('clients', [ClientController::class, 'index'])->name('admin.clients');
+        
+        // Admin Blog Management
+        Route::get('blogs', [PostController::class, 'adminIndex'])->name('admin.blogs');
+        Route::get('blogs/create', [PostController::class, 'create'])->name('admin.blogs.create');
+        Route::post('blogs', [PostController::class, 'store'])->name('admin.blogs.store');
+        Route::get('blogs/{post}/edit', [PostController::class, 'edit'])->name('admin.blogs.edit');
+        Route::patch('blogs/{post}', [PostController::class, 'update'])->name('admin.blogs.update');
+        Route::delete('blogs/{post}', [PostController::class, 'destroy'])->name('admin.blogs.destroy');
         Route::patch('clients/{user}/approve', [ClientController::class, 'approve'])->name('admin.clients.approve');
         Route::patch('clients/{user}/reject', [ClientController::class, 'reject'])->name('admin.clients.reject');
         Route::delete('clients/{user}', [ClientController::class, 'destroy'])->name('admin.clients.destroy');

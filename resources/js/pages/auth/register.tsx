@@ -14,6 +14,7 @@ export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        phone: '',
         password: '',
         password_confirmation: '',
     });
@@ -122,6 +123,24 @@ export default function Register() {
                                     />
                                 </div>
                                 <InputError message={errors.email} />
+                            </div>
+
+                            <div className="space-y-1.5">
+                                <Label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Phone Number</Label>
+                                <div className="relative">
+                                    <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/40" />
+                                    <Input 
+                                        id="phone" 
+                                        type="tel" 
+                                        name="phone" 
+                                        required 
+                                        value={data.phone} 
+                                        onChange={e => setData('phone', e.target.value)}
+                                        className="rounded-xl h-12 border-border bg-surface/50 pl-11 focus-visible:ring-primary focus-visible:border-primary transition-all"
+                                        placeholder="+91 00000 00000" 
+                                    />
+                                </div>
+                                <InputError message={errors.phone} />
                             </div>
                         </div>
 

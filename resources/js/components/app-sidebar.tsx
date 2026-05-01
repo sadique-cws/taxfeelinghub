@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, FileText, ShieldCheck, Users, Briefcase, MessageSquare } from 'lucide-react';
+import { LayoutGrid, FileText, ShieldCheck, Users, Briefcase, MessageSquare, Newspaper } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -27,7 +27,7 @@ export function AppSidebar() {
         },
     ];
 
-    if (user.role === 'admin') {
+    if (user && user.role === 'admin') {
         mainNavItems.push({
             title: 'Manage Documents',
             href: '/admin/documents',
@@ -44,11 +44,16 @@ export function AppSidebar() {
             icon: Briefcase,
         });
         mainNavItems.push({
+            title: 'Manage Blog',
+            href: '/admin/blogs',
+            icon: Newspaper,
+        });
+        mainNavItems.push({
             title: 'Manage Inquiries',
             href: '/admin/leads',
             icon: MessageSquare,
         });
-    } else {
+    } else if (user) {
         mainNavItems.push({
             title: 'My Documents',
             href: '/dashboard/documents',
@@ -65,7 +70,7 @@ export function AppSidebar() {
                             <Link href={dashboard()} prefetch className="flex items-center gap-3">
                                 <AppLogo 
                                     className="text-primary" 
-                                    subtext={user.role === 'admin' ? 'Admin Console' : 'Client Portal'} 
+                                    subtext={user?.role === 'admin' ? 'Admin Console' : 'Client Portal'} 
                                 />
                             </Link>
                         </SidebarMenuButton>

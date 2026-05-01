@@ -18,7 +18,18 @@ trait ProfileValidationRules
         return [
             'name' => $this->nameRules(),
             'email' => $this->emailRules($userId),
+            'phone' => $this->phoneRules(),
         ];
+    }
+
+    /**
+     * Get the validation rules used to validate user phone numbers.
+     *
+     * @return array<int, string>
+     */
+    protected function phoneRules(): array
+    {
+        return ['required', 'string', 'max:15'];
     }
 
     /**

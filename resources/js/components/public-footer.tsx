@@ -8,6 +8,7 @@ const NAV_LINKS = [
     { href: '/blog', label: 'Blog' },
     { href: '/career', label: 'Career' },
     { href: '/contact', label: 'Contact' },
+    { href: '/login', label: 'Client Login' },
 ];
 
 const SERVICES = [

@@ -4,16 +4,29 @@ import { Calendar, User, ArrowRight, Phone } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Button } from '@/components/ui/button';
 
-const POSTS = [
-  { id: 1, title: "Understanding the new e-Way Bill rules for Bihar", excerpt: "A practical breakdown of the intra-state e-Way Bill system and what manufacturers and traders need to do today.", author: "Rajeev Ranjan", date: "Apr 2025", category: "GST", tag: "Compliance" },
-  { id: 2, title: "ITR filing checklist for salaried individuals (FY 2024-25)", excerpt: "Documents, deadlines and common deductions you shouldn't miss while filing your income tax return this year.", author: "TaxFilingHub Team", date: "Mar 2025", category: "Income Tax", tag: "Personal Finance" },
-  { id: 3, title: "Private Limited vs LLP: which entity should your startup choose?", excerpt: "Cost, compliance and fundraising — a side-by-side comparison to help you pick the right structure from day one.", author: "Rajeev Ranjan", date: "Feb 2025", category: "Registration", tag: "Startups" },
-  { id: 4, title: "GST input tax credit: the rules every business owner should know", excerpt: "How ITC works, the conditions for claiming it, and the most common mistakes that lead to notices.", author: "TaxFilingHub Team", date: "Feb 2025", category: "GST", tag: "Compliance" },
-  { id: 5, title: "MSME registration in 2025: benefits beyond the certificate", excerpt: "Loan subsidies, tax breaks and government tenders — why MSME registration is still one of the best free upgrades.", author: "Rajeev Ranjan", date: "Jan 2025", category: "MSME", tag: "Growth" },
-  { id: 6, title: "ROC annual filing: a stress-free guide for Pvt Ltd companies", excerpt: "AOC-4, MGT-7, board meetings — a calendar-based walkthrough of every annual ROC obligation.", author: "TaxFilingHub Team", date: "Jan 2025", category: "Compliance", tag: "Corporate" },
-];
+interface Post {
+    id: number;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    featured_image?: string;
+    published_at: string;
+    author: {
+        name: string;
+    };
+}
 
-export default function Blog() {
+interface BlogProps {
+    posts: {
+        data: Post[];
+        links: any;
+    };
+}
+
+export default function Blog({ posts }: BlogProps) {
+  const allPosts = posts.data;
+
   return (
     <PublicLayout>
       <Head title="Blog — Tax, GST & Compliance Insights | Tax Filing Hub">
@@ -28,52 +41,67 @@ export default function Blog() {
       />
 
       <section className="container-page py-20">
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Featured */}
-          <article className="lg:row-span-2 group rounded-xl border border-border bg-card overflow-hidden flex flex-col transition-all hover:border-gold/50 animate-fade-up">
-            <div className="aspect-[4/3] bg-primary relative overflow-hidden">
-              <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:24px_24px]" />
-              <div className="absolute bottom-8 left-8">
-                <span className="inline-block rounded bg-gold text-black px-4 py-1.5 text-xs font-bold uppercase tracking-widest">
-                  Featured
-                </span>
-              </div>
-            </div>
-            <div className="p-10 flex-1 flex flex-col">
-              <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-accent mb-6">
-                <span>{POSTS[0].category}</span>
-                <span className="h-1.5 w-1.5 rounded-full bg-border" />
-                <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {POSTS[0].date}</span>
-              </div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-primary group-hover:text-accent transition-smooth leading-tight">
-                {POSTS[0].title}
-              </h2>
-              <p className="mt-6 text-muted-foreground leading-relaxed text-lg flex-1">{POSTS[0].excerpt}</p>
-              <div className="mt-8 pt-8 border-t border-border flex items-center justify-between">
-                <span className="text-sm font-bold text-primary flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-primary/5 flex items-center justify-center">
-                    <User className="h-5 w-5 text-gold" />
+        {allPosts.length === 0 ? (
+          <div className="text-center py-20">
+            <h2 className="text-2xl font-display font-bold text-primary">No blog posts found.</h2>
+            <p className="mt-4 text-muted-foreground">Check back soon for more insights.</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid gap-8 lg:grid-cols-2">
+              {/* Featured */}
+              {allPosts[0] && (
+                <article className="lg:row-span-2 group rounded-xl border border-border bg-card overflow-hidden flex flex-col transition-all hover:border-gold/50 animate-fade-up">
+                  <div className="aspect-[4/3] bg-primary relative overflow-hidden">
+                    {allPosts[0].featured_image ? (
+                      <img src={allPosts[0].featured_image} alt={allPosts[0].title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    ) : (
+                      <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:24px_24px]" />
+                    )}
+                    <div className="absolute bottom-8 left-8">
+                      <span className="inline-block rounded bg-gold text-black px-4 py-1.5 text-xs font-bold uppercase tracking-widest">
+                        Latest
+                      </span>
+                    </div>
                   </div>
-                  {POSTS[0].author}
-                </span>
-                <span className="text-sm font-bold text-accent uppercase tracking-widest inline-flex items-center gap-2 group-hover:text-primary transition-colors">
-                  Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </div>
+                  <div className="p-10 flex-1 flex flex-col">
+                    <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-accent mb-6">
+                      <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {new Date(allPosts[0].published_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                    </div>
+                    <Link href={`/blog/${allPosts[0].slug}`}>
+                        <h2 className="font-display text-3xl md:text-4xl font-bold text-primary group-hover:text-accent transition-smooth leading-tight">
+                            {allPosts[0].title}
+                        </h2>
+                    </Link>
+                    <p className="mt-6 text-muted-foreground leading-relaxed text-lg flex-1">{allPosts[0].excerpt}</p>
+                    <div className="mt-8 pt-8 border-t border-border flex items-center justify-between">
+                      <span className="text-sm font-bold text-primary flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-full bg-primary/5 flex items-center justify-center">
+                          <User className="h-5 w-5 text-gold" />
+                        </div>
+                        {allPosts[0].author.name}
+                      </span>
+                      <Link href={`/blog/${allPosts[0].slug}`} className="text-sm font-bold text-accent uppercase tracking-widest inline-flex items-center gap-2 group-hover:text-primary transition-colors">
+                        Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              )}
+
+              {/* Side cards */}
+              {allPosts.slice(1, 3).map((p, i) => (
+                <BlogCard key={p.id} post={p} index={i + 1} />
+              ))}
             </div>
-          </article>
 
-          {/* Side cards */}
-          {POSTS.slice(1, 3).map((p, i) => (
-            <BlogCard key={p.id} post={p} index={i + 1} />
-          ))}
-        </div>
-
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
-          {POSTS.slice(3).map((p, i) => (
-            <BlogCard key={p.id} post={p} compact index={i + 3} />
-          ))}
-        </div>
+            <div className="mt-12 grid gap-8 md:grid-cols-3">
+              {allPosts.slice(3).map((p, i) => (
+                <BlogCard key={p.id} post={p} compact index={i + 3} />
+              ))}
+            </div>
+          </>
+        )}
 
         <div className="mt-20 text-center animate-fade-up">
           <Link
@@ -112,31 +140,31 @@ export default function Blog() {
   );
 }
 
-function BlogCard({ post, compact = false, index = 0 }: { post: typeof POSTS[number]; compact?: boolean; index?: number }) {
+function BlogCard({ post, compact = false, index = 0 }: { post: Post; compact?: boolean; index?: number }) {
   return (
     <article 
         className="group rounded-xl border border-border bg-card p-8 md:p-10 transition-all hover:border-gold/50 flex flex-col animate-fade-up"
         style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-accent mb-6">
-        <span>{post.category}</span>
-        <span className="h-1.5 w-1.5 rounded-full bg-border" />
-        <span>{post.date}</span>
+        <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {new Date(post.published_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
       </div>
-      <h3 className={`font-display font-bold text-primary group-hover:text-accent transition-smooth leading-tight ${compact ? "text-xl" : "text-2xl"}`}>
-        {post.title}
-      </h3>
-      <p className="mt-4 text-muted-foreground leading-relaxed flex-1">{post.excerpt}</p>
+      <Link href={`/blog/${post.slug}`}>
+        <h3 className={`font-display font-bold text-primary group-hover:text-accent transition-smooth leading-tight ${compact ? "text-xl" : "text-2xl"}`}>
+            {post.title}
+        </h3>
+      </Link>
+      <p className="mt-4 text-muted-foreground leading-relaxed flex-1 line-clamp-3">{post.excerpt}</p>
       <div className="mt-8 pt-8 border-t border-border flex items-center justify-between">
         <span className="text-sm font-bold text-primary flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-primary/5 flex items-center justify-center">
             <User className="h-4 w-4 text-gold" />
           </div>
-          {post.author}
+          {post.author.name}
         </span>
-        <span className="text-sm font-bold text-accent uppercase tracking-widest inline-flex items-center gap-2 group-hover:text-primary transition-colors">
+        <Link href={`/blog/${post.slug}`} className="text-sm font-bold text-accent uppercase tracking-widest inline-flex items-center gap-2 group-hover:text-primary transition-colors">
           Read <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </span>
+        </Link>
       </div>
     </article>
   );

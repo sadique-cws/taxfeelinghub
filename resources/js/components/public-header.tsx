@@ -22,7 +22,8 @@ import { AppLogo } from '@/components/app-logo';
 export function PublicHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { url } = usePage();
+  const { url, props } = usePage();
+  const auth = props.auth as any;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -60,14 +61,13 @@ export function PublicHeader() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <a
-            href={SITE.phoneHref}
-            className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-smooth"
+        <div className="hidden lg:flex items-center gap-6">
+          <Link
+            href={auth.user ? '/dashboard' : '/login'}
+            className="text-sm font-bold text-primary hover:text-gold transition-smooth uppercase tracking-widest"
           >
-            <Phone className="h-4 w-4" />
-            {SITE.phone}
-          </a>
+            {auth.user ? 'Dashboard' : 'Client Login'}
+          </Link>
           <Link
             href="/contact"
             className="inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft hover:bg-secondary transition-smooth"
@@ -104,6 +104,12 @@ export function PublicHeader() {
                     {l.label}
                   </Link>
                 ))}
+                <Link
+                    href={auth.user ? '/dashboard' : '/login'}
+                    className="flex items-center px-4 py-4 text-lg font-bold rounded-xl text-foreground hover:bg-surface"
+                >
+                    {auth.user ? 'Dashboard' : 'Client Login'}
+                </Link>
               </nav>
               <div className="p-6 border-t border-border bg-surface/50">
                 <a

@@ -17,6 +17,8 @@ createInertiaApp({
             case name === 'services':
             case name.startsWith('services/'):
             case name === 'blog':
+            case name === 'blog-detail':
+            case name === 'location-landing':
             case name === 'career':
             case name === 'contact':
             case name === 'error':
