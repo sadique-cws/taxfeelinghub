@@ -101,9 +101,9 @@ export default function Welcome() {
       {/* HERO */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden bg-hero-gradient text-primary-foreground">
         <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:32px_32px]" />
-        <div className="container-page relative grid gap-12 lg:grid-cols-[1.15fr_1fr] items-center py-10">
+        <div className="container-page relative grid gap-10 lg:grid-cols-[1.15fr_1fr] items-center py-6 lg:py-10">
           <div className="animate-fade-up">
-            <div className="inline-flex items-center gap-2 mb-6">
+            <div className="inline-flex items-center gap-2 mb-4">
               <div className="gold-rule" />
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
                 Financial • Legal • Advisory
@@ -112,10 +112,10 @@ export default function Welcome() {
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
               A trusted partner at every <span className="text-gold">stage of your growth.</span>
             </h1>
-            <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl leading-relaxed">
+            <p className="mt-5 text-lg text-primary-foreground/80 max-w-xl leading-relaxed">
               Tax Filing Hub combines technical mastery with a personal touch — helping startups, SMEs and enterprises stay compliant, efficient and ready for what's next.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-lg bg-gold px-7 py-3.5 font-semibold text-gold-foreground hover:bg-gold/90 transition-smooth"
@@ -130,7 +130,7 @@ export default function Welcome() {
               </Link>
             </div>
 
-            <div className="mt-10 flex items-center gap-6 text-sm text-primary-foreground/70">
+            <div className="mt-8 flex items-center gap-6 text-sm text-primary-foreground/70">
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="h-9 w-9 rounded-full bg-gradient-to-br from-gold to-accent border-2 border-primary" />

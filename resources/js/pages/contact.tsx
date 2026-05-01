@@ -41,125 +41,134 @@ export default function Contact() {
 
       <PageHeader
         eyebrow="Contact"
-        title="Let's talk about your business."
-        description="Whether it's a quick question or a long-term engagement, our team is ready to help. We respond within one business day."
+        title="Let's talk business."
+        description="Submit your details and one of our financial advisors will be in touch shortly."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
 
-      <section className="container-page py-20">
-        {/* Info cards — top row, responsive grid */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-10">
-          <InfoCard
-            icon={MapPin}
-            title="Visit us"
-            lines={[
-              `${SITE.address.line1},`,
-              `${SITE.address.line2},`,
-              `${SITE.address.city}-${SITE.address.pin} (${SITE.address.state})`,
-            ]}
-          />
-          <InfoCard
-            icon={Phone}
-            title="Call us"
-            lines={[SITE.phone, "Mon–Sat, 10:00–19:00 IST"]}
-            actionHref={SITE.phoneHref}
-          />
-          <InfoCard
-            icon={Mail}
-            title="Email us"
-            lines={[SITE.email, "We reply within one business day"]}
-            actionHref={`mailto:${SITE.email}`}
-          />
-          <div className="rounded-xl bg-primary text-white p-6 h-full border border-white/10 animate-fade-up">
-            <Clock className="h-5 w-5 text-gold mb-3" />
-            <p className="font-display font-semibold text-lg">Office Hours</p>
-            <ul className="mt-3 space-y-1.5 text-sm text-white/80">
-              <li className="flex justify-between"><span>Mon – Fri</span><span>10:00 – 19:00</span></li>
-              <li className="flex justify-between"><span>Saturday</span><span>10:00 – 16:00</span></li>
-              <li className="flex justify-between"><span>Sunday</span><span>Closed</span></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Form */}
-        <div className="grid gap-10 lg:grid-cols-5">
-          <div className="lg:col-span-3 rounded-xl border border-border bg-card p-8 md:p-10 animate-fade-up">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary">Request a call back</h2>
-            <p className="mt-2 text-muted-foreground">
-              Submit your details and one of our financial advisors will be in touch shortly.
+      <section className="container-page py-12 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-12 items-start">
+          {/* Main Form - Now on the left and more prominent */}
+          <div className="lg:col-span-7 rounded-2xl border border-border bg-card p-8 md:p-12 animate-fade-up relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-gold" />
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">Request a Call Back</h2>
+            <p className="mt-3 text-muted-foreground text-lg">
+              Expert advice is just a message away.
             </p>
 
             {wasSuccessful ? (
-              <div className="mt-8 rounded-xl border border-gold/40 bg-gold/10 p-8 text-center animate-fade-up">
-                <CheckCircle2 className="h-12 w-12 text-gold mx-auto" />
-                <h3 className="mt-4 font-display text-xl font-semibold text-primary">Message sent!</h3>
-                <p className="mt-2 text-muted-foreground">Thank you for reaching out. Our team will contact you within one business day.</p>
+              <div className="mt-10 rounded-xl border border-gold/40 bg-gold/5 p-10 text-center animate-fade-up">
+                <CheckCircle2 className="h-16 w-16 text-gold mx-auto" />
+                <h3 className="mt-6 font-display text-2xl font-bold text-primary">Message sent!</h3>
+                <p className="mt-3 text-muted-foreground text-lg">Thank you for reaching out. We'll contact you within one business day.</p>
               </div>
             ) : (
-              <form
-                className="mt-8 grid gap-5"
-                onSubmit={submit}
-              >
-                <div className="grid sm:grid-cols-2 gap-5">
+              <form className="mt-10 grid gap-6" onSubmit={submit}>
+                <div className="grid sm:grid-cols-2 gap-6">
                   <Field label="Full name" name="name" required value={data.name} onChange={e => setData('name', e.target.value)} error={errors.name} />
-                  <Field label="Email" name="email" type="email" required value={data.email} onChange={e => setData('email', e.target.value)} error={errors.email} />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-5">
                   <Field label="Phone" name="phone" type="tel" required value={data.phone} onChange={e => setData('phone', e.target.value)} error={errors.phone} />
-                  <Field label="Subject" name="subject" value={data.subject} onChange={e => setData('subject', e.target.value)} error={errors.subject} />
+                </div>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <Field label="Email Address" name="email" type="email" required value={data.email} onChange={e => setData('email', e.target.value)} error={errors.email} />
+                  <Field label="Subject" name="subject" value={data.subject} onChange={e => setData('subject', e.target.value)} error={errors.subject} placeholder="e.g. GST Filing" />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 font-display uppercase tracking-widest text-[10px]">
-                    How can we help?<span className="text-gold ml-1">*</span>
+                  <label htmlFor="message" className="block text-xs font-bold text-primary mb-3 uppercase tracking-widest">
+                    Your Requirements<span className="text-gold ml-1">*</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={5}
+                    rows={4}
                     required
                     value={data.message}
                     onChange={e => setData('message', e.target.value)}
-                    className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-smooth"
-                    placeholder="Tell us briefly about your business and what you need help with…"
+                    className="w-full rounded-xl border border-input bg-background px-5 py-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-gold transition-all"
+                    placeholder="Tell us briefly about your business needs..."
                   />
                   {errors.message && <p className="text-red-500 text-[10px] font-bold uppercase mt-1">{errors.message}</p>}
                 </div>
                 <button
                   type="submit"
                   disabled={processing}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 py-4 font-bold text-white hover:bg-secondary transition-smooth group disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-3 rounded-xl bg-primary px-10 py-5 font-bold text-white hover:bg-secondary transition-all group disabled:opacity-50 text-lg shadow-lg hover:shadow-primary/20"
                 >
-                  {processing ? "Sending..." : "Send Message"} <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  {processing ? "Sending..." : "Submit Inquiry"} <Send className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </form>
             )}
           </div>
 
-          {/* Side panel */}
-          <aside className="lg:col-span-2 space-y-5 animate-fade-up">
-            <div className="rounded-xl overflow-hidden border border-border h-64 lg:h-72">
+          {/* Quick Contact & Info - On the right */}
+          <div className="lg:col-span-5 space-y-8 animate-fade-up" style={{ animationDelay: '150ms' }}>
+            <div className="grid gap-6">
+              <ContactLink 
+                icon={Phone} 
+                title="Speak with an Advisor" 
+                detail={SITE.phone} 
+                sub="Mon–Sat, 10:00–19:00 IST"
+                href={SITE.phoneHref}
+              />
+              <ContactLink 
+                icon={Mail} 
+                title="General Inquiries" 
+                detail={SITE.email} 
+                sub="Average response: 2 hours"
+                href={`mailto:${SITE.email}`}
+              />
+              <ContactLink 
+                icon={MapPin} 
+                title="Office Location" 
+                detail={`${SITE.address.city}, ${SITE.address.state}`} 
+                sub={`${SITE.address.line1}, ${SITE.address.line2}`}
+              />
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border border-border h-64 shadow-sm group">
               <iframe
                 title="Tax Filing Hub office location"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(`${SITE.address.line1}, ${SITE.address.line2}, ${SITE.address.city}, ${SITE.address.state} ${SITE.address.pin}`)}&output=embed`}
-                className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full border-0 grayscale group-hover:grayscale-0 transition-all duration-1000"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-            <div className="rounded-xl bg-primary text-white p-8 border border-white/10">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold mb-6">Why Tax Filing Hub</p>
-              <ul className="space-y-4 text-base text-white/80">
-                <li className="flex gap-3"><CheckCircle2 className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" /> Direct access to senior advisors</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" /> Transparent pricing, no hidden fees</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" /> Pan-India compliance coverage</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" /> Response within one business day</li>
+
+            <div className="rounded-2xl bg-surface border border-border p-8">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-6">Why Work With Us</h3>
+              <ul className="space-y-4">
+                {[
+                  "Direct access to senior tax advisors",
+                  "Transparent pricing, no hidden fees",
+                  "Response within one business day",
+                  "Expertise in Bihar local compliances"
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-3 text-sm text-primary font-medium">
+                    <CheckCircle2 className="h-5 w-5 text-gold shrink-0" /> {item}
+                  </li>
+                ))}
               </ul>
             </div>
-          </aside>
+          </div>
         </div>
       </section>
     </PublicLayout>
   );
+}
+
+function ContactLink({ icon: Icon, title, detail, sub, href }: any) {
+  const Card = (
+    <div className="flex items-start gap-5 p-6 rounded-2xl border border-border bg-card hover:border-gold/50 transition-all group">
+      <div className="h-12 w-12 rounded-xl bg-surface flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0 shadow-sm">
+        <Icon className="h-6 w-6" />
+      </div>
+      <div>
+        <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">{title}</p>
+        <p className="text-lg font-bold text-primary leading-tight">{detail}</p>
+        <p className="text-xs text-muted-foreground mt-1 font-medium">{sub}</p>
+      </div>
+    </div>
+  );
+  return href ? <a href={href} className="block">{Card}</a> : Card;
 }
 
 function InfoCard({
