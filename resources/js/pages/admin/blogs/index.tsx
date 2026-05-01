@@ -1,6 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { Plus, Edit2, Trash2, Calendar, User, Eye, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AppLayout from '@/layouts/app-layout';
 
 interface Post {
     id: number;
@@ -140,3 +141,9 @@ export default function AdminBlogs({ posts }: Props) {
         </>
     );
 }
+
+AdminBlogs.layout = (page: any) => (
+    <AppLayout breadcrumbs={[{ title: 'Blog Management', href: '/admin/blogs' }]}>
+        {page}
+    </AppLayout>
+);

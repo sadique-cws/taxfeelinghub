@@ -3,6 +3,7 @@ import { ArrowLeft, Save, FileText, Image as ImageIcon, Send } from 'lucide-reac
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import AppLayout from '@/layouts/app-layout';
 
 interface Post {
     id: number;
@@ -83,14 +84,77 @@ export default function EditBlog({ post: postData }: Props) {
                                 {errors.excerpt && <p className="text-red-500 text-xs font-bold">{errors.excerpt}</p>}
                             </div>
 
-                            <div className="space-y-2">
-                                <Label htmlFor="content" className="text-primary font-bold uppercase tracking-widest text-[10px]">Article Content (HTML supported)</Label>
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <Label htmlFor="content" className="text-primary font-bold uppercase tracking-widest text-[10px]">Article Content (HTML supported)</Label>
+                                    <div className="flex gap-2">
+                                        <select 
+                                            className="text-[10px] font-bold uppercase tracking-widest border border-border rounded px-2 py-1 bg-surface focus:outline-none focus:ring-1 focus:ring-gold"
+                                            onChange={(e) => {
+                                                const templates: Record<string, string> = {
+                                                    'gst': '<h3>GST Benefits for Businesses</h3>\n<ul>\n<li>Reduced tax burden</li>\n<li>Easy compliance</li>\n<li>Input tax credit</li>\n</ul>',
+                                                    'compliance': '<h3>Annual Compliance Checklist</h3>\n<ol>\n<li>Income Tax Return</li>\n<li>GST Annual Return</li>\n<li>ROC Filing</li>\n</ol>',
+                                                    'intro': '<p>In this article, we explore the recent changes in the regulatory landscape and what they mean for small business owners in Bihar.</p>'
+                                                };
+                                                if (e.target.value) {
+                                                    setData('content', data.content + templates[e.target.value]);
+                                                    e.target.value = '';
+                                                }
+                                            }}
+                                        >
+                                            <option value="">Quick Templates</option>
+                                            <option value="intro">Introduction Text</option>
+                                            <option value="gst">GST Section</option>
+                                            <option value="compliance">Compliance List</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                {/* Formatting Toolbar */}
+                                <div className="flex flex-wrap gap-1 p-2 bg-surface border border-border rounded-t-lg">
+                                    {[
+                                        { label: 'B', tag: 'b', title: 'Bold' },
+                                        { label: 'I', tag: 'i', title: 'Italic' },
+                                        { label: 'H2', tag: 'h2', title: 'Heading 2' },
+                                        { label: 'H3', tag: 'h3', title: 'Heading 3' },
+                                        { label: 'P', tag: 'p', title: 'Paragraph' },
+                                        { label: 'List', tag: 'li', title: 'List Item', wrap: 'ul' },
+                                    ].map((btn) => (
+                                        <button
+                                            key={btn.label}
+                                            type="button"
+                                            onClick={() => {
+                                                const el = document.getElementById('content') as HTMLTextAreaElement;
+                                                const start = el.selectionStart;
+                                                const end = el.selectionEnd;
+                                                const text = el.value;
+                                                const selected = text.substring(start, end);
+                                                const replacement = btn.wrap 
+                                                    ? `<${btn.wrap}>\n  <${btn.tag}>${selected || 'Text'}</${btn.tag}>\n</${btn.wrap}>`
+                                                    : `<${btn.tag}>${selected || 'Text'}</${btn.tag}>`;
+                                                setData('content', text.substring(0, start) + replacement + text.substring(end));
+                                            }}
+                                            className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-white transition-colors"
+                                            title={btn.title}
+                                        >
+                                            {btn.label}
+                                        </button>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={() => setData('content', data.content + '<br />\n')}
+                                        className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-white transition-colors"
+                                    >
+                                        Break
+                                    </button>
+                                </div>
+
                                 <textarea
                                     id="content"
                                     value={data.content}
                                     onChange={e => setData('content', e.target.value)}
                                     placeholder="Write your article content here..."
-                                    className="w-full min-h-[500px] rounded-md border border-border bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gold transition-all"
+                                    className="w-full min-h-[500px] rounded-b-lg border border-t-0 border-border bg-transparent px-4 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-gold transition-all font-mono"
                                 />
                                 {errors.content && <p className="text-red-500 text-xs font-bold">{errors.content}</p>}
                             </div>
@@ -163,3 +227,12 @@ export default function EditBlog({ post: postData }: Props) {
         </>
     );
 }
+
+EditBlog.layout = (page: any) => (
+    <AppLayout breadcrumbs={[
+        { title: 'Blog Management', href: '/admin/blogs' },
+        { title: 'Edit Article', href: '#' }
+    ]}>
+        {page}
+    </AppLayout>
+);

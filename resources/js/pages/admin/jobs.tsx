@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import AppLayout from '@/layouts/app-layout';
 
 interface CareerJob {
     id: number;
@@ -178,9 +179,11 @@ export default function AdminJobs({ jobs }: Props) {
     );
 }
 
-AdminJobs.layout = {
-    breadcrumbs: [
+AdminJobs.layout = (page: any) => (
+    <AppLayout breadcrumbs={[
         { title: 'Admin', href: '/admin/documents' },
         { title: 'Careers', href: '/admin/jobs' },
-    ],
-};
+    ]}>
+        {page}
+    </AppLayout>
+);
