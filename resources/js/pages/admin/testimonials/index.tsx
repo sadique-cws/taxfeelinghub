@@ -118,6 +118,15 @@ export default function AdminTestimonials({ testimonials }: Props) {
                                         </td>
                                         <td className="px-6 py-5 text-right">
                                             <div className="flex items-center justify-end gap-2">
+                                                {testimonial.status === 'draft' && (
+                                                    <Button 
+                                                        size="sm" 
+                                                        className="h-8 px-3 bg-green-600 hover:bg-green-700 text-white font-bold text-[10px] uppercase tracking-widest"
+                                                        onClick={() => router.patch(`/admin/testimonials/${testimonial.id}`, { status: 'published' })}
+                                                    >
+                                                        Approve
+                                                    </Button>
+                                                )}
                                                 <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-gold hover:text-black transition-all" asChild title="Edit">
                                                     <Link href={`/admin/testimonials/${testimonial.id}/edit`}>
                                                         <Edit2 className="h-4 w-4" />

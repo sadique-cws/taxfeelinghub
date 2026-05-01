@@ -48,7 +48,12 @@ Route::middleware(['auth', 'verified', 'approved'])->group(function () {
     // User Document Routes
     Route::get('dashboard/documents', [DocumentController::class, 'userIndex'])->name('dashboard.documents');
     Route::get('dashboard/documents/download', [DocumentController::class, 'downloadZip'])->name('dashboard.documents.download');
+    Route::get('dashboard/documents/{document}/download', [DocumentController::class, 'download'])->name('dashboard.documents.single-download');
     Route::delete('documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+
+    // User Testimonial Routes
+    Route::get('dashboard/feedback', [\App\Http\Controllers\Client\FeedbackController::class, 'create'])->name('dashboard.feedback.create');
+    Route::post('dashboard/feedback', [\App\Http\Controllers\Client\FeedbackController::class, 'store'])->name('dashboard.feedback.store');
 
     // Admin Routes
     Route::middleware(['admin'])->prefix('admin')->group(function () {

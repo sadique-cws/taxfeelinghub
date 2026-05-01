@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, FileText, ShieldCheck, Users, Briefcase, MessageSquare, Newspaper } from 'lucide-react';
+import { LayoutGrid, FileText, ShieldCheck, Users, Briefcase, MessageSquare, Newspaper, Quote } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -49,6 +49,11 @@ export function AppSidebar() {
             icon: Newspaper,
         });
         mainNavItems.push({
+            title: 'Manage Stories',
+            href: '/admin/testimonials',
+            icon: Quote,
+        });
+        mainNavItems.push({
             title: 'Manage Inquiries',
             href: '/admin/leads',
             icon: MessageSquare,
@@ -58,6 +63,11 @@ export function AppSidebar() {
             title: 'My Documents',
             href: '/dashboard/documents',
             icon: FileText,
+        });
+        mainNavItems.push({
+            title: 'Share Story',
+            href: '/dashboard/feedback',
+            icon: Quote,
         });
     }
 

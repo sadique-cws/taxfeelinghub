@@ -97,7 +97,7 @@ export default function UserDocuments({ documents }: Props) {
                                         </td>
                                         <td className="px-6 py-5 text-right">
                                             <Button variant="outline" className="rounded border-primary text-primary font-semibold hover:bg-primary hover:text-white" asChild>
-                                                <a href={`/storage/${doc.file_path}`} download={doc.name}>
+                                                <a href={`/dashboard/documents/${doc.id}/download`} download={doc.name}>
                                                     <Download className="h-4 w-4 mr-2" /> Download
                                                 </a>
                                             </Button>

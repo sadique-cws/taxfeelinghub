@@ -74,6 +74,23 @@ class DocumentController extends Controller
     }
 
     /**
+     * Download a single document securely.
+     */
+    public function download(Document $document)
+    {
+        // Check permissions (Admin can download any, User can download own)
+        if (auth()->user()->role !== 'admin' && auth()->id() !== $document->user_id) {
+            abort(403);
+        }
+
+        if (!Storage::exists($document->file_path)) {
+            return back()->with('error', 'File not found on server.');
+        }
+
+        return Storage::download($document->file_path, $document->name);
+    }
+
+    /**
      * User: Download all their documents as a ZIP.
      */
     public function downloadZip(Request $request)
@@ -85,11 +102,7 @@ class DocumentController extends Controller
         }
 
         $zipFileName = 'documents-' . now()->format('Y-m-d-His') . '.zip';
-        $zipPath = storage_path('app/temp/' . $zipFileName);
-
-        if (!is_dir(storage_path('app/temp'))) {
-            mkdir(storage_path('app/temp'), 0755, true);
-        }
+        $zipPath = storage_path('app/' . $zipFileName);
 
         $zip = new ZipArchive;
         if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
@@ -99,6 +112,10 @@ class DocumentController extends Controller
                 }
             }
             $zip->close();
+        }
+
+        if (!file_exists($zipPath)) {
+            return back()->with('error', 'Could not create ZIP file.');
         }
 
         return response()->download($zipPath)->deleteFileAfterSend(true);

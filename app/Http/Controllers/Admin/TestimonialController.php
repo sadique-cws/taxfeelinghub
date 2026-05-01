@@ -63,13 +63,13 @@ class TestimonialController extends Controller
     public function update(Request $request, Testimonial $testimonial)
     {
         $validated = $request->validate([
-            'client_name' => 'required|string|max:255',
-            'business_name' => 'nullable|string|max:255',
-            'content' => 'required|string',
-            'rating' => 'required|integer|min:1|max:5',
-            'avatar' => 'nullable|string|max:255',
-            'is_featured' => 'boolean',
-            'status' => 'required|string|in:draft,published',
+            'client_name' => 'sometimes|required|string|max:255',
+            'business_name' => 'sometimes|nullable|string|max:255',
+            'content' => 'sometimes|required|string',
+            'rating' => 'sometimes|required|integer|min:1|max:5',
+            'avatar' => 'sometimes|nullable|string|max:255',
+            'is_featured' => 'sometimes|boolean',
+            'status' => 'sometimes|required|string|in:draft,published',
         ]);
 
         $testimonial->update($validated);
