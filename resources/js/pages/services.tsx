@@ -2,13 +2,13 @@ import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
 import {
   ArrowRight, BookOpen, Building2, FileCheck2, Landmark,
-  Receipt, ShieldCheck, TrendingUp, Users, Phone
+  Receipt, ShieldCheck, TrendingUp, Users, Phone, LayoutGrid
 } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Button } from '@/components/ui/button';
 
 const ICONS = {
-  BookOpen, ShieldCheck, Building2, FileCheck2, Users, TrendingUp, Landmark, Receipt,
+  BookOpen, ShieldCheck, Building2, FileCheck2, Users, TrendingUp, Landmark, Receipt, LayoutGrid
 } as const;
 
 const SERVICES = [
@@ -35,10 +35,17 @@ const SERVICES = [
   },
   {
     slug: 'compliance-services',
-    title: 'Compliance Services',
+    title: 'Compliance & Audit',
     short: 'Stay ahead of every ROC, tax and regulatory deadline.',
     icon: 'FileCheck2',
-    highlights: ['ROC Filings', 'Secretarial Audit', 'Statutory Records']
+    highlights: ['Statutory Audit', 'Internal Audit', 'Secretarial Audit']
+  },
+  {
+    slug: 'miscellaneous-services',
+    title: 'Misc registrations',
+    short: 'DSC, IEC, FSSAI, Society & Trust registrations made easy.',
+    icon: 'LayoutGrid',
+    highlights: ['Digital Signature', 'FSSAI License', 'Import-Export Code']
   },
   {
     slug: 'accounting-services',

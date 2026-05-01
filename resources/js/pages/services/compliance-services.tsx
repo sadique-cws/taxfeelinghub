@@ -2,35 +2,39 @@ import ServiceDetail from '@/components/service-detail';
 
 export default function ComplianceServices() {
     const data = {
-        title: 'Compliance Services',
-        description: 'Stay ahead of every ROC, tax and regulatory deadline.',
-        overview: 'Running a business involves juggling multiple statutory deadlines. Our compliance services ensure that you never miss a filing, whether it is ROC annual returns, Income Tax filings, or GST reports. We act as your compliance calendar, giving you peace of mind and protecting you from heavy penalties.',
+        title: 'Compliance & Audit Services',
+        description: 'Comprehensive compliance management and assurance solutions for sustainable growth.',
+        overview: 'In today’s dynamic regulatory landscape, maintaining timely and accurate compliance is a critical pillar of business growth. At Tax Filing Hub, we offer comprehensive compliance management and audit solutions. Our expert team ensures end-to-end management of all regulatory filings, including ROC annual returns, Income Tax, GST, EPF, ESI, and TDS. Beyond mandatory filings, our audit services — including Statutory, Internal, and Management Audits — play a pivotal role in ensuring financial transparency, regulatory compliance, and operational efficiency.',
         features: [
             {
-                title: 'Annual ROC Filings',
-                description: 'Expert preparation of AOC-4, MGT-7 and other mandatory secretarial records.'
+                title: 'Statutory Audits',
+                description: 'Legally mandated examinations under the Income Tax Act, Companies Act, and GST laws to ensure financial integrity.'
             },
             {
-                title: 'Audit Support',
-                description: 'Coordinating with statutory auditors to ensure smooth year-end audits.'
+                title: 'Internal Audits',
+                description: 'Continuous evaluation of internal controls and risk management to identify inefficiencies and mitigate potential risks.'
             },
             {
-                title: 'Regulatory Updates',
-                description: 'Proactive notification about changes in laws that affect your specific industry.'
+                title: 'Management Audits',
+                description: 'Evaluating the effectiveness of strategic decisions and resource utilization to ensure alignment with long-term objectives.'
             },
             {
-                title: 'Minutes & Registers',
-                description: 'Maintenance of statutory registers and drafting minutes of board/general meetings.'
+                title: 'Regulatory Filings',
+                description: 'Proactive management of ROC annual returns, GST reports, EPF/ESI, and other statutory obligations.'
+            },
+            {
+                title: 'Specialized Audits',
+                description: 'Tailored solutions including stock audits, due diligence, and forensic audits for deeper business insights.'
             }
         ],
         faqs: [
             {
-                question: 'What happens if I miss a filing deadline?',
-                answer: 'Missing deadlines can lead to heavy daily penalties, disqualification of directors, and in extreme cases, striking off of the company. Our goal is to ensure 100% on-time filing.'
+                question: 'What is the statutory audit framework in India?',
+                answer: 'Statutory audits are conducted annually (April 1st to March 31st) to maintain compliance and present a true and fair view of an entity’s financial position.'
             },
             {
-                question: 'Do you handle compliance for LLPs?',
-                answer: 'Yes, we handle Form 8 and Form 11 filings for LLPs, along with Income Tax returns and other regulatory needs.'
+                question: 'How do internal audits benefit my organization?',
+                answer: 'They provide an early detection system for errors or fraudulent activities and help in optimizing operational processes and risk management.'
             }
         ]
     };

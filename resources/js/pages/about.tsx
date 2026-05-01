@@ -12,7 +12,7 @@ const VALUES = [
 ];
 
 const TIMELINE = [
-  { year: "2015", title: "Founded in Purnia, Bihar", desc: "Started as a two-person tax practice serving local businesses." },
+  { year: "2012", title: "Founded in Purnia, Bihar", desc: "Established by CA Rajeev Kumar Ranjan to deliver high-quality financial advisory." },
   { year: "2018", title: "Expanded to corporate advisory", desc: "Added company registrations, ROC compliance and audit support." },
   { year: "2021", title: "Launched cloud accounting", desc: "Moved 200+ clients to Tally, Zoho and QuickBooks for real-time insights." },
   { year: "Today", title: "500+ clients across India", desc: "A multi-disciplinary team serving startups, SMEs and large enterprises." },
@@ -40,12 +40,18 @@ export default function About() {
           <h2 className="font-display text-3xl md:text-5xl font-bold text-primary tracking-tight leading-tight">
             A leading financial & legal advisory firm with deep specialisation in assurance.
           </h2>
-          <div className="mt-8 space-y-6 text-muted-foreground text-lg leading-relaxed">
+          <div className="mt-8 space-y-6 text-muted-foreground text-lg leading-relaxed text-justify">
             <p>
-              Tax Filing Hub continues to offer a wholesome service experience to boost highly valued client relationships — combining technical and industry expertise at par with well-placed firms together with a personal commitment to optimise client service.
+              Tax Filing Hub is a premier financial and legal advisory firm, distinguished by its deep expertise in assurance, taxation, and regulatory compliance. The firm is led by <strong>CA Rajeev Kumar Ranjan</strong>, a highly regarded practicing Chartered Accountant based in Purnia, Bihar, with a professional footprint that extends across India and international jurisdictions.
             </p>
             <p>
-              Whether you're a first-time founder filing your first return or a 100-person enterprise managing complex compliance, our team becomes a quiet, dependable extension of yours.
+              Since establishing his practice in 2012, he has consistently delivered sophisticated, high-quality advisory services designed to create measurable value for clients. Guided by the principle of <strong>“Service with Responsibility,”</strong> he upholds the highest standards of precision, integrity, and professional excellence.
+            </p>
+            <p>
+              With over 15 years of extensive experience, CA Rajeev Kumar Ranjan, along with his accomplished team, offers comprehensive expertise across financial management, taxation, assurance, and strategic advisory. The firm remains at the forefront of the evolving financial and legal ecosystem by proactively tracking legislative amendments, regulatory developments, and policy shifts.
+            </p>
+            <p>
+              The strength of Tax Filing Hub lies in its multidisciplinary team of seasoned professionals, comprising Chartered Accountants, Company Secretaries, Corporate Financial Advisors, Advocates, and Tax Consultants. Leveraging deep domain knowledge and practical insights, the team delivers bespoke solutions spanning bookkeeping, corporate advisory, statutory compliance, and digital financial transformation.
             </p>
           </div>
           <div className="mt-12 grid grid-cols-3 gap-6">

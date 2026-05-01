@@ -2,35 +2,39 @@ import ServiceDetail from '@/components/service-detail';
 
 export default function TrademarkCopyright() {
     const data = {
-        title: 'Trademark & Copyright',
-        description: 'Protect your brand identity with end-to-end IP registration.',
-        overview: 'Your brand is your most valuable asset. Our IP experts help you secure your trademarks and copyrights, ensuring that your intellectual property is protected from infringement. From initial search and advisory to filing and handling oppositions, we manage the entire lifecycle of your IP protection.',
+        title: 'Trademark Registration Services',
+        description: 'Secure your brand identity through efficient, legally compliant, and strategically guided solutions.',
+        overview: 'Welcome to Tax Filing Hub — your reliable partner for professional trademark registration. We recognize that securing a brand identity can often seem complex and time-intensive. Our goal is to simplify this journey by offering a streamlined, hassle-free process. While we take care of the legal and procedural complexities, from in-depth search to addressing objections, you can stay focused on scaling and managing your business operations.',
         features: [
             {
-                title: 'Trademark Search',
-                description: 'Comprehensive search across the IP database to ensure your brand name/logo is unique and registrable.'
+                title: 'Search & Analysis',
+                description: 'In-depth trademark search to verify availability and significantly reduce the risk of rejection.'
             },
             {
-                title: 'Application Filing',
-                description: 'Expert preparation and filing of trademark and copyright applications to minimize the risk of objection.'
+                title: 'Drafting & Filing',
+                description: 'Complete assistance in drafting and filing your trademark application with the relevant authorities.'
             },
             {
-                title: 'Prosecution & Response',
-                description: 'Handling examination reports and responding to objections raised by the IP registrar.'
+                title: 'Objection Handling',
+                description: 'Expert support in addressing examination reports, objections, or oppositions throughout the process.'
             },
             {
-                title: 'Opposition Handling',
-                description: 'Representing your interests in case of oppositions filed by third parties against your trademark.'
+                title: 'Application Management',
+                description: 'Continuous monitoring and management of your application to ensure it progresses smoothly at every stage.'
+            },
+            {
+                title: 'Brand Protection',
+                description: 'Strategic advisory to safeguard your intellectual property and strengthen your brand value in the market.'
             }
         ],
         faqs: [
             {
-                question: 'How long does trademark registration take?',
-                answer: 'While you can start using the "TM" mark immediately after filing, the full registration process usually takes 6-12 months, depending on government processing times and objections.'
+                question: 'Why is trademark search important before filing?',
+                answer: 'It helps identify potential conflicts early, ensuring your brand name is unique and minimizing the chances of legal disputes or application rejection.'
             },
             {
-                question: 'What is the difference between Trademark and Copyright?',
-                answer: 'Trademarks protect brand names, logos, and slogans. Copyrights protect original creative works like software code, designs, literature, and music.'
+                question: 'How does Tax Filing Hub help with objections?',
+                answer: 'Our legal experts analyze the examiner\'s report and draft precise responses to resolve objections and keep your registration on track.'
             }
         ]
     };

@@ -2,35 +2,39 @@ import ServiceDetail from '@/components/service-detail';
 
 export default function FirmCompanyRegistration() {
     const data = {
-        title: 'Firm & Company Registration',
-        description: 'Incorporate the right entity for your goals — fast and compliant.',
-        overview: 'Choosing the right business structure is critical for future growth, fundability, and liability protection. We help entrepreneurs register Private Limited Companies, LLPs, OPCs, and Partnership firms with speed and precision, handling all the paperwork from DIN to Certificate of Incorporation.',
+        title: 'Company Registration & Conversion',
+        description: 'Comprehensive incorporation and business restructuring solutions for modern enterprises.',
+        overview: 'At Tax Filing Hub, we deliver end-to-end company registration and compliance solutions. Our expertise spans Private Limited, Public Limited, LLP, OPC, Section 8, Nidhi, and Chit Fund Company registration. We also specialize in business entity conversion and constitutional modifications, enabling your business to evolve in line with growth, funding requirements, and statutory obligations.',
         features: [
             {
-                title: 'Private Limited / LLP',
-                description: 'End-to-end incorporation including name approval, MOA/AOA drafting, and spice+ filing.'
+                title: 'New Incorporation',
+                description: 'End-to-end management of documentation, name approval, and incorporation for all types of business entities.'
             },
             {
-                title: 'Post-Incorp Compliance',
-                description: 'PAN, TAN, and GST registration bundled with your company formation.'
+                title: 'Business Conversion',
+                description: 'Assisting in transitioning Partnership firms to LLPs, or Private Limited to Public Limited companies for scaling.'
             },
             {
-                title: 'MSME / Startup India',
-                description: 'Getting you recognized by the government to avail tax holidays and easier funding.'
+                title: 'Constitutional Modification',
+                description: 'Alteration of MOA & AOA, change in business objects, name, or registered office with full ROC compliance.'
             },
             {
-                title: 'Digital Signatures',
-                description: 'Procurement of DSCs and DINs for all directors/partners.'
+                title: 'Strategic Advisory',
+                description: 'Expert guidance on the Companies Act and LLP Act to ensure your business structure is optimized for growth.'
+            },
+            {
+                title: 'Capital Restructuring',
+                description: 'Assistance in changing capital structure and admission or retirement of partners and directors.'
             }
         ],
         faqs: [
             {
-                question: 'What documents are required for company registration?',
-                answer: 'You typically need PAN, Aadhaar, Photo, and Address Proof (Utility bill) of all directors, along with proof of registered office address.'
+                question: 'Why should I convert my Partnership firm into an LLP?',
+                answer: 'LLPs provide the benefits of limited liability and a separate legal identity, enhancing credibility and protecting personal assets.'
             },
             {
-                question: 'Can one person start a company?',
-                answer: 'Yes, through an One Person Company (OPC) or a Sole Proprietorship. However, for growth and funding, we usually recommend a Private Limited structure.'
+                question: 'What is involved in modifying a company\'s constitution?',
+                answer: 'It involves altering the Memorandum or Articles of Association (MOA/AOA) to reflect changes in business goals or structure, requiring formal ROC filings.'
             }
         ]
     };

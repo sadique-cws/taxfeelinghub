@@ -2,35 +2,39 @@ import ServiceDetail from '@/components/service-detail';
 
 export default function AccountingSupport() {
     const data = {
-        title: 'Accounting Support',
+        title: 'Accounting Support Services',
         description: 'End-to-end bookkeeping and accounting partner for SMEs and startups.',
-        overview: 'Maintaining accurate financial records is the backbone of any successful business. Our accounting support services provide you with a dedicated team of professionals who handle your daily bookkeeping, bank reconciliations, and financial reporting, ensuring your books are always audit-ready and providing you with clear insights into your business performance.',
+        overview: 'In today’s fast-paced business environment, accurate Accounting and Bookkeeping Services are essential for sustainable growth and financial stability. At Tax Filing Hub, we help businesses streamline their accounting processes, minimize errors, and maintain full compliance. Our experienced professionals bring deep industry knowledge and a systematic approach to managing your financial data, providing critical insights for informed decision-making.',
         features: [
             {
-                title: 'Daily & Monthly Bookkeeping',
-                description: 'We handle all your day-to-day transactions, ensuring every expense and income is correctly categorized.'
-            },
-            {
-                title: 'Bank Reconciliations',
-                description: 'Regular matching of your bank statements with your internal records to prevent errors and fraud.'
+                title: 'Bookkeeping Services',
+                description: 'Accurate recording and maintenance of daily financial transactions in a systematic manner.'
             },
             {
                 title: 'Financial Statements',
-                description: 'Preparation of Balance Sheets, P&L Statements, and Cash Flow reports on a monthly basis.'
+                description: 'Preparation of Balance Sheets, Profit & Loss Accounts, and cash flow statements to monitor performance.'
             },
             {
-                title: 'MIS Reporting',
-                description: 'Customized Management Information System reports to help you make data-driven decisions.'
+                title: 'AR/AP Management',
+                description: 'Efficient tracking of receivables and payables to maintain healthy cash flow and vendor relations.'
+            },
+            {
+                title: 'Bank Reconciliation',
+                description: 'Ensuring accuracy between bank statements and financial records to prevent errors and fraud.'
+            },
+            {
+                title: 'Analysis & Forecasting',
+                description: 'Data-driven insights and projections to support strategic decision-making and business growth.'
             }
         ],
         faqs: [
             {
-                question: 'What accounting software do you use?',
-                answer: 'We are experts in Tally, Zoho Books, QuickBooks, and SAP. We can work with your existing setup or help you migrate to a more efficient cloud platform.'
+                question: 'What is the importance of proper bookkeeping?',
+                answer: 'Proper bookkeeping is crucial for maintaining financial transparency, ensuring statutory compliance, and monitoring business performance.'
             },
             {
-                question: 'How often will I receive financial reports?',
-                answer: 'By default, we provide monthly reporting packages. However, for clients requiring more frequent updates, we can provide weekly or even real-time dashboards.'
+                question: 'What is the difference between Accounting and Bookkeeping?',
+                answer: 'Bookkeeping is the foundation—recording and organizing transactions. Accounting involves interpreting and analyzing that data into meaningful financial statements.'
             }
         ]
     };
