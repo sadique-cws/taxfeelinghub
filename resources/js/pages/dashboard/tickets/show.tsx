@@ -1,4 +1,4 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { ArrowLeft, MessageSquare, Send, User, Clock, CheckCircle2, ShieldCheck, LifeBuoy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -52,7 +52,7 @@ export default function ClientTicketShow({ ticket }: Props) {
         <>
             <Head title={`Ticket #${ticket.id} — Client Portal`} />
 
-            <div className="p-6 md:p-8 space-y-8 min-h-full max-w-5xl mx-auto">
+            <div className="p-6 md:p-8 space-y-8 min-h-screen w-full mx-auto bg-background">
                 {/* Back Link */}
                 <div className="flex justify-between items-center">
                     <Link href="/dashboard/tickets" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold hover:text-primary transition-colors">
@@ -223,10 +223,19 @@ export default function ClientTicketShow({ ticket }: Props) {
 }
 
 ClientTicketShow.layout = (page: any) => (
-    <AppLayout breadcrumbs={[
-        { title: 'Support Tickets', href: '/dashboard/tickets' },
-        { title: `Ticket #${page.props.ticket.id}`, href: '#' }
-    ]}>
-        {page}
-    </AppLayout>
+    <ClientTicketLayout>{page}</ClientTicketLayout>
 );
+
+function ClientTicketLayout({ children }: { children: React.ReactNode }) {
+    const { ticket } = usePage().props as any;
+    const breadcrumbs = [
+        { title: 'Support Tickets', href: '/dashboard/tickets' },
+        { title: ticket ? `Ticket #${ticket.id}` : 'Ticket Details', href: '#' }
+    ];
+
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            {children}
+        </AppLayout>
+    );
+}

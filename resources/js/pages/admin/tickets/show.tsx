@@ -1,4 +1,4 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { ArrowLeft, MessageSquare, Send, User, Clock, CheckCircle2, ShieldCheck, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -53,7 +53,7 @@ export default function AdminTicketShow({ ticket }: Props) {
         <>
             <Head title={`Ticket #${ticket.id} — Admin`} />
 
-            <div className="p-6 md:p-8 space-y-8 min-h-full max-w-5xl mx-auto">
+            <div className="p-6 md:p-8 space-y-8 min-h-screen w-full mx-auto bg-background">
                 {/* Back Link */}
                 <Link href="/admin/tickets" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold hover:text-primary transition-colors">
                     <ArrowLeft className="h-4 w-4" /> Back to All Tickets
@@ -235,10 +235,19 @@ export default function AdminTicketShow({ ticket }: Props) {
 }
 
 AdminTicketShow.layout = (page: any) => (
-    <AppLayout breadcrumbs={[
-        { title: 'Support Tickets', href: '/admin/tickets' },
-        { title: `Ticket #${page.props.ticket.id}`, href: '#' }
-    ]}>
-        {page}
-    </AppLayout>
+    <AdminTicketLayout>{page}</AdminTicketLayout>
 );
+
+function AdminTicketLayout({ children }: { children: React.ReactNode }) {
+    const { ticket } = usePage().props as any;
+    const breadcrumbs = [
+        { title: 'Support Tickets', href: '/admin/tickets' },
+        { title: ticket ? `Ticket #${ticket.id}` : 'Ticket Details', href: '#' }
+    ];
+
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            {children}
+        </AppLayout>
+    );
+}

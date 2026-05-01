@@ -82,7 +82,7 @@ export function AppSidebar() {
     }
 
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="icon" variant="sidebar" className="bg-white text-neutral-900">
             <SidebarHeader className="py-5 px-4">
                 <SidebarMenu>
                     <SidebarMenuItem>
@@ -102,7 +102,7 @@ export function AppSidebar() {
                 <NavMain items={mainNavItems} />
             </SidebarContent>
 
-            <SidebarFooter>
+            <SidebarFooter className="border-t border-sidebar-border/50">
                 <NavUser />
             </SidebarFooter>
         </Sidebar>
