@@ -22,8 +22,8 @@ const SERVICES = [
 const SITE = {
     name: 'Tax Filing Hub',
     email: 'taxfilinghub@gmail.com',
-    phone: '+91 7488447789',
-    phoneHref: 'tel:+917488447789',
+    phone: '+91 7979891922',
+    phoneHref: 'tel:+917979891922',
     address: {
         line1: 'Rajeswari Niwas',
         line2: 'Beside PNB Bank Gate, Infront of Big Shop, Bhatta Bazar',
@@ -106,12 +106,19 @@ export function PublicFooter() {
       <div className="border-t border-primary-foreground/10 bg-primary/50">
         <div className="container-page py-10">
           <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold/60 mb-6 text-center">Service Areas in Bihar</h4>
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-            {['Purnia', 'Katihar', 'Kishanganj', 'Araria', 'Forbesganj', 'Saharsa', 'Madhepura', 'Bhagalpur', 'Patna'].map((city) => (
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
+            {[
+              'Purnia', 'Patna', 'Gaya', 'Muzaffarpur', 'Darbhanga', 'Bhagalpur', 'Begusarai', 
+              'Katihar', 'Munger', 'Chhapra', 'Samastipur', 'Siwan', 'Motihari', 'Bettiah', 
+              'Hajipur', 'Sasaram', 'Arrah', 'Buxar', 'Kishanganj', 'Araria', 'Forbesganj', 
+              'Saharsa', 'Madhepura', 'Jehanabad', 'Aurangabad', 'Nawada', 'Jamui', 
+              'Lakhisarai', 'Sheikhpura', 'Banka', 'Supaul', 'Khagaria', 'Sitamarhi', 
+              'Sheohar', 'Madhubani', 'Gopalganj', 'Arwal', 'Bhabua'
+            ].map((city) => (
               <Link 
                 key={city} 
                 href={`/best-tax-consultant-in-${city.toLowerCase()}`}
-                className="text-xs text-primary-foreground/50 hover:text-gold transition-smooth"
+                className="text-[11px] text-primary-foreground/40 hover:text-gold transition-smooth"
               >
                 Tax Consultant in {city}
               </Link>

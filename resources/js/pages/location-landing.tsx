@@ -128,7 +128,7 @@ export default function LocationLanding({ location, services }: LocationProps) {
                     <div className="flex flex-col items-center text-center p-8 rounded-xl border border-dashed border-border animate-fade-up" style={{ animationDelay: '0.1s' }}>
                         <Phone className="h-8 w-8 text-gold mb-4" />
                         <h4 className="font-bold text-primary mb-2">Call Direct</h4>
-                        <p className="text-sm text-muted-foreground">+91 7488447789</p>
+                        <p className="text-sm text-muted-foreground">+91 7979891922</p>
                     </div>
                     <div className="flex flex-col items-center text-center p-8 rounded-xl border border-dashed border-border animate-fade-up" style={{ animationDelay: '0.2s' }}>
                         <Mail className="h-8 w-8 text-gold mb-4" />

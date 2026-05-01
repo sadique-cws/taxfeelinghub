@@ -13,8 +13,8 @@ const NAV_LINKS = [
 ];
 
 const SITE = {
-    phone: '+91 7488447789',
-    phoneHref: 'tel:+917488447789',
+    phone: '+91 7979891922',
+    phoneHref: 'tel:+917979891922',
 };
 
 import { AppLogo } from '@/components/app-logo';
