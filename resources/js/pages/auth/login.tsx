@@ -10,7 +10,8 @@ import { Spinner } from '@/components/ui/spinner';
 import { register } from '@/routes';
 import { request } from '@/routes/password';
 import { AppLogo } from '@/components/app-logo';
-import { ShieldCheck, User as UserIcon, LogIn, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, User as UserIcon, LogIn, ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 
 type Props = { status?: string; canResetPassword: boolean; canRegister: boolean; };
 
@@ -87,7 +88,10 @@ export default function Login({ status, canResetPassword, canRegister }: Props) 
                         <AppLogo className="text-primary" />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="flex flex-col gap-2">
+                        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gold hover:text-primary transition-colors w-fit mb-2">
+                            <ArrowLeft className="h-3 w-3" /> Back to Home
+                        </Link>
                         <h1 className="font-display text-3xl font-bold text-primary tracking-tight">Sign In</h1>
                         <p className="text-muted-foreground">Access your advisor portal and documents</p>
                     </div>
