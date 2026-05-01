@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
-import { Calendar, User, ArrowLeft, Phone, Mail } from "lucide-react";
+import { Calendar, User, ArrowLeft, Phone, Mail, FileText } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Button } from '@/components/ui/button';
 
@@ -26,6 +26,11 @@ export default function BlogDetail({ post }: BlogDetailProps) {
     <PublicLayout>
       <Head title={`${post.title} | Blog — Tax Filing Hub`}>
         <meta name="description" content={post.excerpt} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.excerpt} />
+        {post.featured_image && <meta property="og:image" content={post.featured_image} />}
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <PageHeader
@@ -70,8 +75,21 @@ export default function BlogDetail({ post }: BlogDetailProps) {
                 </div>
 
                 {post.featured_image && (
-                    <div className="aspect-video rounded-2xl overflow-hidden mb-12 border border-border">
-                        <img src={post.featured_image} alt={post.title} className="w-full h-full object-cover" />
+                    <div className="aspect-video rounded-2xl overflow-hidden mb-12 border border-border relative bg-primary flex items-center justify-center">
+                        <img 
+                            src={post.featured_image} 
+                            alt={post.title} 
+                            className="w-full h-full object-cover" 
+                            onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement?.querySelector('.image-fallback')?.classList.remove('hidden');
+                            }}
+                        />
+                        <div className="image-fallback hidden absolute inset-0 flex flex-col items-center justify-center">
+                            <div className="absolute inset-0 opacity-[0.1] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:24px_24px]" />
+                            <FileText className="h-24 w-24 text-white/20" />
+                            <p className="text-white/40 font-display mt-4 font-bold uppercase tracking-widest text-xs">Article Overview</p>
+                        </div>
                     </div>
                 )}
 
@@ -79,10 +97,27 @@ export default function BlogDetail({ post }: BlogDetailProps) {
                     <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
 
-                <div className="mt-20 pt-10 border-t border-border flex items-center justify-between">
+                <div className="mt-20 pt-10 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-4">
-                        <span className="text-sm font-bold text-primary">Share this article:</span>
-                        {/* Simple share links could go here */}
+                        <span className="text-sm font-bold text-primary uppercase tracking-widest">Share article:</span>
+                        <div className="flex items-center gap-2">
+                            <ShareButton 
+                                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                                label="Twitter"
+                            />
+                            <ShareButton 
+                                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                                label="Facebook"
+                            />
+                            <ShareButton 
+                                href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&title=${encodeURIComponent(post.title)}`}
+                                label="LinkedIn"
+                            />
+                            <ShareButton 
+                                href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + (typeof window !== 'undefined' ? window.location.href : ''))}`}
+                                label="WhatsApp"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,4 +171,17 @@ export default function BlogDetail({ post }: BlogDetailProps) {
       </section>
     </PublicLayout>
   );
+}
+
+function ShareButton({ href, label }: { href: string; label: string }) {
+    return (
+        <a 
+            href={href} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="h-10 px-4 rounded-lg border border-border bg-surface flex items-center justify-center text-xs font-bold text-primary hover:border-gold/50 hover:bg-background transition-smooth"
+        >
+            {label}
+        </a>
+    );
 }

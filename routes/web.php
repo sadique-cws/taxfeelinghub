@@ -8,7 +8,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\CareerJobController;
 use App\Http\Controllers\PostController;
 
-Route::inertia('/', 'welcome')->name('home');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::inertia('/about', 'about')->name('about');
 Route::inertia('/services', 'services')->name('services');
 Route::get('/blog', [PostController::class, 'index'])->name('blog');
@@ -77,6 +77,9 @@ Route::middleware(['auth', 'verified', 'approved'])->group(function () {
         Route::get('leads', [LeadController::class, 'index'])->name('admin.leads');
         Route::patch('leads/{lead}/toggle-read', [LeadController::class, 'toggleRead'])->name('admin.leads.toggle-read');
         Route::delete('leads/{lead}', [LeadController::class, 'destroy'])->name('admin.leads.destroy');
+
+        // Admin Testimonial Management
+        Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class)->names('admin.testimonials');
     });
 });
 

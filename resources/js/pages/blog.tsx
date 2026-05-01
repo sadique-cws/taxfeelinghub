@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
-import { Calendar, User, ArrowRight, Phone } from "lucide-react";
+import { Calendar, User, ArrowRight, Phone, FileText } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Button } from '@/components/ui/button';
 
@@ -54,10 +54,20 @@ export default function Blog({ posts }: BlogProps) {
                 <article className="lg:row-span-2 group rounded-xl border border-border bg-card overflow-hidden flex flex-col transition-all hover:border-gold/50 animate-fade-up">
                   <div className="aspect-[4/3] bg-primary relative overflow-hidden">
                     {allPosts[0].featured_image ? (
-                      <img src={allPosts[0].featured_image} alt={allPosts[0].title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                    ) : (
-                      <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:24px_24px]" />
-                    )}
+                      <img 
+                        src={allPosts[0].featured_image} 
+                        alt={allPosts[0].title} 
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement?.querySelector('.image-fallback')?.classList.remove('hidden');
+                        }}
+                      />
+                    ) : null}
+                    <div className={`image-fallback absolute inset-0 bg-primary flex items-center justify-center ${allPosts[0].featured_image ? 'hidden' : ''}`}>
+                      <div className="absolute inset-0 opacity-[0.1] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:24px_24px]" />
+                      <FileText className="h-20 w-20 text-white/20" />
+                    </div>
                     <div className="absolute bottom-8 left-8">
                       <span className="inline-block rounded bg-gold text-black px-4 py-1.5 text-xs font-bold uppercase tracking-widest">
                         Latest

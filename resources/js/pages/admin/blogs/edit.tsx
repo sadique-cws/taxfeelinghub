@@ -1,9 +1,10 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Save, FileText, Image as ImageIcon, Send } from 'lucide-react';
+import { ArrowLeft, Save, FileText, Image as ImageIcon, Send, Eye, Edit3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
+import { useState } from 'react';
 
 interface Post {
     id: number;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export default function EditBlog({ post: postData }: Props) {
+    const [activeTab, setActiveTab] = useState<'edit' | 'preview' | 'split'>('edit');
     const { data, setData, patch, processing, errors } = useForm({
         title: postData.title,
         excerpt: postData.excerpt || '',
@@ -86,76 +88,116 @@ export default function EditBlog({ post: postData }: Props) {
 
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <Label htmlFor="content" className="text-primary font-bold uppercase tracking-widest text-[10px]">Article Content (HTML supported)</Label>
-                                    <div className="flex gap-2">
-                                        <select 
-                                            className="text-[10px] font-bold uppercase tracking-widest border border-border rounded px-2 py-1 bg-surface focus:outline-none focus:ring-1 focus:ring-gold"
-                                            onChange={(e) => {
-                                                const templates: Record<string, string> = {
-                                                    'gst': '<h3>GST Benefits for Businesses</h3>\n<ul>\n<li>Reduced tax burden</li>\n<li>Easy compliance</li>\n<li>Input tax credit</li>\n</ul>',
-                                                    'compliance': '<h3>Annual Compliance Checklist</h3>\n<ol>\n<li>Income Tax Return</li>\n<li>GST Annual Return</li>\n<li>ROC Filing</li>\n</ol>',
-                                                    'intro': '<p>In this article, we explore the recent changes in the regulatory landscape and what they mean for small business owners in Bihar.</p>'
-                                                };
-                                                if (e.target.value) {
-                                                    setData('content', data.content + templates[e.target.value]);
-                                                    e.target.value = '';
-                                                }
-                                            }}
-                                        >
-                                            <option value="">Quick Templates</option>
-                                            <option value="intro">Introduction Text</option>
-                                            <option value="gst">GST Section</option>
-                                            <option value="compliance">Compliance List</option>
-                                        </select>
+                                    <div className="flex items-center gap-4">
+                                        <Label className="text-primary font-bold uppercase tracking-widest text-[10px]">Article Content</Label>
+                                        <div className="flex bg-surface border border-border rounded p-1">
+                                            {[
+                                                { id: 'edit', label: 'Edit', icon: Edit3 },
+                                                { id: 'preview', label: 'Preview', icon: Eye },
+                                                { id: 'split', label: 'Split', icon: FileText },
+                                            ].map((tab) => {
+                                                const Icon = tab.icon;
+                                                return (
+                                                    <button
+                                                        key={tab.id}
+                                                        type="button"
+                                                        onClick={() => setActiveTab(tab.id as any)}
+                                                        className={`px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded transition-all flex items-center gap-1.5 ${
+                                                            activeTab === tab.id 
+                                                            ? 'bg-primary text-white' 
+                                                            : 'text-muted-foreground hover:text-primary'
+                                                        }`}
+                                                    >
+                                                        <Icon className="h-3 w-3" /> {tab.label}
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
+                                    
+                                    {activeTab === 'edit' && (
+                                        <div className="flex gap-2">
+                                            <select 
+                                                className="text-[10px] font-bold uppercase tracking-widest border border-border rounded px-2 py-1 bg-surface focus:outline-none focus:ring-1 focus:ring-gold"
+                                                onChange={(e) => {
+                                                    const templates: Record<string, string> = {
+                                                        'gst': '<h3>GST Benefits for Businesses</h3>\n<ul>\n<li>Reduced tax burden</li>\n<li>Easy compliance</li>\n<li>Input tax credit</li>\n</ul>',
+                                                        'compliance': '<h3>Annual Compliance Checklist</h3>\n<ol>\n<li>Income Tax Return</li>\n<li>GST Annual Return</li>\n<li>ROC Filing</li>\n</ol>',
+                                                        'intro': '<p>In this article, we explore the recent changes in the regulatory landscape and what they mean for small business owners in Bihar.</p>'
+                                                    };
+                                                    if (e.target.value) {
+                                                        setData('content', data.content + templates[e.target.value]);
+                                                        e.target.value = '';
+                                                    }
+                                                }}
+                                            >
+                                                <option value="">Quick Templates</option>
+                                                <option value="intro">Introduction Text</option>
+                                                <option value="gst">GST Section</option>
+                                                <option value="compliance">Compliance List</option>
+                                            </select>
+                                        </div>
+                                    )}
                                 </div>
-                                
-                                {/* Formatting Toolbar */}
-                                <div className="flex flex-wrap gap-1 p-2 bg-surface border border-border rounded-t-lg">
-                                    {[
-                                        { label: 'B', tag: 'b', title: 'Bold' },
-                                        { label: 'I', tag: 'i', title: 'Italic' },
-                                        { label: 'H2', tag: 'h2', title: 'Heading 2' },
-                                        { label: 'H3', tag: 'h3', title: 'Heading 3' },
-                                        { label: 'P', tag: 'p', title: 'Paragraph' },
-                                        { label: 'List', tag: 'li', title: 'List Item', wrap: 'ul' },
-                                    ].map((btn) => (
-                                        <button
-                                            key={btn.label}
-                                            type="button"
-                                            onClick={() => {
-                                                const el = document.getElementById('content') as HTMLTextAreaElement;
-                                                const start = el.selectionStart;
-                                                const end = el.selectionEnd;
-                                                const text = el.value;
-                                                const selected = text.substring(start, end);
-                                                const replacement = btn.wrap 
-                                                    ? `<${btn.wrap}>\n  <${btn.tag}>${selected || 'Text'}</${btn.tag}>\n</${btn.wrap}>`
-                                                    : `<${btn.tag}>${selected || 'Text'}</${btn.tag}>`;
-                                                setData('content', text.substring(0, start) + replacement + text.substring(end));
-                                            }}
-                                            className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-white transition-colors"
-                                            title={btn.title}
-                                        >
-                                            {btn.label}
-                                        </button>
-                                    ))}
-                                    <button
-                                        type="button"
-                                        onClick={() => setData('content', data.content + '<br />\n')}
-                                        className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-white transition-colors"
-                                    >
-                                        Break
-                                    </button>
-                                </div>
+                                                               <div className={`grid gap-0 border border-border rounded-xl overflow-hidden ${activeTab === 'split' ? 'lg:grid-cols-2 h-[600px]' : ''}`}>
+                                    {(activeTab === 'edit' || activeTab === 'split') && (
+                                        <div className={`flex flex-col bg-card ${activeTab === 'split' ? 'border-r border-border' : ''}`}>
+                                            <div className="flex flex-wrap gap-1 p-2 bg-surface border-b border-border">
+                                                {[
+                                                    { label: 'B', tag: 'b', title: 'Bold' },
+                                                    { label: 'I', tag: 'i', title: 'Italic' },
+                                                    { label: 'H2', tag: 'h2', title: 'Heading 2' },
+                                                    { label: 'H3', tag: 'h3', title: 'Heading 3' },
+                                                    { label: 'P', tag: 'p', title: 'Paragraph' },
+                                                    { label: 'List', tag: 'li', title: 'List Item', wrap: 'ul' },
+                                                ].map((btn) => (
+                                                    <button
+                                                        key={btn.label}
+                                                        type="button"
+                                                        onClick={() => {
+                                                            const el = document.getElementById('content') as HTMLTextAreaElement;
+                                                            const start = el.selectionStart;
+                                                            const end = el.selectionEnd;
+                                                            const text = el.value;
+                                                            const selected = text.substring(start, end);
+                                                            const replacement = btn.wrap 
+                                                                ? `<${btn.wrap}>\n  <${btn.tag}>${selected || 'Text'}</${btn.tag}>\n</${btn.wrap}>`
+                                                                : `<${btn.tag}>${selected || 'Text'}</${btn.tag}>`;
+                                                            setData('content', text.substring(0, start) + replacement + text.substring(end));
+                                                        }}
+                                                        className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-black transition-all"
+                                                        title={btn.title}
+                                                    >
+                                                        {btn.label}
+                                                    </button>
+                                                ))}
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setData('content', data.content + '<br />\n')}
+                                                    className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-black transition-all"
+                                                >
+                                                    Break
+                                                </button>
+                                            </div>
+                                            <textarea
+                                                id="content"
+                                                value={data.content}
+                                                onChange={e => setData('content', e.target.value)}
+                                                placeholder="Write your article content here..."
+                                                className={`w-full flex-1 bg-transparent px-4 py-4 text-sm focus:outline-none transition-all font-mono resize-none ${activeTab === 'split' ? 'min-h-0' : 'min-h-[500px]'}`}
+                                            />
+                                        </div>
+                                    )}
 
-                                <textarea
-                                    id="content"
-                                    value={data.content}
-                                    onChange={e => setData('content', e.target.value)}
-                                    placeholder="Write your article content here..."
-                                    className="w-full min-h-[500px] rounded-b-lg border border-t-0 border-border bg-transparent px-4 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-gold transition-all font-mono"
-                                />
+                                    {(activeTab === 'preview' || activeTab === 'split') && (
+                                        <div className={`bg-surface/30 px-8 py-8 overflow-y-auto ${activeTab === 'split' ? 'h-full' : 'min-h-[558px]'}`}>
+                                            <div className="prose prose-lg max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-primary prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-gold prose-strong:text-primary">
+                                                <div dangerouslySetInnerHTML={{ __html: data.content || '<p class="text-muted-foreground italic">No content to preview yet...</p>' }} />
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+>
                                 {errors.content && <p className="text-red-500 text-xs font-bold">{errors.content}</p>}
                             </div>
                         </div>

@@ -34,7 +34,30 @@ const WHY = [
   { title: "Transparent Pricing", desc: "Clear scope and fixed fees — no surprises, no hidden charges." },
 ];
 
-const TESTIMONIALS = [
+interface Testimonial {
+    id: number;
+    client_name: string;
+    business_name: string | null;
+    content: string;
+    rating: number;
+    avatar: string | null;
+}
+
+interface Post {
+    id: number;
+    title: string;
+    slug: string;
+    excerpt: string | null;
+    featured_image: string | null;
+    created_at: string;
+}
+
+interface WelcomeProps {
+    featured_testimonials: Testimonial[];
+    recent_posts: Post[];
+}
+
+const TESTIMONIALS_FALLBACK = [
   { name: "Anjali Sharma", role: "Founder, Retail SME", quote: "TaxFilingHub turned our messy books into a real-time dashboard. They've become an extension of our team." },
   { name: "Rohit Verma", role: "Director, Manufacturing Pvt Ltd", quote: "Their GST and ROC compliance has been flawless for three years. We finally sleep peacefully at deadline time." },
   { name: "Priya Mehta", role: "Co-founder, D2C Startup", quote: "From incorporation to fundraising paperwork — they handled every milestone with patience and clarity." },
@@ -91,7 +114,7 @@ const SERVICES = [
   },
 ];
 
-export default function Welcome() {
+export default function Welcome({ featured_testimonials, recent_posts }: WelcomeProps) {
   return (
     <PublicLayout>
       <Head title="Tax Filing Hub — Tax, GST & Company Compliance Made Simple">
@@ -263,20 +286,79 @@ export default function Welcome() {
           </h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="rounded-xl border border-border bg-card p-7 transition-smooth hover:border-gold/50">
+          {(featured_testimonials && featured_testimonials.length > 0 ? featured_testimonials : TESTIMONIALS_FALLBACK).map((t: any, idx) => (
+            <figure key={idx} className="rounded-xl border border-border bg-card p-7 transition-smooth hover:border-gold/50 flex flex-col">
               <div className="flex gap-1 text-gold mb-4">
-                {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className={`h-4 w-4 ${i < (t.rating || 5) ? 'fill-current' : 'text-muted-foreground/20'}`} />
+                ))}
               </div>
-              <blockquote className="text-foreground leading-relaxed">"{t.quote}"</blockquote>
-              <figcaption className="mt-6 pt-5 border-t border-border">
-                <p className="font-semibold text-primary">{t.name}</p>
-                <p className="text-sm text-muted-foreground">{t.role}</p>
+              <blockquote className="text-foreground leading-relaxed flex-1">"{t.content || t.quote}"</blockquote>
+              <figcaption className="mt-6 pt-5 border-t border-border flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-primary/5 flex items-center justify-center overflow-hidden shrink-0 border border-border">
+                    {t.avatar ? (
+                        <img src={t.avatar} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                        <Users className="h-5 w-5 text-gold" />
+                    )}
+                </div>
+                <div>
+                    <p className="font-semibold text-primary">{t.client_name || t.name}</p>
+                    <p className="text-[10px] uppercase font-bold text-accent tracking-wider">{t.business_name || t.role}</p>
+                </div>
               </figcaption>
             </figure>
           ))}
         </div>
       </section>
+
+      {/* RECENT POSTS */}
+      {recent_posts && recent_posts.length > 0 && (
+        <section className="bg-surface py-20 md:py-28">
+            <div className="container-page">
+                <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-14">
+                    <div className="max-w-2xl">
+                        <div className="gold-rule mb-5" />
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Knowledge Hub</p>
+                        <h2 className="mt-3 font-display text-3xl md:text-5xl font-bold text-primary tracking-tight">
+                            Recent Insights & Updates.
+                        </h2>
+                    </div>
+                    <Link 
+                        href="/blog" 
+                        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gold hover:text-primary transition-colors pb-1 border-b border-gold"
+                    >
+                        View all posts <ArrowRight className="h-4 w-4" />
+                    </Link>
+                </div>
+
+                <div className="grid gap-8 md:grid-cols-3">
+                    {recent_posts.map((post) => (
+                        <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
+                            <div className="aspect-[16/10] rounded-xl overflow-hidden bg-muted border border-border mb-6">
+                                {post.featured_image ? (
+                                    <img src={post.featured_image} alt={post.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                ) : (
+                                    <div className="h-full w-full flex items-center justify-center text-muted-foreground/20 italic">
+                                        No Image
+                                    </div>
+                                )}
+                            </div>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold mb-3">
+                                {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                            </p>
+                            <h3 className="font-display text-xl font-bold text-primary group-hover:text-accent transition-colors leading-tight mb-3">
+                                {post.title}
+                            </h3>
+                            <p className="text-sm text-muted-foreground line-clamp-2">
+                                {post.excerpt}
+                            </p>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-24 bg-secondary text-primary-foreground relative overflow-hidden">

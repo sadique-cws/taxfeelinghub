@@ -108,17 +108,17 @@ export default function AdminBlogs({ posts }: Props) {
                                         </td>
                                         <td className="px-6 py-5 text-right">
                                             <div className="flex items-center justify-end gap-2">
-                                                <Button size="icon" variant="ghost" className="h-8 w-8 hover:text-accent" asChild title="View on site">
+                                                <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-gold hover:text-black transition-all" asChild title="View on site">
                                                     <Link href={`/blog/${post.slug}`}>
                                                         <Eye className="h-4 w-4" />
                                                     </Link>
                                                 </Button>
-                                                <Button size="icon" variant="ghost" className="h-8 w-8 hover:text-accent" asChild title="Edit">
+                                                <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-gold hover:text-black transition-all" asChild title="Edit">
                                                     <Link href={`/admin/blogs/${post.id}/edit`}>
                                                         <Edit2 className="h-4 w-4" />
                                                     </Link>
                                                 </Button>
-                                                <Button size="icon" variant="ghost" className="h-8 w-8 hover:text-red-500" onClick={() => deletePost(post.id)} title="Delete">
+                                                <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-red-500 hover:text-white transition-all" onClick={() => deletePost(post.id)} title="Delete">
                                                     <Trash2 className="h-4 w-4" />
                                                 </Button>
                                             </div>
