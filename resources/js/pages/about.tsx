@@ -33,7 +33,7 @@ export default function About() {
       />
 
       {/* WHO WE ARE */}
-      <section className="container-page py-16 md:py-24 grid gap-16 lg:grid-cols-2 items-center">
+      <section className="container-page py-16 md:py-24 grid gap-16 lg:grid-cols-1 items-center">
         <div className="animate-fade-up">
           <div className="gold-rule mb-5" />
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-accent mb-5">Who we are</p>
@@ -60,12 +60,7 @@ export default function About() {
             <Stat value="25+" label="Experts" />
           </div>
         </div>
-        <div className="relative animate-fade-up" style={{ animationDelay: '0.2s' }}>
-          <div className="absolute -inset-4 bg-accent/5 rounded-xl blur-xl" />
-          <div className="relative aspect-[4/3] rounded-xl bg-surface border border-border overflow-hidden flex items-center justify-center text-muted-foreground font-display text-xl">
-            [Team Image Placeholder]
-          </div>
-        </div>
+        
       </section>
 
       {/* VALUES */}
@@ -123,7 +118,7 @@ export default function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-primary text-white relative overflow-hidden">
+      <section className="py-24 bg-secondary text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_center,#D4AF37_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="container mx-auto px-4 text-center relative z-10">
             <div className="max-w-3xl mx-auto">

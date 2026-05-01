@@ -124,7 +124,7 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-primary text-white relative overflow-hidden">
+      <section className="py-24 bg-secondary text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_center,#D4AF37_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="container mx-auto px-4 text-center relative z-10">
             <div className="max-w-3xl mx-auto">
