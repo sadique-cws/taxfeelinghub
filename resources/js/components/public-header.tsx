@@ -36,7 +36,7 @@ export function PublicHeader() {
     <header
       className={`sticky top-0 z-50 w-full transition-smooth ${
         scrolled
-          ? "border-b border-border bg-background/85 backdrop-blur-lg shadow-soft"
+          ? "border-b border-border bg-background/85 backdrop-blur-lg"
           : "bg-background"
       }`}
     >
@@ -70,7 +70,7 @@ export function PublicHeader() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft hover:bg-secondary transition-smooth"
+            className="inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-secondary transition-smooth"
           >
             Get Started
           </Link>
@@ -79,7 +79,7 @@ export function PublicHeader() {
         <Sheet>
           <SheetTrigger asChild>
             <button
-              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl text-primary hover:bg-surface transition-smooth border border-border"
+              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-primary hover:bg-surface transition-smooth border border-border"
               aria-label="Toggle menu"
             >
               <Menu className="h-5 w-5" />
@@ -95,7 +95,7 @@ export function PublicHeader() {
                   <Link
                     key={l.href}
                     href={l.href}
-                    className={`flex items-center px-4 py-4 text-lg font-bold rounded-xl transition-smooth ${
+                    className={`flex items-center px-4 py-4 text-lg font-bold rounded-md transition-smooth ${
                         (l.href === '/' ? url === '/' : url.startsWith(l.href))
                         ? "text-primary bg-surface border-l-4 border-gold"
                         : "text-foreground hover:bg-surface"
@@ -106,7 +106,7 @@ export function PublicHeader() {
                 ))}
                 <Link
                     href={auth.user ? '/dashboard' : '/login'}
-                    className="flex items-center px-4 py-4 text-lg font-bold rounded-xl text-foreground hover:bg-surface"
+                    className="flex items-center px-4 py-4 text-lg font-bold rounded-md text-foreground hover:bg-surface"
                 >
                     {auth.user ? 'Dashboard' : 'Client Login'}
                 </Link>
@@ -123,7 +123,7 @@ export function PublicHeader() {
                 </a>
                 <Link
                   href="/contact"
-                  className="mt-4 flex items-center justify-center rounded-xl bg-primary px-5 py-4 text-base font-bold text-white shadow-elegant hover:bg-secondary transition-smooth"
+                  className="mt-4 flex items-center justify-center rounded-md bg-primary px-5 py-4 text-base font-bold text-white hover:bg-secondary transition-smooth"
                 >
                   Get Started
                 </Link>
