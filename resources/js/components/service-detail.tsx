@@ -13,12 +13,13 @@ import { PageHeader } from '@/components/page-header';
 interface ServiceDetailProps {
     title: string;
     description: string;
-    overview: string;
+    overview: string | React.ReactNode;
     features: { title: string; description: string }[];
     faqs: { question: string; answer: string }[];
+    extraContent?: React.ReactNode;
 }
 
-export default function ServiceDetail({ title, description, overview, features, faqs }: ServiceDetailProps) {
+export default function ServiceDetail({ title, description, overview, features, faqs, extraContent }: ServiceDetailProps) {
     return (
         <PublicLayout>
             <Head title={`${title} — Tax Filing Hub`} />
@@ -57,6 +58,11 @@ export default function ServiceDetail({ title, description, overview, features, 
                             </div>
                         </div>
                     </div>
+                    {extraContent && (
+                        <div className="mt-20 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+                            {extraContent}
+                        </div>
+                    )}
                 </div>
             </section>
 

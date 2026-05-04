@@ -2,13 +2,13 @@ import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
 import {
   ArrowRight, BookOpen, Building2, FileCheck2, Landmark,
-  Receipt, ShieldCheck, TrendingUp, Users, Phone, LayoutGrid
+  Receipt, ShieldCheck, TrendingUp, Users, Phone, LayoutGrid, Gavel, RefreshCcw
 } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Button } from '@/components/ui/button';
 
 const ICONS = {
-  BookOpen, ShieldCheck, Building2, FileCheck2, Users, TrendingUp, Landmark, Receipt, LayoutGrid
+  BookOpen, ShieldCheck, Building2, FileCheck2, Users, TrendingUp, Landmark, Receipt, LayoutGrid, Gavel, RefreshCcw
 } as const;
 
 const SERVICES = [
@@ -34,11 +34,32 @@ const SERVICES = [
     highlights: ['Pvt Ltd / LLP', 'MSME Registration', 'Digital Signatures']
   },
   {
+    slug: 'conversion-restructuring',
+    title: 'Conversion & Constitution',
+    short: 'Seamless business entity conversion and MOA/AOA modifications.',
+    icon: 'RefreshCcw',
+    highlights: ['Partnership to LLP', 'Private to Public', 'Constitutional Mods']
+  },
+  {
     slug: 'compliance-services',
-    title: 'Compliance & Audit',
+    title: 'Compliance Services',
     short: 'Stay ahead of every ROC, tax and regulatory deadline.',
     icon: 'FileCheck2',
-    highlights: ['Statutory Audit', 'Internal Audit', 'Secretarial Audit']
+    highlights: ['ROC Annual Returns', 'TDS & GST Filings', 'Secretarial Compliance']
+  },
+  {
+    slug: 'audit-assurance',
+    title: 'Audit & Assurance',
+    short: 'Ensure financial transparency and operational efficiency.',
+    icon: 'ShieldCheck',
+    highlights: ['Statutory Audit', 'Internal Audit', 'Management Audit']
+  },
+  {
+    slug: 'tax-litigation',
+    title: 'Tax Litigation',
+    short: 'Expert representation for Direct & Indirect tax controversies.',
+    icon: 'Gavel',
+    highlights: ['ITAT / GSTAT Appeals', 'Investigation Defense', 'High Court Writs']
   },
   {
     slug: 'miscellaneous-services',
@@ -46,13 +67,6 @@ const SERVICES = [
     short: 'DSC, IEC, FSSAI, Society & Trust registrations made easy.',
     icon: 'LayoutGrid',
     highlights: ['Digital Signature', 'FSSAI License', 'Import-Export Code']
-  },
-  {
-    slug: 'accounting-services',
-    title: 'Payroll & HR',
-    short: 'On-site bookkeeping, payroll and consultancy at your office.',
-    icon: 'Users',
-    highlights: ['Payroll processing', 'PF & ESI filings', 'Labor law compliance']
   },
   {
     slug: 'business-fund-management',

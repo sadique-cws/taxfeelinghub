@@ -31,6 +31,9 @@ Route::prefix('services')->group(function () {
     Route::inertia('/direct-taxes', 'services/direct-taxes');
     Route::inertia('/indirect-taxes', 'services/indirect-taxes');
     Route::inertia('/miscellaneous-services', 'services/miscellaneous-services');
+    Route::inertia('/tax-litigation', 'services/tax-litigation');
+    Route::inertia('/conversion-restructuring', 'services/conversion-restructuring');
+    Route::inertia('/audit-assurance', 'services/audit-assurance');
 });
 
 use App\Http\Controllers\DashboardController;

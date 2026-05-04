@@ -53,6 +53,9 @@ export default function About() {
             <p>
               The strength of Tax Filing Hub lies in its multidisciplinary team of seasoned professionals, comprising Chartered Accountants, Company Secretaries, Corporate Financial Advisors, Advocates, and Tax Consultants. Leveraging deep domain knowledge and practical insights, the team delivers bespoke solutions spanning bookkeeping, corporate advisory, statutory compliance, and digital financial transformation.
             </p>
+            <p>
+              At its core, Tax Filing Hub is committed to fostering enduring client relationships through a seamless blend of technical excellence and personalized service. The firm’s approach integrates industry-leading practices with a client-centric philosophy, ensuring a holistic and refined service experience that empowers businesses to achieve sustainable growth and operational excellence.
+            </p>
           </div>
           <div className="mt-10 grid grid-cols-3 gap-6">
             <Stat value="500+" label="Clients" />

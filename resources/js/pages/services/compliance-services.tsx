@@ -2,39 +2,93 @@ import ServiceDetail from '@/components/service-detail';
 
 export default function ComplianceServices() {
     const data = {
-        title: 'Compliance & Audit Services',
-        description: 'Comprehensive compliance management and assurance solutions for sustainable growth.',
-        overview: 'In today’s dynamic regulatory landscape, maintaining timely and accurate compliance is a critical pillar of business growth. At Tax Filing Hub, we offer comprehensive compliance management and audit solutions. Our expert team ensures end-to-end management of all regulatory filings, including ROC annual returns, Income Tax, GST, EPF, ESI, and TDS. Beyond mandatory filings, our audit services — including Statutory, Internal, and Management Audits — play a pivotal role in ensuring financial transparency, regulatory compliance, and operational efficiency.',
+        title: 'Compliance Services',
+        description: 'Navigate complex statutory requirements with precision, confidence, and expert guidance.',
+        overview: (
+            <div className="space-y-8">
+                <p>
+                    In today’s dynamic regulatory landscape, maintaining timely and accurate compliance is not just a legal necessity—it is a critical pillar of sustainable business growth. At <strong>Tax Filing Hub</strong>, we offer comprehensive compliance management solutions designed to help businesses seamlessly navigate complex statutory requirements with precision and confidence.
+                </p>
+
+                <p>
+                    Our expert team ensures end-to-end management of all regulatory filings, including ROC annual returns, Income Tax returns, GST filings and reports, EPF, ESI, TDS, and other applicable statutory obligations. We adopt a proactive, technology-driven approach to monitor compliance deadlines, minimize risks, and ensure complete adherence to evolving laws and regulations.
+                </p>
+
+                <p>
+                    By acting as your dedicated compliance partner, we eliminate the burden of tracking multiple due dates and procedural requirements. Our structured compliance calendar, real-time updates, and meticulous review processes safeguard your business from penalties, legal complications, and reputational risks.
+                </p>
+
+                <p>
+                    With a focus on accuracy, transparency, and efficiency, our compliance services empower you to concentrate on your core business operations while we handle the regulatory complexities. Whether you are a startup, SME, or established enterprise, our tailored compliance solutions ensure that your organization remains fully compliant, audit-ready, and future-focused.
+                </p>
+            </div>
+        ),
+        extraContent: (
+            <div className="space-y-12">
+                <div className="p-10 md:p-14 rounded-[2.5rem] bg-secondary text-white relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gold/20 blur-[100px] -mr-32 -mt-32" />
+                    <div className="relative z-10 grid gap-10 lg:grid-cols-[1fr_2fr] items-center">
+                        <div>
+                            <div className="gold-rule mb-6" />
+                            <h3 className="text-white font-bold text-3xl md:text-4xl font-display tracking-tight leading-tight">
+                                Why Choose Our <span className="text-gold italic">Compliance?</span>
+                            </h3>
+                        </div>
+                        <div className="grid gap-4">
+                            {[
+                                "Timely and accurate statutory filings",
+                                "End-to-end compliance management",
+                                "Expert handling of ROC, GST, Income Tax, EPF, ESI, and TDS",
+                                "Automated compliance tracking and alerts",
+                                "Risk mitigation and penalty avoidance",
+                                "Dedicated professional support"
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-4 text-white/80">
+                                    <div className="h-2 w-2 rounded-full bg-gold" />
+                                    <span className="text-lg">{item}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="p-10 md:p-14 rounded-[2.5rem] bg-gold/5 border border-gold/20 relative overflow-hidden text-center">
+                    <p className="text-2xl text-primary font-display font-bold leading-relaxed italic">
+                        "Stay compliant. Stay confident. Grow without interruptions."
+                    </p>
+                </div>
+            </div>
+        ),
         features: [
             {
-                title: 'Statutory Audits',
-                description: 'Legally mandated examinations under the Income Tax Act, Companies Act, and GST laws to ensure financial integrity.'
+                title: 'ROC & Annual Filings',
+                description: 'End-to-end management of annual returns and statutory registers as per MCA guidelines.'
             },
             {
-                title: 'Internal Audits',
-                description: 'Continuous evaluation of internal controls and risk management to identify inefficiencies and mitigate potential risks.'
+                title: 'GST & Income Tax',
+                description: 'Timely filing of returns and reports with absolute accuracy and transparency.'
             },
             {
-                title: 'Management Audits',
-                description: 'Evaluating the effectiveness of strategic decisions and resource utilization to ensure alignment with long-term objectives.'
+                title: 'Payroll Compliance',
+                description: 'Expert handling of EPF, ESI, and TDS obligations to ensure employee-related compliance.'
             },
             {
-                title: 'Regulatory Filings',
-                description: 'Proactive management of ROC annual returns, GST reports, EPF/ESI, and other statutory obligations.'
+                title: 'Compliance Tracking',
+                description: 'Automated monitoring of deadlines and proactive alerts to avoid penalties and risks.'
             },
             {
-                title: 'Specialized Audits',
-                description: 'Tailored solutions including stock audits, due diligence, and forensic audits for deeper business insights.'
+                title: 'Audit Readiness',
+                description: 'Tailored solutions ensuring your organization is always audit-ready and future-focused.'
             }
         ],
         faqs: [
             {
-                question: 'What is the statutory audit framework in India?',
-                answer: 'Statutory audits are conducted annually (April 1st to March 31st) to maintain compliance and present a true and fair view of an entity’s financial position.'
+                question: 'Why is a compliance partner essential for my business?',
+                answer: 'A dedicated partner ensures you never miss a deadline, stay up-to-date with changing laws, and avoid costly penalties, allowing you to focus on growth.'
             },
             {
-                question: 'How do internal audits benefit my organization?',
-                answer: 'They provide an early detection system for errors or fraudulent activities and help in optimizing operational processes and risk management.'
+                question: 'What happens if my business misses a statutory filing?',
+                answer: 'Missing filings can lead to heavy financial penalties, legal complications, and potential reputational damage or loss of good standing.'
             }
         ]
     };
