@@ -12,12 +12,15 @@ import {
   TrendingUp,
   Users,
   Star,
-  Phone
+  Phone,
+  Gavel,
+  RefreshCcw,
+  LayoutGrid
 } from "lucide-react";
 import { Button } from '@/components/ui/button';
 
 const ICONS = {
-  BookOpen, ShieldCheck, Building2, FileCheck2, Users, TrendingUp, Landmark, Receipt,
+  BookOpen, ShieldCheck, Building2, FileCheck2, Users, TrendingUp, Landmark, Receipt, Gavel, RefreshCcw, LayoutGrid
 } as const;
 
 const STATS = [
@@ -89,12 +92,6 @@ const SERVICES = [
     icon: 'FileCheck2'
   },
   {
-    slug: 'accounting-services',
-    title: 'Payroll & HR',
-    short: 'On-site bookkeeping, payroll and consultancy at your office.',
-    icon: 'Users'
-  },
-  {
     slug: 'business-fund-management',
     title: 'Fund Management',
     short: 'Grow profits, reduce costs and arrange the right capital.',
@@ -112,6 +109,30 @@ const SERVICES = [
     short: 'GST registration, returns, audits and advisory under one roof.',
     icon: 'Landmark'
   },
+  {
+    slug: 'tax-litigation',
+    title: 'Tax Litigation',
+    short: 'Expert representation for Direct & Indirect tax controversies.',
+    icon: 'Gavel'
+  },
+  {
+    slug: 'audit-assurance',
+    title: 'Audit & Assurance',
+    short: 'Ensure financial transparency and operational efficiency.',
+    icon: 'ShieldCheck'
+  },
+  {
+    slug: 'conversion-restructuring',
+    title: 'Conversion & Constitution',
+    short: 'Seamless business entity conversion and MOA/AOA modifications.',
+    icon: 'RefreshCcw'
+  },
+  {
+    slug: 'miscellaneous-services',
+    title: 'Misc registrations',
+    short: 'DSC, IEC, FSSAI, Society & Trust registrations made easy.',
+    icon: 'LayoutGrid'
+  },
 ];
 
 export default function Welcome({ featured_testimonials, recent_posts }: WelcomeProps) {
@@ -122,7 +143,11 @@ export default function Welcome({ featured_testimonials, recent_posts }: Welcome
       </Head>
 
       {/* HERO */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden bg-hero-gradient text-primary-foreground">
+      <section 
+        className="relative min-h-[50vh] flex items-center overflow-hidden bg-hero-gradient text-primary-foreground"
+        style={{ backgroundImage: 'url("/hero-bg.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        <div className="absolute inset-0 bg-primary/80 backdrop-blur-[2px]" />
         <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] [background-size:32px_32px]" />
         <div className="container-page relative grid gap-10 lg:grid-cols-[1.15fr_1fr] items-center py-6 lg:py-10">
           <div className="animate-fade-up">
@@ -170,7 +195,7 @@ export default function Welcome({ featured_testimonials, recent_posts }: Welcome
 
           <div className="relative">
             <div className="relative aspect-video rounded-md bg-white/5 border border-primary-foreground/10 overflow-hidden flex items-center justify-center text-primary-foreground/10">
-                [Hero Image]
+                <img src="/hero-main.png" alt="Tax Filing Hub Hero" className="h-full w-full object-cover" />
             </div>
             <div className="absolute -bottom-6 -left-6 hidden md:flex flex-col gap-1 rounded-md bg-background text-foreground p-4 border border-border">
               <div className="flex items-center gap-2">
@@ -238,7 +263,7 @@ export default function Welcome({ featured_testimonials, recent_posts }: Welcome
         <div className="container-page py-20 md:py-28 grid gap-14 lg:grid-cols-2 items-center">
           <div className="relative">
             <div className="aspect-[4/3] rounded-md bg-muted overflow-hidden flex items-center justify-center text-muted-foreground border border-border">
-                [Advisory]
+                <img src="/advisory.png" alt="Advisory Team" className="h-full w-full object-cover" />
             </div>
             <div className="absolute -bottom-6 -right-6 hidden md:block rounded-md bg-primary text-primary-foreground p-6 border border-border max-w-[240px]">
               <p className="font-display text-3xl font-bold text-gold">15+</p>
