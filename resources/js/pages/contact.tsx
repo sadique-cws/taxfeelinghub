@@ -5,12 +5,12 @@ import { PageHeader } from "@/components/page-header";
 
 const SITE = {
     name: 'Tax Filing Hub',
-    email: 'taxfilinghub@gmail.com',
-    phone: '+91 7979891922',
-    phoneHref: 'tel:+917979891922',
+    email: 'Taxfillinghub@gmail.com',
+    phone: '7488447789, 8935949475, 9155982424',
+    phoneHref: 'tel:+917488447789',
     address: {
-        line1: 'Rajeswari Niwas',
-        line2: 'Beside PNB Bank Gate, Infront of Big Shop, Bhatta Bazar',
+        line1: 'Rishika Mansion, 1st Floor',
+        line2: 'Near Awantika Hotel, Bhatta Bazar',
         city: 'Purnia',
         pin: '854301',
         state: 'Bihar'

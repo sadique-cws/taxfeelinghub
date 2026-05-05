@@ -132,8 +132,8 @@ export default function BlogDetail({ post }: BlogDetailProps) {
                         <Button className="w-full rounded-lg h-12 font-bold" asChild>
                             <Link href="/contact">Get a Consultation</Link>
                         </Button>
-                        <a href="tel:+917979891922" className="flex items-center justify-center gap-2 text-sm font-bold text-primary hover:text-gold transition-colors py-2">
-                            <Phone className="h-4 w-4" /> +91 7979891922
+                        <a href="tel:+917488447789" className="flex items-center justify-center gap-2 text-sm font-bold text-primary hover:text-gold transition-colors py-2">
+                            <Phone className="h-4 w-4" /> 7488447789
                         </a>
                     </div>
                 </div>
@@ -159,11 +159,11 @@ export default function BlogDetail({ post }: BlogDetailProps) {
                     <Button size="lg" variant="secondary" className="rounded-lg px-10 h-16 text-lg font-bold w-full sm:w-auto border border-white/20" asChild>
                         <Link href="/contact">Request a Call Back</Link>
                     </Button>
-                    <a href="tel:+917979891922" className="flex items-center gap-4 text-2xl font-bold text-gold hover:text-white transition-smooth group">
+                    <a href="tel:+917488447789" className="flex items-center gap-4 text-2xl font-bold text-gold hover:text-white transition-smooth group">
                         <div className="h-12 w-12 rounded-full border-2 border-gold/30 flex items-center justify-center group-hover:border-white transition-smooth">
                             <Phone className="h-6 w-6" />
                         </div>
-                        <span>+91 7979891922</span>
+                        <span>7488447789</span>
                     </a>
                 </div>
             </div>

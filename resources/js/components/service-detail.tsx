@@ -106,11 +106,11 @@ export default function ServiceDetail({ title, description, overview, features, 
                             <Button size="lg" className="rounded-xl px-12 h-16 text-lg font-bold w-full sm:w-auto shadow-elegant" asChild>
                                 <Link href="/contact">Request a Call Back</Link>
                             </Button>
-                            <a href="tel:+917979891922" className="flex items-center gap-4 text-2xl font-bold text-primary hover:text-accent transition-smooth group">
+                            <a href="tel:+917488447789" className="flex items-center gap-4 text-2xl font-bold text-primary hover:text-accent transition-smooth group">
                                 <div className="h-12 w-12 rounded-full border-2 border-primary/20 flex items-center justify-center group-hover:border-accent transition-smooth">
                                     <Phone className="h-6 w-6" />
                                 </div>
-                                <span>+91 7979891922</span>
+                                <span>7488447789</span>
                             </a>
                         </div>
                     </div>

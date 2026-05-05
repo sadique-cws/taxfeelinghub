@@ -121,10 +121,10 @@ export default function Career({ openings }: { openings: CareerJob[] }) {
             </p>
             <div className="mt-12">
               <a
-                href="mailto:taxfilinghub@gmail.com?subject=Career Application"
+                href="mailto:Taxfillinghub@gmail.com?subject=Career Application"
                 className="inline-flex items-center gap-3 rounded-lg bg-gold px-10 py-5 text-lg font-bold text-black hover:bg-gold/90 transition-smooth group"
               >
-                taxfilinghub@gmail.com <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                Taxfillinghub@gmail.com <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
           </div>
