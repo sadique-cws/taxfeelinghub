@@ -43,20 +43,39 @@ class SeoController extends Controller
             route('home'),
             route('about'),
             route('services'),
+            route('blog'),
             route('career'),
             route('contact'),
+            // Service pages
+            url('/services/accounting-support'),
+            url('/services/trademark-copyright'),
+            url('/services/firm-company-registration'),
+            url('/services/compliance-services'),
+            url('/services/accounting-services'),
+            url('/services/business-fund-management'),
+            url('/services/direct-taxes'),
+            url('/services/indirect-taxes'),
+            url('/services/miscellaneous-services'),
+            url('/services/tax-litigation'),
+            url('/services/conversion-restructuring'),
+            url('/services/audit-assurance'),
         ];
 
-        // Add service detail pages (if any)
-        // ...
+        // Add dynamic blog posts
+        $posts = \App\Models\Post::where('status', 'published')->orderBy('published_at', 'desc')->get();
+        foreach ($posts as $post) {
+            $urls[] = route('blog.show', $post->slug);
+        }
 
         // Add programmatic SEO pages
-        foreach (config('seo.cities') as $cityKey => $cityData) {
-            $urls[] = url("/best-tax-consultant-in-{$cityKey}");
-            if (isset($cityData['areas'])) {
-                foreach ($cityData['areas'] as $area) {
-                    $areaSlug = Str::slug($area);
-                    $urls[] = url("/best-tax-consultant-in-{$cityKey}/{$areaSlug}");
+        if (config('seo.cities')) {
+            foreach (config('seo.cities') as $cityKey => $cityData) {
+                $urls[] = url("/best-tax-consultant-in-{$cityKey}");
+                if (isset($cityData['areas'])) {
+                    foreach ($cityData['areas'] as $area) {
+                        $areaSlug = Str::slug($area);
+                        $urls[] = url("/best-tax-consultant-in-{$cityKey}/{$areaSlug}");
+                    }
                 }
             }
         }
@@ -67,7 +86,7 @@ class SeoController extends Controller
             $xml .= '<url>';
             $xml .= '<loc>' . htmlspecialchars($url) . '</loc>';
             $xml .= '<lastmod>' . date('Y-m-d') . '</lastmod>';
-            $xml .= '<changefreq>monthly</changefreq>';
+            $xml .= '<changefreq>weekly</changefreq>';
             $xml .= '<priority>0.8</priority>';
             $xml .= '</url>';
         }
