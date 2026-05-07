@@ -1,15 +1,14 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Save, FileText, Image as ImageIcon, Send, Eye, Edit3 } from 'lucide-react';
+import { ArrowLeft, Save, Image as ImageIcon, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
-import { useState } from 'react';
+
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 
 export default function CreateBlog() {
-    const [activeTab, setActiveTab] = useState<'edit' | 'preview' | 'split'>('edit');
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         excerpt: '',
@@ -78,54 +77,7 @@ export default function CreateBlog() {
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4">
                                         <Label className="text-primary font-bold uppercase tracking-widest text-[10px]">Article Content</Label>
-                                        <div className="flex bg-surface border border-border rounded p-1">
-                                            {[
-                                                { id: 'edit', label: 'Edit', icon: Edit3 },
-                                                { id: 'preview', label: 'Preview', icon: Eye },
-                                                { id: 'split', label: 'Split', icon: FileText },
-                                            ].map((tab) => {
-                                                const Icon = tab.icon;
-                                                return (
-                                                    <button
-                                                        key={tab.id}
-                                                        type="button"
-                                                        onClick={() => setActiveTab(tab.id as any)}
-                                                        className={`px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded transition-all flex items-center gap-1.5 ${
-                                                            activeTab === tab.id 
-                                                            ? 'bg-primary text-white' 
-                                                            : 'text-muted-foreground hover:text-primary'
-                                                        }`}
-                                                    >
-                                                        <Icon className="h-3 w-3" /> {tab.label}
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
                                     </div>
-                                    
-                                    {activeTab === 'edit' && (
-                                        <div className="flex gap-2">
-                                            <select 
-                                                className="text-[10px] font-bold uppercase tracking-widest border border-border rounded px-2 py-1 bg-surface focus:outline-none focus:ring-1 focus:ring-gold"
-                                                onChange={(e) => {
-                                                    const templates: Record<string, string> = {
-                                                        'gst': '<h3>GST Benefits for Businesses</h3>\n<ul>\n<li>Reduced tax burden</li>\n<li>Easy compliance</li>\n<li>Input tax credit</li>\n</ul>',
-                                                        'compliance': '<h3>Annual Compliance Checklist</h3>\n<ol>\n<li>Income Tax Return</li>\n<li>GST Annual Return</li>\n<li>ROC Filing</li>\n</ol>',
-                                                        'intro': '<p>In this article, we explore the recent changes in the regulatory landscape and what they mean for small business owners in Bihar.</p>'
-                                                    };
-                                                    if (e.target.value) {
-                                                        setData('content', data.content + templates[e.target.value]);
-                                                        e.target.value = '';
-                                                    }
-                                                }}
-                                            >
-                                                <option value="">Quick Templates</option>
-                                                <option value="intro">Introduction Text</option>
-                                                <option value="gst">GST Section</option>
-                                                <option value="compliance">Compliance List</option>
-                                            </select>
-                                        </div>
-                                    )}
                                 </div>
                                     <div className="bg-card border border-border rounded-xl overflow-hidden mt-4">
                                         <ReactQuill
