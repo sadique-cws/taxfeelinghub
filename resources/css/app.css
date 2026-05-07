@@ -168,3 +168,39 @@
     display: none !important;
   }
 }
+
+/* React Quill Styles */
+.ql-container {
+  font-size: 1rem !important;
+  font-family: var(--font-sans) !important;
+}
+.ql-editor {
+  min-height: 500px;
+}
+.ql-toolbar {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-color: var(--color-border) !important;
+}
+.ql-container {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-color: var(--color-border) !important;
+}
+
+/* Frontend Blog Content Constraints */
+.prose img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.prose .ql-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  height: auto;
+}

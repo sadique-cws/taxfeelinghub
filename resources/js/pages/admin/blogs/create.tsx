@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
 import { useState } from 'react';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 export default function CreateBlog() {
     const [activeTab, setActiveTab] = useState<'edit' | 'preview' | 'split'>('edit');
@@ -125,65 +127,31 @@ export default function CreateBlog() {
                                         </div>
                                     )}
                                 </div>
-                                                               <div className={`grid gap-0 border border-border rounded-xl overflow-hidden ${activeTab === 'split' ? 'lg:grid-cols-2 h-[600px]' : ''}`}>
-                                    {(activeTab === 'edit' || activeTab === 'split') && (
-                                        <div className={`flex flex-col bg-card ${activeTab === 'split' ? 'border-r border-border' : ''}`}>
-                                            <div className="flex flex-wrap gap-1 p-2 bg-surface border-b border-border">
-                                                {[
-                                                    { label: 'B', tag: 'b', title: 'Bold' },
-                                                    { label: 'I', tag: 'i', title: 'Italic' },
-                                                    { label: 'H2', tag: 'h2', title: 'Heading 2' },
-                                                    { label: 'H3', tag: 'h3', title: 'Heading 3' },
-                                                    { label: 'P', tag: 'p', title: 'Paragraph' },
-                                                    { label: 'List', tag: 'li', title: 'List Item', wrap: 'ul' },
-                                                ].map((btn) => (
-                                                    <button
-                                                        key={btn.label}
-                                                        type="button"
-                                                        onClick={() => {
-                                                            const el = document.getElementById('content') as HTMLTextAreaElement;
-                                                            const start = el.selectionStart;
-                                                            const end = el.selectionEnd;
-                                                            const text = el.value;
-                                                            const selected = text.substring(start, end);
-                                                            const replacement = btn.wrap 
-                                                                ? `<${btn.wrap}>\n  <${btn.tag}>${selected || 'Text'}</${btn.tag}>\n</${btn.wrap}>`
-                                                                : `<${btn.tag}>${selected || 'Text'}</${btn.tag}>`;
-                                                            setData('content', text.substring(0, start) + replacement + text.substring(end));
-                                                        }}
-                                                        className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-black transition-all"
-                                                        title={btn.title}
-                                                    >
-                                                        {btn.label}
-                                                    </button>
-                                                ))}
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setData('content', data.content + '<br />\n')}
-                                                    className="px-3 py-1 text-xs font-bold border border-border rounded bg-white hover:bg-gold hover:text-black transition-all"
-                                                >
-                                                    Break
-                                                </button>
-                                            </div>
-                                            <textarea
-                                                id="content"
-                                                value={data.content}
-                                                onChange={e => setData('content', e.target.value)}
-                                                placeholder="Write your article content here..."
-                                                className={`w-full flex-1 bg-transparent px-4 py-4 text-sm focus:outline-none transition-all font-mono resize-none ${activeTab === 'split' ? 'min-h-0' : 'min-h-[500px]'}`}
-                                            />
-                                        </div>
-                                    )}
-
-                                    {(activeTab === 'preview' || activeTab === 'split') && (
-                                        <div className={`bg-surface/30 px-8 py-8 overflow-y-auto ${activeTab === 'split' ? 'h-full' : 'min-h-[558px]'}`}>
-                                            <div className="prose prose-lg max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-primary prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-gold prose-strong:text-primary">
-                                                <div dangerouslySetInnerHTML={{ __html: data.content || '<p class="text-muted-foreground italic">No content to preview yet...</p>' }} />
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
->
+                                    <div className="bg-card border border-border rounded-xl overflow-hidden mt-4">
+                                        <ReactQuill
+                                            theme="snow"
+                                            value={data.content}
+                                            onChange={(val) => setData('content', val)}
+                                            modules={{
+                                                toolbar: [
+                                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
+                                                    ['link', 'image', 'video'],
+                                                    [{ 'color': [] }, { 'background': [] }],
+                                                    ['clean']
+                                                ]
+                                            }}
+                                            formats={[
+                                                'header',
+                                                'bold', 'italic', 'underline', 'strike', 'blockquote',
+                                                'list', 'bullet', 'indent',
+                                                'link', 'image', 'video',
+                                                'color', 'background'
+                                            ]}
+                                            className="min-h-[500px]"
+                                        />
+                                    </div>
                                 {errors.content && <p className="text-red-500 text-xs font-bold">{errors.content}</p>}
                             </div>
                         </div>
