@@ -188,19 +188,79 @@
   border-color: var(--color-border) !important;
 }
 
-/* Frontend Blog Content Constraints */
+/* Frontend Blog Content Constraints & Formatting */
+.prose {
+    line-height: 1.8 !important;
+}
+
+.prose p {
+    margin-bottom: 1.5rem !important;
+}
+
+.prose p:empty::before,
+.prose p > br:only-child::before {
+    content: "\00a0";
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Lists Styling */
+.prose ul {
+    list-style-type: disc !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    padding-left: 1.5rem !important;
+}
+
+.prose ol {
+    list-style-type: decimal !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    padding-left: 1.5rem !important;
+}
+
+.prose li {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Headings Spacing */
+.prose h1, .prose h2, .prose h3, .prose h4 {
+    margin-top: 2.5rem !important;
+    margin-bottom: 1.25rem !important;
+    font-weight: 700 !important;
+}
+
 .prose img {
   max-width: 100% !important;
   height: auto !important;
+  margin: 2rem 0 !important;
 }
+
 .prose pre {
   max-width: 100%;
   overflow-x: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
+
 .prose .ql-video {
   width: 100%;
   aspect-ratio: 16/9;
   height: auto;
+  margin: 2rem 0 !important;
+}
+
+/* Quill Content Alignment Support */
+.prose .ql-align-center {
+  text-align: center;
+}
+.prose .ql-align-right {
+  text-align: right;
+}
+.prose .ql-align-justify {
+  text-align: justify;
 }
