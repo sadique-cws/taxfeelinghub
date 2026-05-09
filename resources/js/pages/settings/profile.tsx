@@ -45,6 +45,7 @@ export default function Profile({
 
                                 <Input
                                     id="name"
+                                    key={`name-${auth.user.name}`}
                                     className="mt-1 block w-full"
                                     defaultValue={auth.user.name}
                                     name="name"
@@ -64,6 +65,7 @@ export default function Profile({
 
                                 <Input
                                     id="email"
+                                    key={`email-${auth.user.email}`}
                                     type="email"
                                     className="mt-1 block w-full"
                                     defaultValue={auth.user.email}
@@ -76,6 +78,26 @@ export default function Profile({
                                 <InputError
                                     className="mt-2"
                                     message={errors.email}
+                                />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="phone">Phone number</Label>
+
+                                <Input
+                                    id="phone"
+                                    key={`phone-${auth.user.phone}`}
+                                    type="tel"
+                                    className="mt-1 block w-full"
+                                    defaultValue={auth.user.phone}
+                                    name="phone"
+                                    autoComplete="tel"
+                                    placeholder="Phone number"
+                                />
+
+                                <InputError
+                                    className="mt-2"
+                                    message={errors.phone}
                                 />
                             </div>
 

@@ -191,6 +191,8 @@
 /* Frontend Blog Content Constraints & Formatting */
 .prose {
     line-height: 1.7 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
 }
 
 .prose p {

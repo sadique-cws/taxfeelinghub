@@ -29,7 +29,7 @@ trait ProfileValidationRules
      */
     protected function phoneRules(): array
     {
-        return ['required', 'string', 'max:15'];
+        return ['nullable', 'string', 'max:15'];
     }
 
     /**
