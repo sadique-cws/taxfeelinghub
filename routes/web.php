@@ -8,6 +8,10 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\CareerJobController;
 use App\Http\Controllers\PostController;
 
+Route::get('/test-validation', function () {
+    return response()->json((new \App\Http\Requests\Settings\ProfileUpdateRequest())->rules());
+});
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::inertia('/about', 'about')->name('about');
 Route::inertia('/services', 'services')->name('services');
