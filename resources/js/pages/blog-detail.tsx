@@ -93,7 +93,7 @@ export default function BlogDetail({ post }: BlogDetailProps) {
                     </div>
                 )}
 
-                <div className="prose prose-lg max-w-none w-full prose-headings:font-display prose-headings:font-bold prose-headings:text-primary prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-gold prose-strong:text-primary prose-img:max-w-full prose-img:h-auto prose-img:rounded-xl">
+                <div className="prose prose-lg max-w-4xl w-full text-left prose-headings:font-display prose-headings:font-bold prose-headings:text-primary prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-gold prose-strong:text-primary prose-img:max-w-full prose-img:h-auto prose-img:rounded-xl">
                     <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
 
